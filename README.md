@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Plagiamax
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
@@ -27,5 +26,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 =======
-# plagiamax
->>>>>>> 56ede61bb1e81ce189e6afc81625ed8051ebfac1
