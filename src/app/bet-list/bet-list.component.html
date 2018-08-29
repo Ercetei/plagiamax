@@ -1,0 +1,38 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center subtitle">
+				Samedi 25 Août - 3ème journée
+			</h3>
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-2 text-center">
+					 <span class="badge badge-default">1</span>
+				</div>
+				<div class="col-md-2 text-center">
+					 <span class="badge badge-default">N</span>
+				</div> 
+				<div class="col-md-2 text-center">
+					 <span class="badge badge-default">2</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<h3>
+						Amiens - Reims
+					</h3>
+				</div>
+				<div class="col-md-2 text-center">
+					 <button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'" (click)="onAddBet(1)">2.60</button>
+				</div>
+				<div class="col-md-2 text-center">
+					 <button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'" (click)="onAddBet(2)">3.05</button>
+				</div>
+				<div class="col-md-2 text-center">
+					 <button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'" (click)="onAddBet(3)">2.75</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

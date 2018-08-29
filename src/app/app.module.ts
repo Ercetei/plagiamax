@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { BetListComponent } from './bet-list/bet-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BetListComponent
   ],
   imports: [
     BrowserModule,
