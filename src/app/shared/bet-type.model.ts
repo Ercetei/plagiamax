@@ -1,9 +1,10 @@
-export class Bet{
+// Ajouter objet equipe
+export class BetType{
 
-    public id: number;
-    public label: string;
-    public odds: number;
-    public type: number;
+    id: number;
+    label: string;
+    odds: number;
+    type: number;
 
 	constructor(id: number = 0, label: string = "", odds: number = 0, type: number = 0){
         this.id = id;

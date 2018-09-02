@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { BetGroup } from '../models/BetGroup';
-import { Bet } from '../models/Bet';
+import { Observable, of } from 'rxjs';
+import { Bet } from './bet.model';
+import { BetType } from './bet-type.model';
+import { Match } from './match.model';
 
 @Injectable()
-export class BetGroupService {
+export class BetService {
 
-    private selectedBets = new BetGroup();
+    private selectedBets = new Bet();
     public betGroupSubject = new Subject();
-
+    
     constructor(){
 		
     }
@@ -18,29 +20,33 @@ export class BetGroupService {
     }
     
     // Ajoute un pari aux paris sélectionnés
-    addBet(bet: Bet){
+    addBet(bet: BetType){
       this.selectedBets.bets.push(bet);
       this.emitBetGroupSubject();
     }
 
     // Retire un pari des paris sélectionnés
-    removeBet(bet: Bet){
+    removeBet(bet: BetType){
       this.selectedBets.bets.splice(this.selectedBets.bets.indexOf(bet), 1);
       this.emitBetGroupSubject();
     }
     
     // Récupère tous les paris sélectionnés
-    getBets(): Bet[] {
+    getSelectedBets(): BetType[] {
       return this.selectedBets.bets;
     }
 
     // Récupère l'un des paris sélectionnés
-    getBet(id: number){
+    getSelectedBet(id: number){
       return this.selectedBets.bets.find(x => x.id == id);
     }
 
     // Teste si un pari est sélectionné
     containsBet(id: number){
       return this.selectedBets.bets.findIndex(x => x.id == id) > -1;
+    }
+
+    getBetTypes(match: Match): Observable<BetType[]> {
+      return of(match.bets);
     }
 }

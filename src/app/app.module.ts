@@ -5,16 +5,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
-import { BetListComponent } from './bet-list/bet-list.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BetGroupService } from './services/BetGroupService';
+import { BetService } from './shared/bet.service';
 import { UserService } from './shared/user.service';
+import { MatchService } from './shared/match.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { BetListComponent } from './bet-list/bet-list.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -42,7 +42,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService, BetGroupService, AuthGuard,
+  providers: [UserService, BetService, MatchService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
