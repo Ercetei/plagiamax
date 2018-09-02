@@ -1,0 +1,24 @@
+<div *ngIf="isLoginError" class="red-text center error-message">
+    L'identifiant ou le mot de passe est incorrect
+</div>
+
+<div class="container">
+
+    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+        <h2 class="form-signin-heading">Me connecter</h2>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" name="Email" class="form-control" ngModel #Email placeholder="example@domain.com" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <input type="password" id="inputPassword" name="Password" class="form-control" #Password ngModel placeholder="**********" required>
+        <label for="inputBirth" class="sr-only">Date de naissance</label>
+        <input type="date" id="inputBirth" class="form-control" name="Birth" #Birth ngModel placeholder="01/01/1990" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Se souvenir de moi
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+        <a routerLink="/signup">Je n'ai pas de compte</a> | <a routerLink="/home">Annuler</a>
+    </form>
+
+</div>

@@ -5,9 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { BetListComponent } from './bet-list/bet-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BetGroupService } from './services/BetGroupService';
+=======
 import { UserService } from './shared/user.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -22,10 +25,23 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 
+
+>>>>>>> 831f2671d93ee22b650e716399bf39478a7c807d
+
 @NgModule({
   declarations: [
     AppComponent,
-    BetListComponent,
+<<<<<<< HEAD
+    BetListComponent
+  ],
+  imports: [
+    BrowserModule,
+    AngularFontAwesomeModule,
+    HttpClientModule
+  ],
+  providers: [
+    BetGroupService
+=======
     SignUpComponent,
     UserComponent,
     SignInComponent,
@@ -42,12 +58,13 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService, BetGroupService, AuthGuard,
+  providers: [UserService,AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
     }
+>>>>>>> 831f2671d93ee22b650e716399bf39478a7c807d
   ],
   bootstrap: [AppComponent]
 })
