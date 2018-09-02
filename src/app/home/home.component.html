@@ -1,26 +1,32 @@
-<nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">
-      <i class="material-icons">cloud</i>Dotnet Mob App</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li>
-        <a (click)="Logout()">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<div class="row" *ngIf="userClaims">
-  <div class="col s12 m7">
-    <div class="card">
-      <div class="card-content">
-        <span>Username :{{userClaims.UserName}}</span>
-        <br>
-        <span>Email : {{userClaims.Email}}</span>
-        <br>
-        <span>Full Name : {{userClaims.FirstName}} {{userClaims.LastName}}</span>
-        <br>
-        <span>Logged On : {{userClaims.LoggedOn}}</span>
-      </div>
+<app-navbar></app-navbar>
+
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+    <img [src]="images[0]" alt="Random first slide">
+    <div class="carousel-caption">
+      <h3>Slide 1</h3>
+      <p>Blablabla nouveau pari dans nouvelle compétition lambda</p>
     </div>
-  </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[1]" alt="Random second slide">
+    <div class="carousel-caption">
+      <h3>Encore une slide</h3>
+      <p>Inscrivez-vous aujourd'hui et gagnez 100€...</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[2]"  alt="Random third slide">
+    <div class="carousel-caption">
+      <h3>Slide 3</h3>
+      <p>Encore un truc commercial</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="container">
+  <h2>CONTAINER</h2>
+  <div>le container</div>
 </div>
+
+<app-footer></app-footer>

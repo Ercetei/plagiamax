@@ -1,33 +1,42 @@
-<form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
-  <div class="form-group">
-    <label for="userNameSignUp" data-error="Champ requis!">Nom d'utilisateur</label>
-    <input id="userNameSignUp" class="form-control" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
-  </div>
+<div class="container">
+  <form #userRegistrationForm="ngForm" class="form-signup" (ngSubmit)="OnSubmit(userRegistrationForm)">
+    <h2>Inscription</h2>
 
-  <div class="form-group">
-    <label for="passwordSignUp" [attr.data-error]="Password.errors!=null?(Password.errors.required?'Champ requis!':'Minimum 3 caractères'):''">Mot de passe</label>
-    <input id="passwordSignUp" class="form-control" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
-  </div>
+    <div class="form-group">
+      <label for="userNameSignUp" data-error="Champ requis!">Nom d'utilisateur</label>
+      <input id="userNameSignUp" class="form-control" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+    </div>
 
-  <div class="form-group">
-    <label for="emailSignUp" data-error="Email invalide!">Email</label>
-    <input id="emailSignUp" class="form-control" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
-  </div>
+    <div class="form-group">
+      <label for="passwordSignUp" [attr.data-error]="Password.errors!=null?(Password.errors.required?'Champ requis!':'Minimum 3 caractères'):''">Mot de passe</label>
+      <input id="passwordSignUp" class="form-control" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
+    </div>
 
-  <div class="form-group">
-    <label for="birthSignUp" data-error="Date invalide!">Date de naissance</label>
-    <input id="birthSignUp" class="form-control" type="date" name="Birth" #Birth="ngModel" [(ngModel)]="user.Birth">
-  </div>
+    <div class="form-group">
+      <label for="emailSignUp" data-error="Email invalide!">Email</label>
+      <input id="emailSignUp" class="form-control" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
+    </div>
 
-  <div class="form-group">
-    <label for="firstNameSignUp">Prénom</label>
-    <input type="text" class="form-control" id="firstNameSignUp" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
-  </div>
+    <div class="form-group">
+      <label for="birthSignUp" data-error="Date invalide!">Date de naissance</label>
+      <input id="birthSignUp" class="form-control" type="date" name="Birth" #Birth="ngModel" [(ngModel)]="user.Birth">
+    </div>
 
-  <div class="form-group">
-    <label for="lastNameSignUp">Nom de famille</label>
-    <input type="text" class="form-control" id="lastNameSignUp" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
-  </div>
+    <div class="form-group">
+      <label for="firstNameSignUp">Prénom</label>
+      <input type="text" class="form-control" id="firstNameSignUp" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+    </div>
 
-  <button [disabled]="!userRegistrationForm.valid" class="btn btn-primary" type="submit">M'inscrire</button>
-</form>
+    <div class="form-group">
+      <label for="lastNameSignUp">Nom de famille</label>
+      <input type="text" class="form-control" id="lastNameSignUp" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+    </div>
+
+    <button [disabled]="!userRegistrationForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
+
+    <a routerLink="/login">Déjà un compte?</a> | <a routerLink="/home">Annuler</a>
+
+  </form>
+
+
+</div>

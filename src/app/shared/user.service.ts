@@ -15,6 +15,7 @@ export class UserService {
       UserName: user.UserName,
       Password: user.Password,
       Email: user.Email,
+      Birth: user.Birth,
       FirstName: user.FirstName,
       LastName: user.LastName
     }
