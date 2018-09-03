@@ -1,0 +1,15 @@
+<td>
+  <button class="btn btn-warning" (click)="onCategoryBis()">
+    <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+  </button>
+</td>
+<td>
+  <tr *ngFor="let cn of tabCompet">
+    <td> {{ cn.label }} </td>
+    <td>
+      <!-- <button class="btn btn-warning" (click)="onCompetition(cn.id)">
+        <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+      </button> -->
+    </td>
+  </tr>
+</td>

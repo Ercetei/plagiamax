@@ -27,6 +27,38 @@
 <div class="container">
   <h2>CONTAINER</h2>
   <div>le container</div>
+
+  <br>
+
+  <div class="divListCategory">
+    <table id="tabListUser">
+      <tr *ngFor="let cy of tabCategory">
+        <td> {{cy.label }} </td>
+        <!-- <td>
+          <button class="btn btn-warning" (click)="onCategory(cy.tabCompetition)">
+            <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+          </button>
+        </td> -->
+        
+        <app-competition [category]="cy" [indexOfCategory]="cy.id" ></app-competition>
+        <!-- <td hidden="visibleCompet"> -->
+        <!-- <td>
+          <tr *ngFor="let cn of tabCategory[cy.id].tabCompetition">
+            <td> {{cn.label }} </td>
+            <td>
+              <button class="btn btn-warning" (click)="onCompetition(cn.id)">
+                <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+              </button>
+            </td>
+          </tr>
+        </td> -->
+
+      </tr>
+    </table>
+  </div>
+
+  <br>
+
 </div>
 
 <app-footer></app-footer>

@@ -19,6 +19,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+import { CompetitionComponent } from './competition/competition.component';
 
 
 
@@ -30,13 +31,14 @@ import { FooterComponent } from './footer/footer.component';
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CompetitionComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
 
-    AngularFontAwesomeModule,
+    // AngularFontAwesomeModule,
     
     HttpClientModule,
     ToastrModule.forRoot(),
