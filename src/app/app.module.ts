@@ -14,7 +14,8 @@ import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { BetListComponent } from './bet-list/bet-list.component';
+import { BetListComponent } from './bet/bet-list/bet-list.component';
+import { BetSelectedComponent } from './bet/bet-selected/bet-selected.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -26,6 +27,7 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     AppComponent,
     BetListComponent,
+    BetSelectedComponent,
     SignUpComponent,
     UserComponent,
     SignInComponent,

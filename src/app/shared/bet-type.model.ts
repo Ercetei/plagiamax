@@ -1,3 +1,5 @@
+import { Match } from './match.model';
+
 // Ajouter objet equipe
 export class BetType{
 
@@ -5,11 +7,13 @@ export class BetType{
     label: string;
     odds: number;
     type: number;
+    match: Match;
 
-	constructor(id: number = 0, label: string = "", odds: number = 0, type: number = 0){
+	constructor(id: number = 0, label: string = "", odds: number = 0, type: number = 0, match: Match = null){
         this.id = id;
         this.label = label;
         this.odds = odds;
         this.type = type;
+        this.match = match;
     }
 }
