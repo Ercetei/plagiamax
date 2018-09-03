@@ -5,7 +5,7 @@ import { Competition } from './models/competition';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'plagiamax';
@@ -23,5 +23,7 @@ export class AppComponent {
     // this.visibleCompet = 'true';
     this.tabCategory[id].tabCompetition = this.tabCompetFoot;
   }
-  
+
+  // title = 'app';
+
 }
