@@ -21,7 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { CompetitionComponent } from './competition/competition.component';
 
-
+import { CategoryService } from './shared/category.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { CompetitionComponent } from './competition/competition.component';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService,AuthGuard,
+  providers: [UserService, CategoryService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

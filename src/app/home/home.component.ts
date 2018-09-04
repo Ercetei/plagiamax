@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
-import { Category } from '../models/category';
-import { Competition } from '../models/competition';
+import { Category } from '../shared/category.model';
+import { Competition } from '../shared/competition.model';
 
 @Component({
   selector: 'app-home',
@@ -37,16 +37,16 @@ export class HomeComponent implements OnInit {
   }
 
 
-  tabCompetFoot = [ new Competition(0, 'Ligue 1 Conforama', 1, 1, 'FRANCE'),
-                    new Competition(1, 'Coupe de France', 0, 2, 'FRANCE')
-                  ];
-  tabCompetBasket = [];
+  // tabCompetFoot = [ new Competition(0, 'Ligue 1 Conforama', 1, 1, 'FRANCE'),
+  //                   new Competition(1, 'Coupe de France', 0, 2, 'FRANCE')
+  //                 ];
+  // tabCompetBasket = [];
   // tabCategory=[ new Category (0, 'Football', 1, []), 
   //               new Category (1, 'Basketball', 0,[])
   //             ];
-  tabCategory=[ new Category (0, 'Football', 1, this.tabCompetFoot), 
-                new Category (1, 'Basketball', 0, this.tabCompetBasket)
-              ];
+  // tabCategory=[ new Category (0, 'Football', 1, this.tabCompetFoot), 
+  //               new Category (1, 'Basketball', 0, this.tabCompetBasket)
+  //             ];
   // onCategory(tabCompetition:Competition[]){
   //   tabCompetition = this.tabCompetFoot ;
   // }
