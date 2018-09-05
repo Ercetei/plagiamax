@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="selectedBets.bets">
     <div class="row">
         <div class="col-md-6"><button class="btn btn-block btn-head" href="#">Simple</button></div>
         <div class="col-md-6"><button class="btn btn-block btn-head" href="#">Combiné</button></div>
     </div>
-    <div class="row back" *ngIf="selectedBets.bets">
+    <div class="row back">
         <div class="bet-block" *ngFor="let bet of selectedBets.bets">
             <div class="col-md-12">
                 <div class="row">

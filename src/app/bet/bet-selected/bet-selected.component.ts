@@ -14,7 +14,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bet-selected.component.scss']
 })
 export class BetSelectedComponent implements OnInit {
-  selectedBets: Bet;
+  selectedBets: Bet = new Bet();
   match: Match;
   @Input() amount: number;
 
