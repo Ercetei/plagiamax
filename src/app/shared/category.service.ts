@@ -27,7 +27,9 @@ export class CategoryService {
     constructor(){
     }
 
-
+    getCategory(){
+        return this.categories;
+    }
     getCompetition(id: number) : Observable<Competition[]> {
         return of(this.categories.find(x => x.id == id).competitions);
     }

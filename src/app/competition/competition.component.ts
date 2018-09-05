@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-// import { Category } from '../shared/category.model';
+import { Category } from '../shared/category.model';
 // import { Competition } from '../shared/competition.model';
 import { CategoryService } from '../shared/category.service';
 
@@ -11,23 +11,27 @@ import { CategoryService } from '../shared/category.service';
 })
 export class CompetitionComponent implements OnInit {
 
-@Input() 	indexOfCategory:number;
+@Input() 	tabCategories:Category[];
+// @Input() 	indexOfCategory:number;
 
   constructor(private categoryService:CategoryService) { }
   // constructor() { }
 
-  ngOnInit() {
+  ngOnInit(){
+    //Je recupere le tableau du service
+    this.tabCategories=this.categoryService.getCategory() ;
   }
 
-  // tabCompet:Competition[];
+  // tabCompet = this.categoryService.getCategory() ;
 
-  onCategoryBis(){
-    console.log("TEST BOUTON" + this.categoryService + " " + this.indexOfCategory);
-    // console.log(this.categoryService.getCompetition(this.indexOfCategory));
-    // for(let cy of this.category){
-
-    // }
-    // this.tabCompet = this.category[this.indexOfCategory].tabCompetition ;
-  }
+  // onCategoryBis(cy: Category, indexOfCategory:number){
+  //   console.log(cy);
+  //   console.log(indexOfCategory);
+  //   console.log(this.categoryService.getCompetition(indexOfCategory));
+  // }
+  
+  // onCategory(){
+  //   console.log("TEST")
+  // }
 
 }

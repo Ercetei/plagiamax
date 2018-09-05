@@ -1,40 +1,53 @@
-    <!-- <table id="tabListUser">
-      <tr *ngFor="let cy of tabCategory">
-        <td> {{cy.label }} </td>
-        <td>
-          <button class="btn btn-warning" (click)="onCategory(cy.tabCompetition)">
-            <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
-          </button>
-        </td>
-
-
-        <td hidden="visibleCompet">
-        <td>
-          <tr *ngFor="let cn of tabCategory[cy.id].tabCompetition">
-            <td> {{cn.label }} </td>
-            <td>
-              <button class="btn btn-warning" (click)="onCompetition(cn.id)">
-                <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
-              </button>
-            </td>
-          </tr>
-        </td>
-
-      </tr>
-    </table> -->
-
-<td>
-  <button class="btn btn-warning" (click)="onCategoryBis()">
-    <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
-  </button>
-</td>
-<td>
-  <tr *ngFor="let cn of tabCompet">
-    <td> {{ cn.label }} </td>
-    <td>
-      <!-- <button class="btn btn-warning" (click)="onCompetition(cn.id)">
-        <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
-      </button> -->
-    </td>
+<!-- <table>
+  <tr *ngFor="let cy of tabCategories">
+  <td> {{ cy.label }} </td>
+    <button class="btn btn-warning" (click)="onCategoryBis(cy, cy.id)">
+      <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+    </button>
   </tr>
-</td>
+</table> -->
+
+<br>
+
+<table>
+  <tr *ngFor="let cy of tabCategories"> 
+    <td class="nav-item dropdown" ngbDropdown>
+      <a class="nav-link dropdown-toggle" id="id01" ngbDropdownToggle>{{ cy.label }}</a>
+
+      <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+
+        <!-- <div *ngFor="let country of cy.countries">{{ country.label }}</div> -->
+        <div>FRANCE</div>
+        <a class="dropdown-item" *ngFor="let cn of cy.competitions">{{ cn.label }}</a>
+        <!-- <a class="dropdown-item" href="#" *ngFor="let cn of cy.competitions">{{ cn.label }}</a> -->
+      </div>
+
+    </td>
+  </tr> 
+</table>
+
+<br>
+<br>
+
+<!-- 
+<tr>
+  <td class="nav-item dropdown" ngbDropdown>
+    <a class="nav-link dropdown-toggle" id="id01" ngbDropdownToggle>MENU1</a>
+
+    <div class="dropdown-menu" id="id02" aria-labelledby="id01" ngbDropdownMenu>
+      TEST1
+      <a class="dropdown-item">TEST3</a>
+
+      <div class="dropdown-menu" aria-labelledby="id02" ngbDropdownMenu>
+          <a class="dropdown-item" >TEST2</a>
+      </div>
+      
+    </div>
+
+  </td>
+</tr> 
+-->
+
+
+<br>
+<br>
