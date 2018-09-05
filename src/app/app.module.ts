@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
-
 import { AppComponent } from './app.component';
 import { UserService } from './shared/user.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,8 +16,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
-
-
+import { ShowbetComponent } from './showbet/showbet.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -29,7 +27,8 @@ import { FooterComponent } from './footer/footer.component';
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ShowbetComponent
   ],
   imports: [
     BrowserModule,
