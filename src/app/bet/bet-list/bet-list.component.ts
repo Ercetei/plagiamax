@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BetService } from '../../shared/bet.service';
-import { BetType } from '../../shared/bet-type.model';
+import { BetService } from '../../shared/services/bet.service';
+import { BetType } from '../../shared/models/bet-type.model';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Bet } from '../../shared/bet.model';
-import { Match } from '../../shared/match.model';
-import { MatchService } from '../../shared/match.service';
+import { Bet } from '../../shared/models/bet.model';
+import { Match } from '../../shared/models/match.model';
+import { MatchService } from '../../shared/services/match.service';
 
 @Component({
   selector: 'app-bet-list',

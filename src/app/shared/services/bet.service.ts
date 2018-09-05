@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
-import { Bet } from './bet.model';
-import { BetType } from './bet-type.model';
-import { Match } from './match.model';
+import { Bet } from '../models/bet.model';
+import { BetType } from '../models/bet-type.model';
+import { Match } from '../models/match.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class BetService {

@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
-import { BetService } from './shared/bet.service';
-import { UserService } from './shared/user.service';
-import { MatchService } from './shared/match.service';
+import { BetService } from './shared/services/bet.service';
+import { UserService } from './shared/services/user.service';
+import { MatchService } from './shared/services/match.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { UserComponent } from './user/user.component';
