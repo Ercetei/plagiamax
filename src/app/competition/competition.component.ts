@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Category } from '../shared/category.model';
-// import { Competition } from '../shared/competition.model';
-import { CategoryService } from '../shared/category.service';
+import { Category } from '../shared/models/category.model';
+import { CategoryService } from '../shared/services/category.service';
 
 @Component({
   selector: 'app-competition',

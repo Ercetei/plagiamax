@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 
-import { Category } from '../shared/category.model';
-import { Competition } from '../shared/competition.model';
+import { Category } from '../models/category.model';
+import { Competition } from '../models/competition.model';
 
 @Injectable()
 export class CategoryService {
 
     // TODO: A supprimer avec la BDD
-    competFoot1: Competition = new Competition(0, 'Ligue 1 Conforama', 1, 1, 'FRANCE') ;
-    competFoot2: Competition = new Competition(1, 'Coupe de France', 0, 2, 'FRANCE') ;
+    competFoot1: Competition = new Competition(0, 'Ligue 1 Conforama', 1, 1, null, null) ;
+    competFoot2: Competition = new Competition(1, 'Coupe de France', 0, 2, null, null) ;
 
     competFoot: Competition[] = [
         this.competFoot1,

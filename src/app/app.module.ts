@@ -25,7 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { CompetitionComponent } from './competition/competition.component';
 
-import { CategoryService } from './shared/category.service';
+import { CategoryService } from './shared/services/category.service';
 
 @NgModule({
   declarations: [
