@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class UserService {

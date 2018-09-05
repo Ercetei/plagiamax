@@ -27,15 +27,24 @@
 <div class="container">
   <h2>CONTAINER</h2>
   <div>le container</div>
-
-  <br>
-
-  <div class="divListCategory">
-    <app-competition></app-competition>
-  </div>
-
-  <br>
-
 </div>
 
+
+<div class="d-flex flex-row justify-content-around">
+  <div class="p-2 col-3 text-center">MENU GAUCHE
+
+      <br>
+
+      <div class="divListCategory">
+        <app-competition></app-competition>
+      </div>
+    
+      <br>
+
+  </div>
+  <div class="p-2 col-6"><router-outlet></router-outlet></div>
+  <div class="p-2 col-3 text-center"><app-bet-selected></app-bet-selected></div>
+</div>
+
+    
 <app-footer></app-footer>
