@@ -13,7 +13,7 @@ import { MatchService } from '../../shared/services/match.service';
   styleUrls: ['./bet-list.component.scss']
 })
 export class BetListComponent implements OnInit {
-  selectedBets: Bet;
+  selectedBets: Bet = new Bet();
   match: Match;
   betTypes: BetType[] = [];
 
