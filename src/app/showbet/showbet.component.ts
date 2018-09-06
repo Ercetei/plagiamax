@@ -58,9 +58,4 @@ export class ShowbetComponent {
     console.log(this.newVal);
   }
 
-  public random() {
-    return this.team[Math.floor(Math.random() * this.team.length)]
-  }
-  random();
-
 }

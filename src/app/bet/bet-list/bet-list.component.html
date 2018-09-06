@@ -1,0 +1,58 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				{{match.teams[0].label}} - {{match.teams[1].label}}
+			</h3>
+			<h3 class="text-center">
+				France - Ligue 1 - 3ème journée
+			</h3>
+		</div>
+	</div>
+	<div class="row" *ngIf="getWinnerBets()">
+		<div class="col-md-12">
+			<h3 class="subtitle">
+				Resultats
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 text-center" *ngFor="let bet of getWinnerBets()">
+			<h4>
+				{{bet.label}}
+			</h4>
+			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		</div>
+	</div>
+	<div class="row bet-group" *ngIf="getScoreBets()">
+		<div class="col-md-12">
+			<h3 class="subtitle">
+				Score exact
+			</h3>
+		</div>
+	</div>
+	<div class="row bet-group">
+		<div class="col-md-4 text-center" *ngFor="let bet of getScoreBets()">
+			<h4>
+				{{bet.label}}
+			</h4>
+			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		</div>
+	</div>
+	<div class="row bet-group" *ngIf="getGoalsBets()">
+		<div class="col-md-12">
+			<h3 class="subtitle">
+				Nombre de buts
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div ngClass="" class="col-md-6 text-center" *ngFor="let bet of getGoalsBets()">
+			<h4>
+				{{bet.label}}
+			</h4>
+			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		</div>
+	</div>
+
+</div>
