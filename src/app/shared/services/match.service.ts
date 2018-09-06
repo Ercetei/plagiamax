@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { Match } from '../models/match.model';
-import { Team } from '../models/team.model';
-import { BetType } from '../models/bet-type.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { MatchTeam } from '../models/match-team.model';
+import { BaseService } from './base.service';
 
 @Injectable()
-export class MatchService {
+export class MatchService extends BaseService{
 
     // TODO: A supprimer avec la BDD
-    match1: Match = new Match(0, "Trophée des champions", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "Monaco")]);
+    /*match1: Match = new Match(0, "Trophée des champions", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "Monaco")]);
     
     match2: Match = new Match(1, "", 0, [ new Team(2, "SCO Angers"), new Team(3, "Stade Rennais FC")]);
     
@@ -53,13 +52,14 @@ export class MatchService {
     matchs: Match[] = [
         this.match1,
         this.match2
-    ]
+    ]*/
     
-    readonly rootUrl = 'http://localhost:1234';
+ 
 
-    constructor(private http: HttpClient) { 
-        this.match1.bets = this.betsT1;
-        this.match2.bets = this.betsT2;
+    constructor() { 
+        super();
+        //this.match1.bets = this.betsT1;
+        //this.match2.bets = this.betsT2;
     }
 
     addMatch(match: Match) {
@@ -77,12 +77,16 @@ export class MatchService {
     }
 
     getMatchs(id: number) : Observable<Match[]> {
-       return of(this.matchs);
-       //return this.http.get<Match[]>(this.rootUrl+'/match');
+       //return of(this.matchs);
+       return this.http.get<Match[]>(this.rootUrl+'/match');
+    }
+
+    getMatchTeams(id: number){
+        return this.http.get<MatchTeam[]>(this.rootUrl+'/matchteam/'+id);
     }
 
     getMatch(id: number) : Observable<Match> {
-        return of(this.matchs.find(x => x.id == id));
-        //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+        //return of(this.matchs.find(x => x.id == id));
+        return this.http.get<Match>(this.rootUrl+'/match/'+id);
     }
 }

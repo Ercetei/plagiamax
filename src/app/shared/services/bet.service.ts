@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { Bet } from '../models/bet.model';
 import { BetType } from '../models/bet-type.model';
 import { Match } from '../models/match.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class BetService {
