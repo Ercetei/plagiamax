@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Category } from '../shared/models/category.model';
+import { Competition } from '../shared/models/competition.model';
 import { CategoryService } from '../shared/services/category.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { CategoryService } from '../shared/services/category.service';
 export class CompetitionComponent implements OnInit {
 
 @Input() 	tabCategories:Category[];
+@Input() 	tabCompetBDD:any;
 // @Input() 	indexOfCategory:number;
 
   constructor(private categoryService:CategoryService) { }
@@ -19,6 +21,7 @@ export class CompetitionComponent implements OnInit {
   ngOnInit(){
     //Je recupere le tableau du service
     this.tabCategories=this.categoryService.getCategory() ;
+    this.tabCompetBDD = this.categoryService.getCompetitionBDD(1);
   }
 
   // tabCompet = this.categoryService.getCategory() ;
@@ -28,9 +31,13 @@ export class CompetitionComponent implements OnInit {
   //   console.log(indexOfCategory);
   //   console.log(this.categoryService.getCompetition(indexOfCategory));
   // }
-  
-  // onCategory(){
-  //   console.log("TEST")
-  // }
+  // football:String = "football";
+  onCategory(){
+    console.log("TEST");
+    console.log(this.tabCompetBDD);
+    console.log(this.tabCompetBDD.id);
+    console.log("TEST");
+    console.log(this.categoryService.getCompetitionBDDTest());
+  }
 
 }
