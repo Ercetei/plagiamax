@@ -26,6 +26,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CompetitionComponent } from './competition/competition.component';
 
 import { CategoryService } from './shared/services/category.service';
+import { HistoricalComponent } from './historical/historical.component';
+import { HistoricalService } from './shared/services/historical.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { CategoryService } from './shared/services/category.service';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    CompetitionComponent
+    CompetitionComponent,
+    HistoricalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { CategoryService } from './shared/services/category.service';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService, CategoryService, BetService, MatchService, AuthGuard,
+  providers: [UserService, HistoricalService, CategoryService, BetService, MatchService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

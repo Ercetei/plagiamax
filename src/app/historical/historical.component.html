@@ -1,0 +1,44 @@
+<br>
+
+<div class="nav-item dropdown" ngbDropdown>
+  <a class="nav-link dropdown-toggle button-link" id="id01" ngbDropdownToggle>Status</a>
+  <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu >
+    
+      <option value="" *ngFor="let status of tabStatus" [value]="status.id">{{ status.status }}</option>
+
+  </div>
+</div>
+<br>
+<!-- <select class="form-control" [(ngModel)]="daySelected" (change)="onChange($event)">
+    <option *ngFor="let day of calendar" [value]="day.id">{{day.label}}</option>
+</select> -->
+<br>
+
+<table class="historical-block">
+
+  <tr class="historical-block-head">
+    <th> JEU </th>
+    <th> DATE </th>
+    <th> HEURE </th>
+    <th> MISE </th>
+    <th> GAIN TOTAL </th>
+    <th> STATUS </th>
+  </tr>
+  <tr>
+      <td> Paris sportifs </td>
+      <td> 22/08/2018 </td>
+      <td> 00h50 </td>
+      <td> 5.00€ </td>
+      <td> 10.00€ </td>
+      <td> Terminé </td>
+  </tr>
+  <tr *ngFor = "let hb of tabBet">
+    <td> {{ hb.label }} </td>
+    <td> {{ hb.betDate }} </td>
+    <td>  </td>
+    <td> {{ hb.betAmount.toFixed(2) }}€ </td>
+    <td> {{ gain.toFixed(2) }}€ </td>
+    <td> {{ tabStatus[hb.status].status }} </td>
+  </tr>
+
+</table>

@@ -42,7 +42,7 @@ export class BetSelectedComponent implements OnInit {
   getTotalOdds(){
     let totalOdds = 1;
     for(let bet of this.selectedBets.bets){
-      totalOdds *= bet.odds;
+      totalOdds *= bet.currentOdds;
     }
     return totalOdds;
   }

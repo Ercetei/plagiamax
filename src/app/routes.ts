@@ -5,7 +5,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { AuthGuard } from './auth/auth.guard';
 import { BetListComponent } from './bet/bet-list/bet-list.component';
-import { CompetitionComponent } from './competition/competition.component';
+import { HistoricalComponent } from './historical/historical.component';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -21,6 +21,9 @@ export const appRoutes: Routes = [
     { path: 'back-office', component: HomeComponent, canActivate:[AuthGuard] },
     { path: 'signup', component: SignUpComponent },
     { path: 'login', component: SignInComponent },
+
+    { path: 'historical', component: HistoricalComponent },
+    
     {   
         path: 'football', component: HomeComponent,
         children: [
