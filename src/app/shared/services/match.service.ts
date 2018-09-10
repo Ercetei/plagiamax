@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { Match } from '../models/match.model';
 import { Team } from '../models/team.model';
+import { Place } from '../models/place.model';
 import { BetType } from '../models/bet-type.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -85,4 +86,50 @@ export class MatchService {
         return of(this.matchs.find(x => x.id == id));
         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
     }
+
+    getLabelMatchs(label: String) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getLabelMatch(label: String) : Observable<Match> {
+         return of(this.matchs.find(x => x.label == label));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getStatusMatchs(status: number) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getStatusMatch(status: number) : Observable<Match> {
+         return of(this.matchs.find(x => x.status == status));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getPlaceMatchs(place: Place) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getPlaceMatch(place: Place) : Observable<Match> {
+         return of(this.matchs.find(x => x.place == place));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getTeamMatchs(teams: Team[]) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getTeamsMatch(teams: Team[]) : Observable<Match> {
+         return of(this.matchs.find(x => x.teams == teams));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getBetMatchs(bets: BetType[]) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getBetMatch(bets: BetType[]) : Observable<Match> {
+         return of(this.matchs.find(x => x.bets == bets));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
 }

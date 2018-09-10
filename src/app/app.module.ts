@@ -22,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
+import { CreditCardComponent } from './credit-card/credit-card.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NgModule } from '@angular/core';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    ShowbetComponent
+    ShowbetComponent,
+    CreditCardComponent
   ],
   imports: [
     BrowserModule,

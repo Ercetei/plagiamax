@@ -6,7 +6,7 @@
     <option *ngFor="let day of calendar" [value]="day.Id"> {{day.Name}} </option>
   </select> -->
   <select class="form-control" [(ngModel)]="daySelected" (change)="onChange($event)">
-    <option *ngFor="let day of calendar" [value]="day.Id">{{day.Name}}</option>    
+    <option *ngFor="let day of calendar" [value]="day.id">{{day.label}}</option>    
 </select>
   <br>
 </div>
@@ -37,81 +37,81 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h3>
-						Amiens - As Monaco
+						{{ betsT5[0].label }} - {{ betsT5[2].label }}
 					</h3>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">2.60</button>
+					 <button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[0].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">3.05</button>
+					 <button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[1].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">2.75</button>
+					 <button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[2].odds }}</button>
 				</div>
       </div>
       <div class="row">
 				<div class="col-md-6">
 					<h3>
-						Paris SG - Marseille
+						{{ betsT1[0].label }} - {{ betsT1[2].label }}
 					</h3>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn4Active==true ? 'btn-active' : 'btn-bet'">2.60</button>
+					 <button class="btn" [ngClass]="btn4Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[0].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn5Active==true ? 'btn-active' : 'btn-bet'">3.05</button>
+					 <button class="btn btn-bet" [ngClass]="btn5Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[1].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn6Active==true ? 'btn-active' : 'btn-bet'">2.75</button>
+					 <button class="btn btn-bet" [ngClass]="btn6Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[2].odds }}</button>
 				</div>
       </div>
       <div class="row">
 				<div class="col-md-6">
 					<h3>
-						Le Mans - Rennes
+						{{ betsT2[0].label }} - {{ betsT2[2].label }}
 					</h3>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn7Active==true ? 'btn-active' : 'btn-bet'">2.60</button>
+					 <button class="btn" [ngClass]="btn7Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[0].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn8Active==true ? 'btn-active' : 'btn-bet'">3.05</button>
+					 <button class="btn btn-bet" [ngClass]="btn8Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[1].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn9Active==true ? 'btn-active' : 'btn-bet'">2.75</button>
+					 <button class="btn btn-bet" [ngClass]="btn9Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[2].odds }}</button>
 				</div>
       </div>
       <div class="row">
 				<div class="col-md-6">
 					<h3>
-						Lyon - Nantes
+						{{ betsT3[0].label }} - {{ betsT3[2].label }}
 					</h3>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn10Active==true ? 'btn-active' : 'btn-bet'">2.60</button>
+					 <button class="btn" [ngClass]="btn10Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[0].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn11Active==true ? 'btn-active' : 'btn-bet'">3.05</button>
+					 <button class="btn btn-bet" [ngClass]="btn11Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[1].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn12Active==true ? 'btn-active' : 'btn-bet'">2.75</button>
+					 <button class="btn btn-bet" [ngClass]="btn12Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[2].odds }}</button>
 				</div>
       </div>
       <div class="row">
 				<div class="col-md-6">
 					<h3>
-						Strasbourg - Caen
+						{{ betsT4[0].label }} - {{ betsT4[2].label }}
 					</h3>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn13Active==true ? 'btn-active' : 'btn-bet'">2.60</button>
+					 <button class="btn" [ngClass]="btn13Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[0].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn14Active==true ? 'btn-active' : 'btn-bet'">3.05</button>
+					 <button class="btn btn-bet" [ngClass]="btn14Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[1].odds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn15Active==true ? 'btn-active' : 'btn-bet'">2.75</button>
+					 <button class="btn btn-bet" [ngClass]="btn15Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[2].odds }}</button>
 				</div>
       </div>
 			</div>
