@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable, of } from 'rxjs';
+import { Subject, of } from 'rxjs';
+// import { Observable, of } from 'rxjs';
 
 import { Category } from '../models/category.model';
 import { Competition } from '../models/competition.model';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import {Observable} from 'rxjs/Observable';  // Angular 5/RxJS 5.5 syntax
+import {forkJoin} from 'rxjs';
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class CategoryService {
@@ -26,7 +33,7 @@ export class CategoryService {
         new Category (1, 'Basketball', 0, [] )
         ];
 
-    readonly rootUrl = 'http://localhost:1234';
+    readonly rootUrl = 'http://localhost:8080';
 
     constructor(private http: HttpClient){
     }
@@ -41,9 +48,27 @@ export class CategoryService {
     getCompetitionBDD(id: number) : Observable<Competition> {
         return this.http.get<Competition>(this.rootUrl+'/competition/'+id);
     }
-    getCompetitionBDDTest() {
-        
-        return this.http.get('http://localhost:1234/competition/1');
+    getCompetitionBDDTest() : Observable<Category>  {
+
+        // return forkJoin(
+        //     this.http.get('http://localhost:8080/category/1')
+        // );
+
+        // this.http.get<any>('http://localhost:8080/category/1')
+        // .subscribe(
+        //     (response) => {
+        //         console.log("test response")
+        //         console.log(response);
+        //     },(error)=>{
+        //         console.log('error');
+        //     }
+        // );
+        return  this.http.get<Category>(this.rootUrl+'/api/category/1');
+        // return this.http.get<any>('http://localhost:8080/category/1');
     }
+    // getCompetitionBDDTest(id: number) : Observable<Category>  {
+
+    //     return this.http.get<Category>('http://localhost:8080/category/1');
+    // }
 
 }

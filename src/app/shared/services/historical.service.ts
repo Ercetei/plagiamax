@@ -10,7 +10,8 @@ import { BetType } from '../models/bet-type.model';
 export class HistoricalService {
 
     histoBetUser:Bet[] = [];
-    histoBet:Bet[] = [  new Bet(1, "Pari sportif", "25/08/2018", 5.00, 1, 1, null),
+    histoBetUserStatus:Bet[] = [];
+    histoBet:Bet[] = [  new Bet(1, "Pari sportif", "25/08/2018", 5.00, 2, 1, null),
                         new Bet(2, "Pari sportif", "25/08/2018", 15.00, 1, 1, null),
                         new Bet(3, "Pari sportif", "25/08/2018", 5.00, 1, 2, null),
                         new Bet(4, "Pari sportif", "26/08/2018", 10.00, 1, 1, null)
@@ -25,15 +26,24 @@ export class HistoricalService {
         for (let lineHistoBet of this.histoBet){
             if ( lineHistoBet.idUser == userId){
                 this.histoBetUser.push(lineHistoBet) ;
-                // console.log(this.histoBetUser);
             }
         }
         return this.histoBetUser ;
     }
-    getHistoGain(){
-        
+    getHistoBetUserStatus(userId:number, idStatus : number){
+        this.histoBetUserStatus = [];
+        let histoBetUser = this.getHistoBetUser(userId) ;
+        for (let lineHistoBetUser of histoBetUser){
+            if ( lineHistoBetUser.status == idStatus){
+                this.histoBetUserStatus.push(lineHistoBetUser) ;
+            }
+        }
+        return this.histoBetUserStatus ;
+    }
+    getHistoGain(userId:number){
+        let histoBetUser = this.getHistoBetUser(userId) ;
         let gainPotentiel: number = 0.00 ;
-        for (let lineHistoBetUser of this.histoBetUser){
+        for (let lineHistoBetUser of histoBetUser){
             gainPotentiel +=  lineHistoBetUser.betAmount ;
         }
         return gainPotentiel ;

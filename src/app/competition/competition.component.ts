@@ -14,7 +14,7 @@ export class CompetitionComponent implements OnInit {
 @Input() 	tabCategories:Category[];
 @Input() 	tabCompetBDD:any;
 // @Input() 	indexOfCategory:number;
-
+  tabCategoriesBis:Category; 
   constructor(private categoryService:CategoryService) { }
   // constructor() { }
 
@@ -36,8 +36,11 @@ export class CompetitionComponent implements OnInit {
     console.log("TEST");
     console.log(this.tabCompetBDD);
     console.log(this.tabCompetBDD.id);
-    console.log("TEST");
+    console.log("TEST BDD TEST");
     console.log(this.categoryService.getCompetitionBDDTest());
+    this.categoryService.getCompetitionBDDTest()
+    .subscribe(category => this.tabCategoriesBis = category);
+    console.log(this.tabCategories);
   }
 
 }
