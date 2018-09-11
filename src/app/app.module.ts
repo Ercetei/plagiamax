@@ -18,7 +18,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
-
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -45,7 +45,8 @@ import { FooterComponent } from './footer/footer.component';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
