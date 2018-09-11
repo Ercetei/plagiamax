@@ -5,9 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
-import { BetService } from './shared/services/bet.service';
+import { BetTypeService } from './shared/services/bet-type.service';
 import { UserService } from './shared/services/user.service';
 import { MatchService } from './shared/services/match.service';
+import { MatchBetService } from './shared/services/match-bet.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { UserComponent } from './user/user.component';
@@ -44,7 +45,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService, BetService, MatchService, AuthGuard,
+  providers: [UserService, BetTypeService, MatchService, MatchBetService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

@@ -1,15 +1,17 @@
-import { Bet } from "./bet.model";
+import { BetType } from "./bet-type.model";
 
 // Ajouter objet equipe
-export class BetType{
+export class BetLine {
 
     id: number;
-    momentodds: number;
-    bet: Bet;
+    idBet: number;
+    momentOdds: number;
+    betType: BetType;
 
-	constructor(id: number = 0, momentodds: number = 0, bet: Bet = null){
+    constructor(id: number = 0, idBet: number = 0, betType: BetType = null, momentOdds: number = 0) {
         this.id = id;
-        this.momentodds = momentodds;
-        this.bet = bet;
+        this.idBet = idBet;
+        this.betType = betType;
+        this.momentOdds = momentOdds;
     }
 }

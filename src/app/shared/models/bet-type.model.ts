@@ -1,19 +1,24 @@
-import { Match } from './match.model';
+import { BetLine } from "./bet-line.model";
 
 // Ajouter objet equipe
 export class BetType{
 
     id: number;
     label: string;
-    odds: number;
+    initialOdds : number;
+    currentOdds: number;
+    status: number;
     type: number;
-    match: Match;
+    betLines: BetLine[];
 
-	constructor(id: number = 0, label: string = "", odds: number = 0, type: number = 0, match: Match = null){
+    constructor(id: number = 0, label: string = "", initialOdds: number = 0, currentOdds: number = 0, 
+                status: number = 0, type: number = 0, betLines: BetLine[] = null){
         this.id = id;
         this.label = label;
-        this.odds = odds;
+        this.initialOdds = initialOdds;
+        this.currentOdds = currentOdds;
+        this.status = status;
         this.type = type;
-        this.match = match;
+        this.betLines = this.betLines;
     }
 }

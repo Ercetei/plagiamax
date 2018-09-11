@@ -1,12 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BetService } from '../../shared/services/bet.service';
 import { BetType } from '../../shared/models/bet-type.model';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Bet } from '../../shared/models/bet.model';
 import { Match } from '../../shared/models/match.model';
-import { MatchService } from '../../shared/services/match.service';
-import { NgForm } from '@angular/forms';
+import { MatchBetService } from '../../shared/services/match-bet.service';
+import { BetTypeService } from '../../shared/services/bet-type.service';
 
 @Component({
   selector: 'app-bet-selected',
@@ -14,45 +11,44 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bet-selected.component.scss']
 })
 export class BetSelectedComponent implements OnInit {
-  selectedBets: Bet = new Bet();
+  selectedBets: BetType[] = [];
   match: Match;
   @Input() amount: number;
 
   betGroupSubscription = new Subscription;
 
   constructor
-  (
-    private betService: BetService
-  ) { 
+    (
+    private matchBetService: MatchBetService
+    ) {
 
   }
 
   ngOnInit() {
-    this.betGroupSubscription = this.betService.betGroupSubject.subscribe(
-      (bg: Bet) => {
-        this.selectedBets = bg;
+    this.betGroupSubscription = this.matchBetService.betTypeSubject.subscribe(
+      (bts: BetType[]) => {
+        this.selectedBets = bts;
       }
     );
   }
 
-  removeBet(betType: BetType){
-    this.betService.removeBet(betType);
+  removeBet(betType: BetType) {
+    this.matchBetService.removeSelectedBet(betType);
   }
 
-  getTotalOdds(){
+  getTotalOdds() {
     let totalOdds = 1;
-    for(let bet of this.selectedBets.bets){
-      totalOdds *= bet.odds;
+    for (let betType of this.selectedBets) {
+      totalOdds += betType.currentOdds - 1;
     }
     return totalOdds;
   }
 
-  getPotentialGains(){
-    if(this.amount > 0){
+  getPotentialGains() {
+    if (this.amount > 0) {
       return this.getTotalOdds() * this.amount;
     } else {
       return 0;
     }
-    
   }
 }

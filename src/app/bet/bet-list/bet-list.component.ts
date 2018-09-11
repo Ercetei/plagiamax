@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BetService } from '../../shared/services/bet.service';
 import { BetType } from '../../shared/models/bet-type.model';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Bet } from '../../shared/models/bet.model';
+import { ActivatedRoute } from '@angular/router';
 import { Match } from '../../shared/models/match.model';
 import { MatchService } from '../../shared/services/match.service';
+import { BetTypeService } from '../../shared/services/bet-type.service';
+import { MatchBetService } from '../../shared/services/match-bet.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-bet-list',
@@ -13,72 +14,86 @@ import { MatchService } from '../../shared/services/match.service';
   styleUrls: ['./bet-list.component.scss']
 })
 export class BetListComponent implements OnInit {
-  selectedBets: Bet = new Bet();
+  selectedBets: BetType[] = [];
   match: Match;
   betTypes: BetType[] = [];
 
   betGroupSubscription = new Subscription;
 
   constructor
-  (
+    (
     private route: ActivatedRoute,
-    private router: Router,
-    private betService: BetService,
-    private matchService: MatchService
-  ) { 
-
+    private matchService: MatchService,
+    private matchBetService: MatchBetService,
+    private betTypeService: BetTypeService
+    ) {
   }
 
   ngOnInit() {
-    this.betGroupSubscription = this.betService.betGroupSubject.subscribe(
-      (bg: Bet) => {
-        this.selectedBets = bg;
+    this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
+      (bts: BetType[]) => {
+        this.selectedBets = bts;
       }
     );
     this.getMatch();
     this.getBetTypes();
   }
 
-  getMatch(){
+  getMatch() {
+    console.log('Récupération du match');
     const match_id = +this.route.snapshot.paramMap.get('id');
-    this.matchService.getMatch(match_id)
-      .subscribe(match => this.match = match);
+    this.matchService.getMatch(match_id).subscribe(
+      match => {
+        this.match = match;
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    );
+
+    //  .subscribe(match => this.match = match);
+    //console.log(this.match);
+    console.log(this.match);
   }
 
-  getBetTypes(){
-    this.betService.getBetTypes(this.match)
+  getBetTypes() {
+    this.matchBetService.getBetsByMatch(this.match)
       .subscribe(betTypes => this.betTypes = betTypes);
   }
 
-  getWinnerBets(){
+  getWinnerBets() {
     return this.betTypes.filter(x => x.type == 1);
   }
 
-  getScoreBets(){
+  getScoreBets() {
     return this.betTypes.filter(x => x.type == 2);
   }
 
-  getGoalsBets(){
+  getGoalsBets() {
     return this.betTypes.filter(x => x.type == 3);
   }
 
-  switchBet(id:number){
-    if(this.isSelectedBet(id)){
+  switchBet(id: number) {
+    if (this.isSelectedBet(id)) {
       this.unselectBet(id);
     } else {
       this.selectBet(id);
     }
   }
 
-  selectBet(id:number){
-    this.betService.addBet(this.betTypes.find(x => x.id == id));
+  selectBet(id: number) {
+    this.matchBetService.addSelectedBet(this.betTypes.find(x => x.id == id));
   }
 
-  unselectBet(id:number){
-    this.betService.removeBet(this.betTypes.find(x => x.id == id));
+  unselectBet(id: number) {
+    this.matchBetService.removeSelectedBet(this.betTypes.find(x => x.id == id));
   }
 
-  isSelectedBet(id:number){
-    return this.betService.containsBet(id);
+  isSelectedBet(id: number) {
+    return this.matchBetService.isSelectedBet(id);
   }
 }

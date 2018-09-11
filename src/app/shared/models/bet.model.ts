@@ -1,11 +1,23 @@
-import { BetType } from "./bet-type.model";
+import { User } from "./user.model";
+import { BetLine } from "./bet-line.model";
 
 export class Bet {
-    bets: BetType[];
-    value: number;
+    id: number;
+    label: string;
+    betDate: string;
+    betAmount: number;
+    status: number;
+    user: User;
+    betLines: BetLine[];
 
-    constructor(bets: BetType[] = [], value = 0){
-        this.bets = bets;
-        this.value = value;
+    constructor(id: number = 0, label: string = "", betDate: string = "",
+        betAmount: number = 0, status: number = 0, user: User = null, betLines: BetLine[] = []) {
+        this.id = id;
+        this.label = label;
+        this.betDate = betDate;
+        this.betAmount = betAmount;
+        this.status = status;
+        this.user = user;
+        this.betLines = betLines;
     }
 }
