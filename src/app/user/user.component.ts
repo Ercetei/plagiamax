@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  isAuthentified:Boolean = !!localStorage.getItem('userToken');
+
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
+
   }
 
 }

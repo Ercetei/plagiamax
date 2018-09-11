@@ -1,2 +1,8 @@
-<button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
-<button type="button" class="btn btn-success" routerLink='/signup' >Inscription</button>
+<div *ngIf="isAuthentified == false; else connectedBlock">
+    <button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
+    <button type="button" class="btn btn-success" routerLink='/signup' >Inscription</button>
+</div>
+
+<ng-template #connectedBlock>
+    <span>{{user.username}}</span>
+</ng-template>
