@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../shared/models/category.model';
 import { Competition } from '../shared/models/competition.model';
 import { CategoryService } from '../shared/services/category.service';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-competition',
@@ -12,16 +13,18 @@ import { CategoryService } from '../shared/services/category.service';
 export class CompetitionComponent implements OnInit {
 
 @Input() 	tabCategories:Category[];
-@Input() 	tabCompetBDD:any;
-// @Input() 	indexOfCategory:number;
-  tabCategoriesBis:Category; 
-  constructor(private categoryService:CategoryService) { }
+// @Input() 	tabCompetBDD:any;
+
+  tabCategoriesBis:any; 
+  tabCategoriesBDD:any[]=[];
+  constructor(private categoryService:CategoryService, private http: HttpClient) { }
   // constructor() { }
 
   ngOnInit(){
     //Je recupere le tableau du service
-    this.tabCategories=this.categoryService.getCategory() ;
-    this.tabCompetBDD = this.categoryService.getCompetitionBDD(1);
+    // this.tabCategories=this.categoryService.getCategory() ;
+    // this.tabCompetBDD = this.categoryService.getCompetitionBDD(1);
+    this.tabCategoriesBDD = this.categoryService.getCompetitionBDDTestBis();
   }
 
   // tabCompet = this.categoryService.getCategory() ;
@@ -33,14 +36,27 @@ export class CompetitionComponent implements OnInit {
   // }
   // football:String = "football";
   onCategory(){
-    console.log("TEST");
-    console.log(this.tabCompetBDD);
-    console.log(this.tabCompetBDD.id);
-    console.log("TEST BDD TEST");
-    console.log(this.categoryService.getCompetitionBDDTest());
-    this.categoryService.getCompetitionBDDTest()
-    .subscribe(category => this.tabCategoriesBis = category);
-    console.log(this.tabCategories);
+    // console.log("Nouveau test")
+    // this.categoryService.getCompetitionBDDTestBis();
+    // this.http.get('http://localhost:8080/category/1' , {
+    //                     withCredentials: true
+    //                 }).subscribe( data => { 
+    //                                         console.log(data);
+    //                                         this.tabCategoriesBDD = data ;
+    //                                         console.log(this.tabCategoriesBDD.id);
+    //                                       }
+    //                 ,
+    //                 (err: HttpErrorResponse) => {
+    //                     if (err.error instanceof Error) {
+    //                     console.log('Client-side error occured.');
+    //                     } else {
+    //                     console.log('Server-side error occured.');
+    //                     }
+    //                 } 
+    //             );
+    console.log("Nouveau test BDD")
+    this.tabCategoriesBDD = this.categoryService.getCompetitionBDDTestBis();
+    // console.log(this.tabCategoriesBDD.label);
   }
 
 }

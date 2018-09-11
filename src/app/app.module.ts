@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
-
 import { AppComponent } from './app.component';
 import { BetService } from './shared/services/bet.service';
 import { UserService } from './shared/services/user.service';
@@ -23,11 +21,15 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+
 import { CompetitionComponent } from './competition/competition.component';
 
 import { CategoryService } from './shared/services/category.service';
 import { HistoricalComponent } from './historical/historical.component';
 import { HistoricalService } from './shared/services/historical.service';
+
+import { ShowbetComponent } from './showbet/showbet.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -40,8 +42,12 @@ import { HistoricalService } from './shared/services/historical.service';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+
     CompetitionComponent,
-    HistoricalComponent
+    HistoricalComponent,
+
+    ShowbetComponent
+    
   ],
   imports: [
     BrowserModule,

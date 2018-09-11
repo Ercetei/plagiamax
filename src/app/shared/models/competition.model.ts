@@ -7,17 +7,18 @@ export class Competition{
     label: String;
     status: number;
     type:number;
-    category:Category;
-    place:Place;
+    // category:Category;
+    // place:Place;
 
-    constructor(id: number = 0, label: string = "", status: number = 0, 
-                type:number = 0, category:Category = null, place:Place = null ) {
+    constructor(id: number = 0, label: string = "", status: number = 0, type:number = 0
+                // , category:Category = null, place:Place = null 
+                ) {
         this.id = id;
         this.label = label;
         this.status = status;
         this.type = type;
-        this.category = category;
-        this.place = place;
+        // this.category = category;
+        // this.place = place;
     }
     
 }

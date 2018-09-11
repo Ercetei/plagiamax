@@ -8,7 +8,12 @@ import { BetListComponent } from './bet/bet-list/bet-list.component';
 import { HistoricalComponent } from './historical/historical.component';
 
 export const appRoutes: Routes = [
-    { path: 'home', component: HomeComponent },
+    // { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent, 
+        children: [
+            { path: 'historical', component: HistoricalComponent }
+        ] 
+    },
     // {
     //     path: 'signup', component: UserComponent,
     //     children: [{ path: '', component: SignUpComponent }]
@@ -22,7 +27,7 @@ export const appRoutes: Routes = [
     { path: 'signup', component: SignUpComponent },
     { path: 'login', component: SignInComponent },
 
-    { path: 'historical', component: HistoricalComponent },
+    // { path: 'historical', component: HistoricalComponent },
     
     {   
         path: 'football', component: HomeComponent,
