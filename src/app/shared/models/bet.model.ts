@@ -1,4 +1,5 @@
-import { BetType } from "./bet-type.model";
+import { BetLine } from "./bet-line.model";
+import { BetType } from "../../showbet/models/bet-type";
 
 // export class Bet {
 //     bets: BetType[];
@@ -16,18 +17,22 @@ export class Bet {
     betDate:string;
     betAmount:number;
     status:number;
-    idUser:number;
+    user:any;
     
-    bets: BetType[];
+    betlines: BetLine[];
+
+    bets:BetType[];
 
     constructor(id:number = 0, label:string = "", betDate:string = "", 
-                betAmount:number = 0, status:number = 0, idUser:number = 0, bets: BetType[] = [] ){
+                betAmount:number = 0, status:number = 0, user:any = null, betlines: BetLine[] = []
+                , bets:BetType[] = [] ){
         this.id=id;
         this.label=label;
         this.betDate=betDate;
         this.betAmount=betAmount;
         this.status=status;
-        this.idUser=idUser;
+        this.user=user;
+        this.betlines = betlines;
         this.bets = bets;
     }
 }

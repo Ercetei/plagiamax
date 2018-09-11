@@ -9,6 +9,14 @@
   </div>
 </div> -->
 <br>
+
+<br>
+TEST BDD
+<button class="btn btn-warning" (click)="testGetReq()">
+  <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
+</button>
+<br>
+
 <div class="form-control-format">
 Status
 <select class="form-control" value="Status" [(ngModel)]="statusSelected" (change)="onChange($event)">
@@ -37,10 +45,12 @@ Status
   </tr> -->
   <tr *ngFor = "let hb of tabBet" >
       <td> {{ hb.label }} </td>
-      <td> {{ hb.betDate }} </td>
+      <td> {{ hb.betdate }} </td>
       <td>  </td>
-      <td> {{ hb.betAmount.toFixed(2) }}€ </td>
-      <td> {{ gain.toFixed(2) }}€ </td>
+      <!-- <td> {{ hb.betAmount.toFixed(2) }}€ </td>
+      <td> {{ gain.toFixed(2) }}€ </td> -->
+      <td> {{ hb.betamount }}€ </td>
+      <td> {{ gain }}€ </td>
       <td> {{ tabStatus[hb.status].status }} </td>
   </tr>
 </table>

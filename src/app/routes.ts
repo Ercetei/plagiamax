@@ -6,6 +6,7 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
 import { AuthGuard } from './auth/auth.guard';
 import { BetListComponent } from './bet/bet-list/bet-list.component';
 import { HistoricalComponent } from './historical/historical.component';
+import { ShowbetComponent } from './showbet/showbet.component';
 
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent },
@@ -32,7 +33,10 @@ export const appRoutes: Routes = [
     {   
         path: 'football', component: HomeComponent,
         children: [
-            { path: 'bets/match/:id', component: BetListComponent }
+            { path: 'competition/1', component: ShowbetComponent }, 
+            { path: 'competition/2',  redirectTo:'/home', pathMatch : 'full' }
+            // ,
+            // { path: 'bets/match/:id', component: BetListComponent }
         ]
     },
     { path: 'basketball', component: HomeComponent }

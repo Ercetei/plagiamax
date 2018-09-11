@@ -1,7 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+
+import {CookieService} from 'ngx-cookie-service';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,20 +12,36 @@ import { Router } from '@angular/router';
   styleUrls: ['sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  isLoginError : boolean = false;
-  constructor(private userService : UserService,private router : Router) { }
+  isLoginError: boolean = false;
+  csrf = '';
+  constructor(private userService: UserService, private router: Router, private cookieService: CookieService, private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get('http://localhost:8080/login', {
+      responseType: 'json',
+      withCredentials: true
+    }).subscribe(
+      data => {
+        this.csrf = data._csrf;
+        localStorage.setItem('userToken', this.csrf);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      });
   }
 
-  OnSubmit(userName,password){
-     this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
-      localStorage.setItem('userToken',data.access_token);
+  OnSubmit(username, password) {
+    this.userService.userAuthentication(username, password, this.csrf).subscribe((data: any) => {
+      localStorage.setItem('userToken', this.cookieService.get('JSESSIONID'));
       this.router.navigate(['/home']);
     },
-    (err : HttpErrorResponse)=>{
-      this.isLoginError = true;
-    });
+      (err: HttpErrorResponse) => {
+        this.isLoginError = true;
+      });
   }
 
 }

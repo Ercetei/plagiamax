@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Subscription } from '../../../node_modules/rxjs';
 
 import { Category } from '../shared/models/category.model';
 import { Competition } from '../shared/models/competition.model';
 import { CategoryService } from '../shared/services/category.service';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-competition',
@@ -17,13 +18,15 @@ export class CompetitionComponent implements OnInit {
 
   tabCategoriesBis:any; 
   tabCategoriesBDD:any[]=[];
-  constructor(private categoryService:CategoryService, private http: HttpClient) { }
+  categoriesTest:Category[];
+  constructor(private categoryService:CategoryService) { }
   // constructor() { }
 
   ngOnInit(){
     //Je recupere le tableau du service
     // this.tabCategories=this.categoryService.getCategory() ;
     // this.tabCompetBDD = this.categoryService.getCompetitionBDD(1);
+
     this.tabCategoriesBDD = this.categoryService.getCompetitionBDDTestBis();
   }
 

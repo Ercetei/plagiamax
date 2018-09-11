@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subject,  Observable, of } from 'rxjs';
+import { Subject,  Observable, of, Subscription } from 'rxjs';
 
 import { Category } from '../models/category.model';
 import { Competition } from '../models/competition.model';
@@ -13,6 +13,10 @@ const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
 @Injectable()
 export class CategoryService {
 
+    readonly rootUrl = 'http://localhost:8080';
+
+    tabCategoriesBDD:Category[]=[];
+
     // TODO: A supprimer avec la BDD
     // competFoot1: Competition = new Competition(0, 'Ligue 1 Conforama', 1, 1, null, null) ;
     // competFoot2: Competition = new Competition(1, 'Coupe de France', 0, 2, null, null) ;
@@ -23,13 +27,11 @@ export class CategoryService {
     // ];
 
     // competBasket1: Competition = new Competition(0, '', 0, 1, 'FRANCE') ;
-    tabCategoriesBDD:Category[]=[];
+
     // categories: Category[] = [ 
     //     new Category (0, 'football', 1, this.competFoot ), 
     //     new Category (1, 'Basketball', 0, [] )
     //     ];
-
-    readonly rootUrl = 'http://localhost:8080';
 
     constructor(private http: HttpClient){
     }
@@ -67,6 +69,5 @@ export class CategoryService {
                 );
         return this.tabCategoriesBDD ;
     }
-
 
 }

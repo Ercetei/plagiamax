@@ -28,6 +28,8 @@ import { CategoryService } from './shared/services/category.service';
 import { HistoricalComponent } from './historical/historical.component';
 import { HistoricalService } from './shared/services/historical.service';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 
@@ -66,7 +68,8 @@ import { NgModule } from '@angular/core';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
