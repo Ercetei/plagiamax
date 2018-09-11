@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent } from "@angular/common/http";
 import { UserService } from "../shared/services/user.service";
-=======
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent} from '@angular/common/http';
-import {UserService} from '../shared/user.service';
->>>>>>> 751edee3033de19f4219750b5087e66ee2f94ef3
+
 import 'rxjs/add/operator/do';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
@@ -21,24 +18,24 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req.clone());
     }
 
-<<<<<<< HEAD
-        if (localStorage.getItem('userToken') != null) {
-            const clonedreq = req.clone({
-                headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
-            });
-            return next.handle(clonedreq)
-                .do(
-                succ => { },
-                err => {
-                    if (err.status === 401)
-                        this.router.navigateByUrl('/login');
-                }
-                );
-        }
-        else {
-            return next.handle(req.clone());
-            //this.router.navigateByUrl('/login');
-=======
+
+        // if (localStorage.getItem('userToken') != null) {
+        //     const clonedreq = req.clone({
+        //         headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
+        //     });
+        //     return next.handle(clonedreq)
+        //         .do(
+        //         succ => { },
+        //         err => {
+        //             if (err.status === 401)
+        //                 this.router.navigateByUrl('/login');
+        //         }
+        //         );
+        // }
+        // else {
+        //     return next.handle(req.clone());
+        //     //this.router.navigateByUrl('/login');
+
     // if (localStorage.getItem('userToken') != null) {
     if (this.cookieService.check('JSESSIONID')) {
       const clonedreq = req.clone({
@@ -54,7 +51,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             // this.router.navigateByUrl('/login');
           }
->>>>>>> 751edee3033de19f4219750b5087e66ee2f94ef3
+
         }
         );
     } else {
