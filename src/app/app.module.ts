@@ -33,6 +33,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,8 @@ import { NgModule } from '@angular/core';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule
+    NgbModule,
+    AngularFontAwesomeModule
   ],
   providers: [UserService, HistoricalService, CategoryService, BetService, MatchService, AuthGuard,
     {
@@ -69,7 +74,8 @@ import { NgModule } from '@angular/core';
       useClass : AuthInterceptor,
       multi : true
     },
-    CookieService
+    CookieService,
+    NgbAlertConfig
   ],
   bootstrap: [AppComponent]
 })

@@ -1,2 +1,24 @@
-<button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
-<button type="button" class="btn btn-success" routerLink='/signup' >Inscription</button>
+<div *ngIf="isAuthentified == false; else connectedBlock">
+	<button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
+	<button type="button" class="btn btn-success" routerLink='/signup'>Inscription</button>
+</div>
+
+<ng-template #connectedBlock>
+<ul class="nav navbar-nav navbar-right">
+	<div class="nav-wallet"><i class="fa fa-money"> {{currentUser.wallet ? currentUser.wallet : "0"}}</i></div>
+	<li class="dropdown">
+	<div class="dropdown-toggle"
+		data-toggle="dropdown" role="button" aria-haspopup="true"
+		aria-expanded="false">
+		<i class="fa fa-user"></i> {{currentUser.username}} 
+	</div>
+		<ul class="dropdown-menu user-menu">
+			<li><em>{{currentUser.mail}}</em></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#UpdateProfile">Modifier le profil</a></li>
+			<li><a href="#Billing">Cagnotte</a></li>
+			<li role="separator" class="divider"></li>
+			<li><button (click)="Logout()">Deconnexion</button></li>
+		</ul></li>
+</ul>
+</ng-template>
