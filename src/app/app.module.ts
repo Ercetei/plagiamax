@@ -23,6 +23,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CookieService } from 'ngx-cookie-service';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule
+    NgbModule,
+    AngularFontAwesomeModule
   ],
   providers: [UserService, BetService, MatchService, AuthGuard,
     {
