@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { BetType } from '../../shared/models/bet-type.model';
 import { ActivatedRoute } from '@angular/router';
 import { Match } from '../../shared/models/match.model';
@@ -24,26 +24,25 @@ export class BetListComponent implements OnInit {
     (
     private route: ActivatedRoute,
     private matchService: MatchService,
-    private matchBetService: MatchBetService,
-    private betTypeService: BetTypeService
+    private matchBetService: MatchBetService
     ) {
   }
 
   ngOnInit() {
-    this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
+    this.getMatch();
+    //this.getBetTypes();
+    /*this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
       (bts: BetType[]) => {
         this.selectedBets = bts;
       }
-    );
-    this.getMatch();
-    this.getBetTypes();
+    );*/
   }
 
   getMatch() {
     console.log('Récupération du match');
     const match_id = +this.route.snapshot.paramMap.get('id');
     this.matchService.getMatch(match_id).subscribe(
-      match => {
+      (match: Match) => {
         this.match = match;
       },
       (err: HttpErrorResponse) => {
@@ -61,20 +60,19 @@ export class BetListComponent implements OnInit {
   }
 
   getBetTypes() {
-    this.matchBetService.getBetsByMatch(this.match)
-      .subscribe(betTypes => this.betTypes = betTypes);
+    this.betTypes = this.match.matchbets;
   }
 
   getWinnerBets() {
-    return this.betTypes.filter(x => x.type == 1);
+    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 1);
   }
 
   getScoreBets() {
-    return this.betTypes.filter(x => x.type == 2);
+    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 2);
   }
 
   getGoalsBets() {
-    return this.betTypes.filter(x => x.type == 3);
+    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 3);
   }
 
   switchBet(id: number) {

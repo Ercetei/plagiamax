@@ -5,9 +5,13 @@ import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 
+const headers = new HttpHeaders()
+.set('Access-Control-Allow-Origin', '*');
+
 @Injectable()
 export class MatchService extends BaseService {
 
+    
     // TODO: A supprimer avec la BDD
     /*match1: Match = new Match(0, "Trophée des champions", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "Monaco")]);
     
@@ -78,10 +82,8 @@ export class MatchService extends BaseService {
         return this.http.post(this.rootUrl + '/match', body, { headers: reqHeader });
     }*/
 
-    getMatchs(id: number): Observable<Match[]> {
+    getMatchs(): Observable<Match[]> {
         //return of(this.matchs);
-        const headers = new HttpHeaders()
-            .set('Access-Control-Allow-Origin', '*');
 
         return this.http.get<Match[]>(this.rootUrl + '/match', {
             headers: headers,
@@ -92,8 +94,7 @@ export class MatchService extends BaseService {
 
     getMatch(id: number): Observable<Match> {
         //return of(this.matchs.find(x => x.id == id));
-        const headers = new HttpHeaders()
-            .set('Access-Control-Allow-Origin', '*');
+       
 
         /*this.http.get<Match>(this.rootUrl+'/match/'+id , {
             headers: headers,
@@ -111,7 +112,6 @@ export class MatchService extends BaseService {
             }
         }
         );*/
-        console.log(this.rootUrl + '/match/' + id);
         return this.http.get<Match>(this.rootUrl + '/match/' + id, {
             headers: headers,
             responseType: 'json',

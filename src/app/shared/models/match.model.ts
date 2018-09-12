@@ -15,11 +15,11 @@ export class Match {
     matchbets: MatchBet[];
     events: Event[];
 
-    constructor(id: number = 0, label: string = "", status: number = 0, matchTeams: MatchTeam[] = [], matchBets: MatchBet[] = [], 
+    constructor(id: number = 0, label: string = "", status: number = 0, matchteams: MatchTeam[] = [], matchBets: MatchBet[] = [], 
     place: Place = null, matchday: MatchDay = null, events: Event[] = []) {
         this.id = id;
         this.label = label;
-        this.matchteams = matchTeams;
+        this.matchteams = matchteams;
         this.status = status;
         this.matchbets = matchBets;
         this.place = place;
