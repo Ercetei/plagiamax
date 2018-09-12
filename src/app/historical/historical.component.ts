@@ -29,54 +29,41 @@ export class HistoricalComponent implements OnInit {
   tabHistoBetBDD:Bet[]=[];
   tabHistoBetLineBDD:BetLine[]=[];
 
+  tabBetTest: Bet[]=[];
+  tabTest: Bet[]=[];
 
   testSubscribe = new Subscription;
 
   constructor(private historicalService:HistoricalService, private http: HttpClient) { }
 
   ngOnInit(){
-    // this.tabBet=this.historicalService.getHistoBetUser(this.idUser) ;
-    // this.gain=this.historicalService.getHistoGain(this.idUser);
+    // this.tabBet=this.historicalService.histoBet;
+    // this.tabBet=this.historicalService.getHistoBetUser(this.historicalService.histoBet, this.idUser) ;
+    // this.gain=this.historicalService.getHistoGain(this.tabBet, this.idUser);
 
-    // this.tabHistoBetBDD = this.historicalService.getReq();
-    // this.tabHistoBetLineBDD = this.historicalService.getReqBetLine();
-    this.testSubscribe = this.http.get<Bet[]>(this.rootUrl + '/bet/' , {
-                                                    withCredentials: true
-                                                }).subscribe( data => { 
-                                                                        console.log(data)
-                                                                        this.tabHistoBetBDD = data ;
-                                                                    }
-                                                ,
-                                                (err: HttpErrorResponse) => {
-                                                    if (err.error instanceof Error) {
-                                                    console.log('Client-side error occured.');
-                                                    } else {
-                                                    console.log('Server-side error occured.');
-                                                    }
-                                                } 
-                                              );
-    this.tabBet=this.historicalService.getHistoBetUser(this.tabHistoBetBDD, this.idUser) ;
-    this.gain=this.historicalService.getHistoGain(this.tabBet, this.idUser);
+    // this.getUserInfos();
+
+    this.historicalService.getBetBDD().subscribe(bets => this.tabBetTest = bets);
+    this.tabTest=this.historicalService.getReq();
+    this.tabBetTest=this.historicalService.getHistoBetUser(this.tabBetTest, this.idUser) ;
+    this.gain=this.historicalService.getHistoGain(this.tabBetTest, this.idUser);
+    
   }
 
   public onChange(event): void {  // event will give you full breif of action
+    this.tabTest=this.historicalService.getReq();
     this.newVal = event.target.value;
-    console.log(this.newVal);
     if (this.newVal == 0){
-      this.tabBet=this.historicalService.getHistoBetUser(this.tabBet, this.idUser) ;
+      this.tabBetTest=this.historicalService.getHistoBetUser(this.tabTest, this.idUser) ;
     }
     else {
-      this.tabBet=this.historicalService.getHistoBetUserStatus(this.tabBet, this.idUser, this.newVal) ;
+      this.tabBetTest=this.historicalService.getHistoBetUserStatus(this.tabTest, this.idUser, this.newVal) ;
     }
   }
+  
+  // async getUserInfos() {
+  //   this.tabTest = await this.historicalService.get("/bet");
+  // }
 
-  testGetReq(){
-    console.log("Nouveau test BDD")
-    this.tabHistoBetBDD = this.historicalService.getReq();
-    // this.tabHistoBetLineBDD = this.historicalService.getReqBetLine();
-
-    this.tabBet=this.historicalService.getHistoBetUser(this.tabHistoBetBDD, this.idUser) ;
-    this.gain=this.historicalService.getHistoGain(this.tabBet, this.idUser);
-  }
 
 }

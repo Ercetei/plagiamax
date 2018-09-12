@@ -12,13 +12,13 @@ export class HistoricalService {
     readonly rootUrl = 'http://localhost:8080';
 
     tabHistoBet:Bet[] = [] ;
-
     histoBetUser:Bet[] = [];
     histoBetUserStatus:Bet[] = [];
-    // histoBet:Bet[] = [  new Bet(1, "Pari sportif", "25/08/2018", 5.00, 2, 1, null),
-    //                     new Bet(2, "Pari sportif", "25/08/2018", 15.00, 1, 1, null),
-    //                     new Bet(3, "Pari sportif", "25/08/2018", 5.00, 1, 2, null),
-    //                     new Bet(4, "Pari sportif", "26/08/2018", 10.00, 1, 1, null)
+    
+    // histoBet:Bet[] = [  new Bet(1, "Pari sportif", "25/08/2018", 5, 2, 1, null),
+    //                     new Bet(2, "Pari sportif", "25/08/2018", 15, 1, 1, null),
+    //                     new Bet(3, "Pari sportif", "25/08/2018", 5, 1, 2, null),
+    //                     new Bet(4, "Pari sportif", "26/08/2018", 10, 1, 1, null)
     //                 ];
 
     // histoBetLine = new BetLine(1, 1, 1, 3.15);
@@ -31,11 +31,11 @@ export class HistoricalService {
     getHistoBetUser(tabHistoBetBDD:Bet[], userId:number){
         this.histoBetUser = [];
         for (let lineHistoBet of tabHistoBetBDD){
+            // if ( lineHistoBet.user == userId){
             if ( lineHistoBet.user.id == userId){
                 this.histoBetUser.push(lineHistoBet) ;
             }
         }
-
         return this.histoBetUser ;
     }
     getHistoBetUserStatus(tabHistoBetBDD:Bet[], userId:number, idStatus : number){
@@ -75,4 +75,33 @@ export class HistoricalService {
                 );
         return this.tabHistoBet ;
     }
+
+
+    getBetBDD(): Observable<Bet[]> {
+        return this.http.get<Bet[]>(this.rootUrl + '/bet', {
+            withCredentials: true
+        });
+    }
+
+    // async get(requestMapping: string): Promise<any> {
+    //     // define headers to allow access
+    //     let httpHeaders = new HttpHeaders()
+    //         .set("Access-Control-Allow-Origin", "*");
+    //     // declare request response in await function (for asynchronous)
+    //     let requestResponse = await this.http
+    //         // GET request HTTP with complete URL
+    //         .get<any>(this.rootUrl + requestMapping, {
+    //             // use headers defined above
+    //             headers: httpHeaders,
+    //             // define response format in JSON
+    //             responseType: 'json',
+    //             // enable to use credentials/certificates
+    //             withCredentials: false
+    //         // transform to promise to be able asynchronous
+    //         }).toPromise()
+    //     // return request response
+    //     return requestResponse;
+    // }
+
+
 }

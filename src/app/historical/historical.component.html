@@ -10,13 +10,6 @@
 </div> -->
 <br>
 
-<br>
-TEST BDD
-<button class="btn btn-warning" (click)="testGetReq()">
-  <i class="fa fa-plus" aria-hidden="true" style="color:white" ></i>
-</button>
-<br>
-
 <div class="form-control-format">
 Status
 <select class="form-control" value="Status" [(ngModel)]="statusSelected" (change)="onChange($event)">
@@ -35,19 +28,11 @@ Status
     <th> GAIN TOTAL </th>
     <th> STATUS </th>
   </tr>
-  <!-- <tr>
-      <td> Paris sportifs </td>
-      <td> 22/08/2018 </td>
-      <td> 00h50 </td>
-      <td> 5.00€ </td>
-      <td> 10.00€ </td>
-      <td> Terminé </td>
-  </tr> -->
-  <tr *ngFor = "let hb of tabBet" >
+  <tr *ngFor = "let hb of tabBetTest" >
       <td> {{ hb.label }} </td>
-      <td> {{ hb.betdate }} </td>
+      <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
       <td>  </td>
-      <!-- <td> {{ hb.betAmount.toFixed(2) }}€ </td>
+      <!-- <td> {{ hb.betamount.toFixed(2) }}€ </td>
       <td> {{ gain.toFixed(2) }}€ </td> -->
       <td> {{ hb.betamount }}€ </td>
       <td> {{ gain }}€ </td>
