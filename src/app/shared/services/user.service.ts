@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
 export class UserService {
   readonly rootUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) {}
+  tabUser: User[]=[];
 
   registerUser(user: User) {
     const body: User = {
@@ -17,7 +18,10 @@ export class UserService {
       mail: user.mail,
       birthdate: new Date(user.birthdate),
       firstname: user.firstname,
-      lastname: user.lastname
+      lastname: user.lastname,
+      creditcard:user.creditcard,
+      cryptogram:user.cryptogram,
+      expirationdate:user.expirationdate
     };
 
     return this.http.post(this.rootUrl + '/user/register', body, {
@@ -50,5 +54,13 @@ export class UserService {
   getUserClaims(idUser) {
     return this.http.get(this.rootUrl + '/user/' + idUser + '/claims');
   }
+
+  getUserBDD(): Observable<User[]> {
+
+    console.log("user")
+    return this.http.get<User[]>(this.rootUrl + '/user', {
+        withCredentials: true
+    });
+}
 
 }

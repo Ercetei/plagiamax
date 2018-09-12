@@ -31,7 +31,11 @@ export class SignUpComponent implements OnInit {
       mail: '',
       birthdate: new Date(),
       firstname: '',
-      lastname: ''
+      lastname: '',
+      creditcard: '',
+      cryptogram: '',
+      expirationdate: ''
+
     }
   }
 

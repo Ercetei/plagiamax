@@ -5,4 +5,8 @@ export class User {
     firstname: string;
     lastname: string;
     birthdate: any;
+    creditcard:string;
+    cryptogram:string;
+    expirationdate:string;
+
 }

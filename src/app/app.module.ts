@@ -20,30 +20,25 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
-<<<<<<< HEAD
+import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
-import { CreditCardComponent } from './credit-card/credit-card.component';
 import { CcComponent } from './cc/cc.component';
-=======
-import { CookieService } from 'ngx-cookie-service';
->>>>>>> 751edee3033de19f4219750b5087e66ee2f94ef3
 
 
 @NgModule({
   declarations: [
+    ShowbetComponent,
     AppComponent,
-    BetListComponent,
-    BetSelectedComponent,
     SignUpComponent,
     UserComponent,
     SignInComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    ShowbetComponent,
-    CreditCardComponent,
-    CcComponent
+    CcComponent,
+    BetSelectedComponent,
+    BetListComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +49,8 @@ import { CookieService } from 'ngx-cookie-service';
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [UserService, BetService, MatchService, AuthGuard,
+  providers: [UserService,AuthGuard,MatchService,
+    BetService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
