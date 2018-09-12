@@ -24,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
+import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
       useClass : AuthInterceptor,
       multi : true
     },
-    CookieService
+    CookieService,
+    NgbAlertConfig
   ],
   bootstrap: [AppComponent]
 })
