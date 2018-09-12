@@ -25,6 +25,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireLite } from 'angularfire-lite';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+    AngularFireLite.forRoot(environment.config),
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
