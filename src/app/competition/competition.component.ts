@@ -13,21 +13,14 @@ import { CategoryService } from '../shared/services/category.service';
 })
 export class CompetitionComponent implements OnInit {
 
-@Input() 	tabCategories:Category[];
-// @Input() 	tabCompetBDD:any;
+  tabCategories: Category[]=[];
 
-  tabCategoriesBis:any; 
-  tabCategoriesBDD:any[]=[];
-  categoriesTest:Category[];
   constructor(private categoryService:CategoryService) { }
-  // constructor() { }
 
   ngOnInit(){
     //Je recupere le tableau du service
-    // this.tabCategories=this.categoryService.getCategory() ;
-    // this.tabCompetBDD = this.categoryService.getCompetitionBDD(1);
+    this.categoryService.getCategoryBDD().subscribe(cats => this.tabCategories = cats);
 
-    this.tabCategoriesBDD = this.categoryService.getCompetitionBDDTestBis();
   }
 
   // tabCompet = this.categoryService.getCategory() ;
@@ -38,28 +31,12 @@ export class CompetitionComponent implements OnInit {
   //   console.log(this.categoryService.getCompetition(indexOfCategory));
   // }
   // football:String = "football";
+
   onCategory(){
-    // console.log("Nouveau test")
-    // this.categoryService.getCompetitionBDDTestBis();
-    // this.http.get('http://localhost:8080/category/1' , {
-    //                     withCredentials: true
-    //                 }).subscribe( data => { 
-    //                                         console.log(data);
-    //                                         this.tabCategoriesBDD = data ;
-    //                                         console.log(this.tabCategoriesBDD.id);
-    //                                       }
-    //                 ,
-    //                 (err: HttpErrorResponse) => {
-    //                     if (err.error instanceof Error) {
-    //                     console.log('Client-side error occured.');
-    //                     } else {
-    //                     console.log('Server-side error occured.');
-    //                     }
-    //                 } 
-    //             );
     console.log("Nouveau test BDD")
-    this.tabCategoriesBDD = this.categoryService.getCompetitionBDDTestBis();
-    // console.log(this.tabCategoriesBDD.label);
+    this.categoryService.getCategoryBDD().subscribe(cats => this.tabCategories = cats);
   }
+
+
 
 }

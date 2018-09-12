@@ -21,7 +21,7 @@ export class SignInComponent implements OnInit {
       responseType: 'json',
       withCredentials: true
     }).subscribe(
-      data => {
+      (data:any) => {
         this.csrf = data._csrf;
         localStorage.setItem('userToken', this.csrf);
       },

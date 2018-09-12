@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subject,  Observable, of, Subscription } from 'rxjs';
+import { Subject, Observable, of, Subscription } from 'rxjs';
 
 import { Category } from '../models/category.model';
 import { Competition } from '../models/competition.model';
@@ -14,8 +14,6 @@ const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
 export class CategoryService {
 
     readonly rootUrl = 'http://localhost:8080';
-
-    tabCategoriesBDD:Category[]=[];
 
     // TODO: A supprimer avec la BDD
     // competFoot1: Competition = new Competition(0, 'Ligue 1 Conforama', 1, 1, null, null) ;
@@ -33,8 +31,10 @@ export class CategoryService {
     //     new Category (1, 'Basketball', 0, [] )
     //     ];
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient) {
     }
+
+
 
     // getCategory(){
     //     return this.categories;
@@ -51,23 +51,29 @@ export class CategoryService {
     //     return this.http.get<Category>('http://localhost:8080/category/1');
     // }
 
-    getCompetitionBDDTestBis() : Category[] {
-        this.http.get<Category[]>(this.rootUrl + '/category/' , {
-                        withCredentials: true
-                    }).subscribe( data => { 
-                                            console.log(data);
-                                            this.tabCategoriesBDD = data ;
-                                        }
-                    ,
-                    (err: HttpErrorResponse) => {
-                        if (err.error instanceof Error) {
-                        console.log('Client-side error occured.');
-                        } else {
-                        console.log('Server-side error occured.');
-                        }
-                    } 
-                );
-        return this.tabCategoriesBDD ;
+    getCategoryBDD(): Observable<Category[]> {
+        return this.http.get<Category[]>(this.rootUrl + '/category', {
+            withCredentials: true
+        });
+    }
+
+    getCompetitionBDDTest() {
+        this.http.get<Category[]>(this.rootUrl + '/category', {
+            withCredentials: true
+        }).subscribe(data => {
+            console.log(data);
+            //this.tabCategoriesBDD = data;
+        }
+            ,
+            (err: HttpErrorResponse) => {
+                if (err.error instanceof Error) {
+                    console.log('Client-side error occured.');
+                } else {
+                    console.log('Server-side error occured.');
+                }
+            }
+        );
+        //return this.tabCategoriesBDD;
     }
 
 }

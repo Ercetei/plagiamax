@@ -45,7 +45,8 @@ export class AuthInterceptor implements HttpInterceptor {
       });
 
       return next.handle(clonedreq)
-        .do(az
+        .do(
+          //az,
         succ => {},
         err => {
           if (err.status === 401) {
