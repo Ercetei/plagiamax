@@ -20,9 +20,14 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+<<<<<<< HEAD
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 import { CreditCardComponent } from './credit-card/credit-card.component';
+import { CcComponent } from './cc/cc.component';
+=======
+import { CookieService } from 'ngx-cookie-service';
+>>>>>>> 751edee3033de19f4219750b5087e66ee2f94ef3
 
 
 @NgModule({
@@ -37,7 +42,8 @@ import { CreditCardComponent } from './credit-card/credit-card.component';
     NavbarComponent,
     FooterComponent,
     ShowbetComponent,
-    CreditCardComponent
+    CreditCardComponent,
+    CcComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,8 @@ import { CreditCardComponent } from './credit-card/credit-card.component';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
