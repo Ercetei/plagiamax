@@ -24,6 +24,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 import { CcComponent } from './cc/cc.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { CcComponent } from './cc/cc.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    NgbModule
+    NgbModule,
+    AngularFontAwesomeModule
   ],
   providers: [UserService,AuthGuard,MatchService,
     BetService,

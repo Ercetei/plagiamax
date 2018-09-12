@@ -7,7 +7,7 @@
     <form class="form-signin" #loginForm="ngForm" (ngSubmit)="OnSubmit(userName.value,password.value)">
         <h2 class="form-signin-heading">Me connecter</h2>
         <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
-        <input type="text" id="inputUsername" name="userName" class="form-control" ngModel #userName placeholder="Toto" required autofocus>
+        <input type="text" id="inputUsername" name="username" class="form-control" ngModel #userName placeholder="Toto" required autofocus>
         <label for="inputPassword" class="sr-only">Mot de passe</label>
         <input type="password" id="inputPassword" name="password" class="form-control" #password ngModel placeholder="**********" required>
         <label for="inputBirth" class="sr-only">Date de naissance</label>

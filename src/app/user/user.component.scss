@@ -1,3 +1,22 @@
 button:first-child{
   margin-right:5px;
 }
+.dropdown-toggle {
+	cursor:pointer;
+}
+
+.user-menu{
+	right:0;
+	left:inherit;
+	padding:5px;
+	box-sizing:border-box;
+}
+
+.divider{
+	border-bottom:1px solid rgba(0,0,0,0.05);
+	margin:10px 0;
+}
+
+.nav-wallet{
+	margin-right:10px;
+}
