@@ -15,7 +15,7 @@ export class Bet {
     id:number;
     label:string;
     betDate:string;
-    betAmount:number;
+    betamount:number;
     status:number;
     user:any;
     
@@ -24,12 +24,12 @@ export class Bet {
     bets:BetType[];
 
     constructor(id:number = 0, label:string = "", betDate:string = "", 
-                betAmount:number = 0, status:number = 0, user:any = null, betlines: BetLine[] = []
+                betamount:number = 0, status:number = 0, user:any = null, betlines: BetLine[] = []
                 , bets:BetType[] = [] ){
         this.id=id;
         this.label=label;
         this.betDate=betDate;
-        this.betAmount=betAmount;
+        this.betamount=betamount;
         this.status=status;
         this.user=user;
         this.betlines = betlines;

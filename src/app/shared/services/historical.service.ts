@@ -48,60 +48,26 @@ export class HistoricalService {
         }
         return this.histoBetUserStatus ;
     }
-    getHistoGain(tabHistoBetBDD:Bet[], userId:number){
-        let histoBetUser = this.getHistoBetUser(tabHistoBetBDD, userId) ;
-        let gainPotentiel: number = 0.00 ;
-        for (let lineHistoBetUser of histoBetUser){
-            gainPotentiel +=  lineHistoBetUser.betAmount ;
-        }
-        return gainPotentiel ;
+
+    async get(requestMapping: string): Promise<any> {
+        // define headers to allow access
+        let httpHeaders = new HttpHeaders()
+            .set("Access-Control-Allow-Origin", "*");
+        // declare request response in await function (for asynchronous)
+        let requestResponse = await this.http
+            // GET request HTTP with complete URL
+            .get<any>(this.rootUrl + requestMapping, {
+                // use headers defined above
+                headers: httpHeaders,
+                // define response format in JSON
+                responseType: 'json',
+                // enable to use credentials/certificates
+                withCredentials: true
+            // transform to promise to be able asynchronous
+            }).toPromise()
+        // return request response
+        return requestResponse;
     }
-
-    getReq() : Bet[] {
-        this.http.get<Bet[]>(this.rootUrl + '/bet/' , {
-                        withCredentials: true
-                    }).subscribe( data => { 
-                                            console.log(data);
-                                            this.tabHistoBet = data ;
-                                        }
-                    ,
-                    (err: HttpErrorResponse) => {
-                        if (err.error instanceof Error) {
-                        console.log('Client-side error occured.');
-                        } else {
-                        console.log('Server-side error occured.');
-                        }
-                    } 
-                );
-        return this.tabHistoBet ;
-    }
-
-
-    getBetBDD(): Observable<Bet[]> {
-        return this.http.get<Bet[]>(this.rootUrl + '/bet', {
-            withCredentials: true
-        });
-    }
-
-    // async get(requestMapping: string): Promise<any> {
-    //     // define headers to allow access
-    //     let httpHeaders = new HttpHeaders()
-    //         .set("Access-Control-Allow-Origin", "*");
-    //     // declare request response in await function (for asynchronous)
-    //     let requestResponse = await this.http
-    //         // GET request HTTP with complete URL
-    //         .get<any>(this.rootUrl + requestMapping, {
-    //             // use headers defined above
-    //             headers: httpHeaders,
-    //             // define response format in JSON
-    //             responseType: 'json',
-    //             // enable to use credentials/certificates
-    //             withCredentials: false
-    //         // transform to promise to be able asynchronous
-    //         }).toPromise()
-    //     // return request response
-    //     return requestResponse;
-    // }
 
 
 }

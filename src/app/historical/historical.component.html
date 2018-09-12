@@ -28,14 +28,14 @@ Status
     <th> GAIN TOTAL </th>
     <th> STATUS </th>
   </tr>
-  <tr *ngFor = "let hb of tabBetTest" >
+  <tr *ngFor = "let hb of tabBetUser" >
       <td> {{ hb.label }} </td>
       <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
       <td>  </td>
       <!-- <td> {{ hb.betamount.toFixed(2) }}€ </td>
       <td> {{ gain.toFixed(2) }}€ </td> -->
       <td> {{ hb.betamount }}€ </td>
-      <td> {{ gain }}€ </td>
+      <td> {{ getHistoGain(hb) }}€ </td>
       <td> {{ tabStatus[hb.status].status }} </td>
   </tr>
 </table>
