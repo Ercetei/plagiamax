@@ -35,19 +35,21 @@ export class CcComponent implements OnInit {
               console.log(this.user)
       } 
     );
-
   
   }
 
-
   onUpdateWallet(user, newWallet) {
-
-      user.wallet = newWallet + 1;
-      this.userService.registerUser(user);
+    console.log(user.wallet)
+    user.wallet = newWallet + user.wallet;
+    this.userService.registerUser(user);
   }
 
-  saveBDD(){
-    
-  }
+
+  // onUpdateWallet(user, newWallet) {
+  //     newWallet 
+  //     user.wallet = newWallet + 1;
+  //     this.userService.registerUser(user);
+  // }
+
 
 }

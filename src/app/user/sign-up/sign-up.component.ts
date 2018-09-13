@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
       form.reset();
     }
 
-    this.user = {
+      this.user = {
       username: '',
       password: '',
       mail: '',
@@ -35,12 +35,11 @@ export class SignUpComponent implements OnInit {
       lastname: '',
       creditcard: '',
       cryptogram: '',
-      expirationdate: ''
-      wallet: ''
+      expirationdate: '',
+      wallet: 0
 
     }
   }
-
   OnSubmit(form: NgForm) {
     this.userService.registerUser(form.value)
       .subscribe(

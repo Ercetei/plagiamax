@@ -74,12 +74,12 @@ export class UserService {
     });
   }
 
-  put(user) {
-    return new Promise(resolve => {
-      user.wallet = user.wallet;
-      resolve(user);
-    });
+  // put(user) {
+  //   return new Promise(resolve => {
+  //     user.wallet = user.wallet;
+  //     resolve(user);
+  //   });
 
-  }
+  // }
 
 }

@@ -25,11 +25,14 @@
     </div>
     <br>
     <div>
-        <input  
+        <input 
+        #newWallet
         placeholder="wallet" 
         [value]="wallet" 
         [(ngModel)]="wallet" 
         [ngModelOptions]="{standalone: true}"
+        (keyup.enter)="onUpdateWallet(newWallet.value)"
+        type = "text"
         size="4" id="wallet" maxlength="5"/>
     </div>
     <div>
