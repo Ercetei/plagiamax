@@ -24,9 +24,9 @@ import { FooterComponent } from './footer/footer.component';
 
 import { CompetitionComponent } from './competition/competition.component';
 
-import { CategoryService } from './shared/services/category.service';
-import { HistoricalComponent } from './historical/historical.component';
-import { HistoricalService } from './shared/services/historical.service';
+import { HistoryComponent } from './history/history.component';
+import { HistoryService } from './shared/services/history.service';
+import { GeneralService } from './shared/services/general.service';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -48,19 +48,13 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-
     CompetitionComponent,
-    HistoricalComponent,
-
+    HistoryComponent,
     ShowbetComponent
-    
   ],
   imports: [
     BrowserModule,
     FormsModule,
-
-    // AngularFontAwesomeModule,
-    
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
@@ -68,7 +62,7 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     AngularFontAwesomeModule
   ],
-  providers: [UserService, HistoricalService, CategoryService, BetService, MatchService, AuthGuard,
+  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

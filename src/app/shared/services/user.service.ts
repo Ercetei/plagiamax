@@ -4,13 +4,16 @@ import {Response, URLSearchParams} from "@angular/http";
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
+import { GeneralService } from '../services/general.service';
 
 @Injectable()
 export class UserService {
-    readonly rootUrl = 'http://localhost:8080';
+    // readonly rootUrl = 'http://localhost:8080';
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private generalService:GeneralService) {
     }
+
+    readonly rootUrl = this.generalService.rootUrl ;
 
     registerUser(user: User) {
         const body: User = {

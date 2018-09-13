@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+// import { Observable, of } from 'rxjs';
+// import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Bet } from '../models/bet.model';
-import { BetLine } from '../models/bet-line.model';
-import { BetType } from '../models/bet-type.model';
+// import { BetLine } from '../models/bet-line.model';
+// import { BetType } from '../models/bet-type.model';
 
 @Injectable()
-export class HistoricalService {
+export class HistoryService {
 
-    readonly rootUrl = 'http://localhost:8080';
+    // readonly rootUrl = 'http://localhost:8080';
 
     tabHistoBet:Bet[] = [] ;
     histoBetUser:Bet[] = [];
@@ -25,7 +25,7 @@ export class HistoricalService {
 
     // histoBetType = new BetType(1, "Match", 1, 3.75, 1, 1);
 
-    constructor(private http: HttpClient){
+    constructor(){
     }
 
     getHistoBetUser(tabHistoBetBDD:Bet[], userId:number){
@@ -48,26 +48,5 @@ export class HistoricalService {
         }
         return this.histoBetUserStatus ;
     }
-
-    async get(requestMapping: string): Promise<any> {
-        // define headers to allow access
-        let httpHeaders = new HttpHeaders()
-            .set("Access-Control-Allow-Origin", "*");
-        // declare request response in await function (for asynchronous)
-        let requestResponse = await this.http
-            // GET request HTTP with complete URL
-            .get<any>(this.rootUrl + requestMapping, {
-                // use headers defined above
-                headers: httpHeaders,
-                // define response format in JSON
-                responseType: 'json',
-                // enable to use credentials/certificates
-                withCredentials: true
-            // transform to promise to be able asynchronous
-            }).toPromise()
-        // return request response
-        return requestResponse;
-    }
-
 
 }

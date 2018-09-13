@@ -31,11 +31,9 @@ Status
   <tr *ngFor = "let hb of tabBetUser" >
       <td> {{ hb.label }} </td>
       <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
-      <td>  </td>
-      <!-- <td> {{ hb.betamount.toFixed(2) }}€ </td>
-      <td> {{ gain.toFixed(2) }}€ </td> -->
-      <td> {{ hb.betamount }}€ </td>
-      <td> {{ getHistoGain(hb) }}€ </td>
+      <td> {{ hb.betdate | date: 'HH:mm' }}  </td>
+      <td> {{ hb.betamount.toFixed(2) }}€ </td>
+      <td> {{ getHistoGain(hb).toFixed(2) }}€ </td>
       <td> {{ tabStatus[hb.status].status }} </td>
   </tr>
 </table>
