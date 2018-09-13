@@ -71,11 +71,11 @@ export class BetListComponent implements OnInit {
   }
 
   selectBet(id:number){
-    this.betService.addBet(this.betTypes.find(x => x.id == id));
+    // this.betService.addBet(this.betTypes.find(x => x.id == id));
   }
 
   unselectBet(id:number){
-    this.betService.removeBet(this.betTypes.find(x => x.id == id));
+    // this.betService.removeBet(this.betTypes.find(x => x.id == id));
   }
 
   isSelectedBet(id:number){

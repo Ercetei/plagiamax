@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,14 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbCarouselConfig]
 })
 export class HomeComponent implements OnInit {
+  csrf: any;
   userClaims: any;
-  images = [1, 2, 3, 4].map(() => `https://picsum.photos/1900/500?random&t=${Math.random()}`);
+  images = [
+    "../../assets/img/banner-1.jpg",
+    "../../assets/img/banner-2.jpg"
+  ]
 
-  constructor(private router: Router, private userService: UserService, config: NgbCarouselConfig) {
+  constructor(private router: Router, private userService: UserService, config: NgbCarouselConfig,private http: HttpClient) {
     // customize default values of carousels used by this component tree
     config.interval = 10000;
     config.wrap = true;
@@ -29,5 +34,9 @@ export class HomeComponent implements OnInit {
     });*/
   }
 
+  // Logout() {
+  //   localStorage.removeItem('userToken');
+  //   this.router.navigate(['/login']);
+  // }
 
 }

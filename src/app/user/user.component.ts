@@ -1,5 +1,7 @@
 import {AppComponent} from '../app.component';
 import {User} from '../shared/models/user.model';
+import {HttpClient} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
@@ -13,7 +15,7 @@ export class UserComponent implements OnInit {
   isAuthentified: Boolean = !!localStorage.getItem('userToken');
   currentUser: User;
 
-  constructor(private cookie: CookieService, private router: Router) {
+  constructor(private cookie: CookieService, private http: HttpClient, private router: Router) {
     if (this.isAuthentified) {
       this.currentUser = JSON.parse(localStorage.getItem('user'));
     }
@@ -23,11 +25,28 @@ export class UserComponent implements OnInit {
 
   }
 
+  /**
+   * Disconnect the current user and destroy the localStorage
+   */
   Logout() {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('user');
-    this.cookie.deleteAll();
-    this.router.navigate(['/home']);
+    this.http.get('http://localhost:8080/logout', {
+      responseType: 'json',
+      withCredentials: true
+    }).subscribe(
+      (data: any) => {
+        this.cookie.deleteAll();
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('user');
+        window.location.reload();
+
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      });
   }
 
 }

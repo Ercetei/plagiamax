@@ -35,24 +35,24 @@ export class BetSelectedComponent implements OnInit {
     );
   }
 
-  removeBet(betType: BetType){
-    this.betService.removeBet(betType);
-  }
+  // removeBet(betType: BetType){
+  //   this.betService.removeBet(betType);
+  // }
 
-  getTotalOdds(){
-    let totalOdds = 1;
-    for(let bet of this.selectedBets.bets){
-      totalOdds *= bet.odds;
-    }
-    return totalOdds;
-  }
+  // getTotalOdds(){
+  //   let totalOdds = 1;
+  //   for(let bet of this.selectedBets.bets){
+  //     totalOdds *= bet.currentOdds;
+  //   }
+  //   return totalOdds;
+  // }
 
-  getPotentialGains(){
-    if(this.amount > 0){
-      return this.getTotalOdds() * this.amount;
-    } else {
-      return 0;
-    }
+  // getPotentialGains(){
+  //   if(this.amount > 0){
+  //     return this.getTotalOdds() * this.amount;
+  //   } else {
+  //     return 0;
+  //   }
     
-  }
+  // }
 }

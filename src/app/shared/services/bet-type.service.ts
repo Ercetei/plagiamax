@@ -9,7 +9,7 @@ export class SeasonService {
 
     seasons: Season[] = []
     
-    readonly rootUrl = 'http://localhost:1234';
+    readonly rootUrl = 'http://localhost:8080';
 
     constructor(private http: HttpClient) { 
     }
