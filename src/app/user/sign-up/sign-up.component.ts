@@ -36,6 +36,7 @@ export class SignUpComponent implements OnInit {
       creditcard: '',
       cryptogram: '',
       expirationdate: ''
+      wallet: ''
 
     }
   }

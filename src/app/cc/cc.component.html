@@ -1,35 +1,46 @@
 <div class="" style="margin: auto; width : 50%">
-<!-- <form stripe:form="saveCreditCard">
+<form stripe:form="saveCreditCard">
     <div class="form-row">
     <label>
       <span>Card Number</span> &nbsp;
-      <input placeholder="Numéro Carte" [(ngModel)]="number" name="number" type="text" size="20" data-stripe="number" id="number" maxlength="20"/>
+      <input placeholder="Numéro Carte" [(ngModel)]="number" name="number" type="text" size="20"
+      data-stripe="number" id="number" maxlength="20"/>
       </label>
     </div>
     <div class="form-row">
     <label>
       <span>Expiration (MM/YY)</span> &nbsp;
-      <input placeholder="mois" [(ngModel)]="expMonth" type="text" size="2" data-stripe="exp-month" id="expMonth" maxlength="2"/> &nbsp;
+      <input placeholder="mois" [(ngModel)]="expMonth" type="text" size="2" [ngModelOptions]="{standalone: true}"
+      data-stripe="exp-month" id="expMonth" maxlength="2"/> 
+      &nbsp;
     </label>&nbsp; 
       <span>/</span> &nbsp;
-      <input placeholder="année" [(ngModel)]="expYear" type="text" size="2" data-stripe="exp-year" id="expYear" maxlength="2"/>
+      <input placeholder="année" [(ngModel)]="expYear" type="text" size="2" [ngModelOptions]="{standalone: true}" 
+      data-stripe="exp-year" id="expYear" maxlength="2"/>
     </div>
     <br>
     <div class="form-row">
-      <input placeholder="cvc" [(ngModel)]="cvc" type="text" size="4" data-stripe="cvc" id="cvc" maxlength="3"/>
+      <input placeholder="cvc" [(ngModel)]="cvc" type="text" size="4" [ngModelOptions]="{standalone: true}"
+       data-stripe="cvc" id="cvc" maxlength="3"/>
     </div>
     <br>
     <div>
-    <button (click)="onSaveBdd()" type="submit">Sauvegarder</button>
+        <input  
+        placeholder="wallet" 
+        [value]="wallet" 
+        [(ngModel)]="wallet" 
+        [ngModelOptions]="{standalone: true}"
+        size="4" id="wallet" maxlength="5"/>
+    </div>
+    <div>
+    <button (click)="onUpdateWallet(user, user.wallet)" type="submit">MAJ Cagnotte</button>
  
-  </div> -->
- <!-- </form> -->
+  </div>
+</form>
   <div *ngFor="let user of tabUser">
     <p>
-        {{ user.creditcard }}
+        Affichage User : {{ user.wallet }}
     </p>
-
-
   </div>
 
 </div>

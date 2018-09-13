@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Response} from "@angular/http";
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from "@angular/http";
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
 
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://localhost:8080';
-  constructor(private http: HttpClient) {}
-  tabUser: User[]=[];
+  constructor(private http: HttpClient) {
+
+  }
+  tabUser: User[] = [];
 
   registerUser(user: User) {
     const body: User = {
@@ -19,9 +21,10 @@ export class UserService {
       birthdate: new Date(user.birthdate),
       firstname: user.firstname,
       lastname: user.lastname,
-      creditcard:user.creditcard,
-      cryptogram:user.cryptogram,
-      expirationdate:user.expirationdate
+      creditcard: user.creditcard,
+      cryptogram: user.cryptogram,
+      expirationdate: user.expirationdate,
+      wallet: user.wallet
     };
 
     return this.http.post(this.rootUrl + '/user/register', body, {
@@ -59,8 +62,24 @@ export class UserService {
 
     console.log("user")
     return this.http.get<User[]>(this.rootUrl + '/user', {
-        withCredentials: true
+      withCredentials: true
     });
-}
+  }
+
+  getSingleUserBDD(id: string): Observable<User> {
+
+    console.log("user")
+    return this.http.get<User>(this.rootUrl + '/user/' + id, {
+      withCredentials: true
+    });
+  }
+
+  put(user) {
+    return new Promise(resolve => {
+      user.wallet = user.wallet;
+      resolve(user);
+    });
+
+  }
 
 }

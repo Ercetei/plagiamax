@@ -8,5 +8,5 @@ export class User {
     creditcard:string;
     cryptogram:string;
     expirationdate:string;
-
+    wallet:number;
 }
