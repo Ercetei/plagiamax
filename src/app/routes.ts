@@ -35,8 +35,8 @@ export const appRoutes: Routes = [
         children: [
             { path: 'competition/1', component: ShowbetComponent }, 
             { path: 'competition/2',  redirectTo:'/home', pathMatch : 'full' }
-            // ,
-            // { path: 'bets/match/:id', component: BetListComponent }
+             ,
+             { path: 'bets/match/:id', component: BetListComponent }
         ]
     },
     { path: 'basketball', component: HomeComponent }

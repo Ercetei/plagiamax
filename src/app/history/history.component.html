@@ -1,14 +1,3 @@
-<!-- <br>
-
-<div class="nav-item dropdown" ngbDropdown>
-  <a class="nav-link dropdown-toggle button-link" id="id01" ngbDropdownToggle>Status</a>
-  <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu >
-    
-      <option value="" *ngFor="let status of tabStatus" [value]="status.id">{{ status.status }}</option>
-
-  </div>
-</div> -->
-<br>
 
 <div class="form-control-format">
 Status
@@ -28,7 +17,7 @@ Status
     <th> GAIN TOTAL </th>
     <th> STATUS </th>
   </tr>
-  <tr *ngFor = "let hb of tabBetUser" >
+  <tr *ngFor = "let hb of tabBetStatus" >
       <td> {{ hb.label }} </td>
       <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
       <td> {{ hb.betdate | date: 'HH:mm' }}  </td>
