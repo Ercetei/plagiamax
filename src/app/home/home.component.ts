@@ -116,5 +116,9 @@ export class HomeComponent implements OnInit {
         this.auth.signout();
     }
 
+    test(item:any) {
+        console.log(item);
+    }
+
 
 }
