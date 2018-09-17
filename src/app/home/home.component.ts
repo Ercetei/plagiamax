@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireLiteDatabase, AngularFireLiteAuth, AngularFireLiteFirestore} from 'angularfire-lite';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -119,6 +118,5 @@ export class HomeComponent implements OnInit {
     test(item:any) {
         console.log(item);
     }
-
 
 }

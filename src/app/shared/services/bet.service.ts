@@ -21,21 +21,21 @@ export class BetService {
     }
     
     // Ajoute un pari aux paris sélectionnés
-    addBet(bet: BetType){
-      this.selectedBets.bets.push(bet);
-      this.emitBetGroupSubject();
-    }
+    // addBet(bet: BetType){
+    //   this.selectedBets.bets.push(bet);
+    //   this.emitBetGroupSubject();
+    // }
 
     // Retire un pari des paris sélectionnés
-    removeBet(bet: BetType){
-      this.selectedBets.bets.splice(this.selectedBets.bets.indexOf(bet), 1);
-      this.emitBetGroupSubject();
-    }
+    // removeBet(bet: BetType){
+    //   this.selectedBets.bets.splice(this.selectedBets.bets.indexOf(bet), 1);
+    //   this.emitBetGroupSubject();
+    // }
     
     // Récupère tous les paris sélectionnés
-    getSelectedBets(): BetType[] {
-      return this.selectedBets.bets;
-    }
+    // getSelectedBets(): BetType[] {
+    //   return this.selectedBets.bets;
+    // }
 
     // Récupère l'un des paris sélectionnés
     getSelectedBet(id: number){

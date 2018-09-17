@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
-
 import { AppComponent } from './app.component';
 import { BetService } from './shared/services/bet.service';
 import { UserService } from './shared/services/user.service';
@@ -22,11 +21,23 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+
+import { CompetitionComponent } from './competition/competition.component';
+
+import { HistoryComponent } from './history/history.component';
+import { HistoryService } from './shared/services/history.service';
+import { GeneralService } from './shared/services/general.service';
+
 import { CookieService } from 'ngx-cookie-service';
+
+import { ShowbetComponent } from './showbet/showbet.component';
+import { NgModule } from '@angular/core';
+
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireLite } from 'angularfire-lite';
 import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +49,10 @@ import { environment } from '../environments/environment';
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CompetitionComponent,
+    HistoryComponent,
+    ShowbetComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +65,7 @@ import { environment } from '../environments/environment';
     NgbModule,
     AngularFontAwesomeModule
   ],
-  providers: [UserService, BetService, MatchService, AuthGuard,
+  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
