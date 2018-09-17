@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {CookieService} from 'ngx-cookie-service';
 import { ValueTransformer } from '@angular/compiler/src/util';
+import { GeneralService } from '../shared/services/general.service';
 
 
 @Component({
@@ -18,31 +19,43 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 export class CcComponent implements OnInit {
   tabUser: User[]=[];
   user: User;
-  oldVal:Number = 0;
- 
+  userID: number;
+  wallet:number;
 
-  constructor(private userService:UserService, private cookieService: CookieService) {}
+  constructor(private userService:UserService, private cookieService: CookieService, private generalService: GeneralService) {}
 
   ngOnInit() {
 
-    let id = this.cookieService.get("user_id");
-    console.log(id);
+    this.userID = parseInt(this.cookieService.get("user_id"));
+    console.log(this.userID);
     
-    this.userService.getSingleUserBDD(id).subscribe(
+    this.userService.getSingleUserBDD(this.userID).subscribe(
       u => {
               this.user = u;
               
               console.log(this.user)
       } 
     );
+
+    // this.getWallet(id);
   
   }
-
-  onUpdateWallet(user, newWallet) {
-    console.log(user.wallet)
-    user.wallet = newWallet + user.wallet;
-    this.userService.registerUser(user);
+// async getWallet(id) {
+//     this.user = await this.generalService.get("/user");
+//     console.log(this.user);
+//     this.wallet = this.user[id-1].wallet ;
+//     console.log(this.wallet);
+//   }
+  onUpdateWallet() {
+    this.user.wallet += (+this.wallet);
+    this.userService.uw(this.userID, this.user.wallet);
+    console.log("user")
+    console.log(this.wallet)
+    console.log(this.user.wallet)
+    // this.wallet=''
   }
+
+  
 
 
   // onUpdateWallet(user, newWallet) {

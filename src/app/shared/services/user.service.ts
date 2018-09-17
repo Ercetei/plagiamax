@@ -4,6 +4,7 @@ import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
+import { Body } from '@angular/http/src/body';
 
 @Injectable()
 export class UserService {
@@ -60,20 +61,26 @@ export class UserService {
 
   getUserBDD(): Observable<User[]> {
 
-    console.log("user")
+    // console.log("user")
     return this.http.get<User[]>(this.rootUrl + '/user', {
       withCredentials: true
     });
   }
 
-  getSingleUserBDD(id: string): Observable<User> {
+  getSingleUserBDD(id: number): Observable<User> {
 
-    console.log("user")
+    // console.log("user")
     return this.http.get<User>(this.rootUrl + '/user/' + id, {
       withCredentials: true
     });
   }
-
+  uw(id, wallet){
+    let body = {wallet}
+    this.http.patch(this.rootUrl + '/user/' + id, body, {
+      responseType: 'json',
+      withCredentials: true
+    }).subscribe();
+  }
   // put(user) {
   //   return new Promise(resolve => {
   //     user.wallet = user.wallet;
