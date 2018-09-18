@@ -1,8 +1,8 @@
-import {AppComponent} from '../app.component';
-import {User} from '../shared/models/user.model';
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
+import { User } from '../shared/models/user.model';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -10,12 +10,14 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['user.component.scss']
 })
 export class UserComponent implements OnInit {
-  isAuthentified: Boolean = !!localStorage.getItem('userToken');
+
+  isAuthentified: Boolean;
   currentUser: User;
 
-  constructor(private cookie: CookieService, private router: Router) {
+  constructor(private cookie: CookieService, private router: Router, private userService: UserService) {
+    this.isAuthentified = this.userService.isAuthentified();
     if (this.isAuthentified) {
-      this.currentUser = JSON.parse(localStorage.getItem('user'));
+      this.currentUser = this.userService.getCurrentUser();
     }
   }
 

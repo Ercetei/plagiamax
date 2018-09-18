@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BetType } from '../../shared/models/bet-type.model';
-import { Match } from '../../shared/models/match.model';
 import { MatchBetService } from '../../shared/services/match-bet.service';
-import { BetTypeService } from '../../shared/services/bet-type.service';
+import { MatchBet } from '../../shared/models/match-bet.model';
+import { Types } from '../../shared/enums/types.enum';
 
 @Component({
   selector: 'app-bet-selected',
@@ -11,37 +10,60 @@ import { BetTypeService } from '../../shared/services/bet-type.service';
   styleUrls: ['./bet-selected.component.scss']
 })
 export class BetSelectedComponent implements OnInit {
-  selectedBets: BetType[] = [];
-  match: Match;
+  selectedBets: any[] = [];
   @Input() amount: number;
 
   betGroupSubscription = new Subscription;
 
   constructor
     (
-    private matchBetService: MatchBetService
+      private betTypeService: MatchBetService
     ) {
 
   }
 
   ngOnInit() {
-    this.betGroupSubscription = this.matchBetService.betTypeSubject.subscribe(
-      (bts: BetType[]) => {
+    this.betTypeService.betTypeSubject.subscribe(
+      (bts: any[]) => {
         this.selectedBets = bts;
+        this.betTypeService.getBetTypeInfos();
       }
-    );
+    ); 
   }
 
-  removeBet(betType: BetType) {
-    this.matchBetService.removeSelectedBet(betType);
+  do(bts){
+    this.selectedBets = bts;
+  }
+
+  removeBet(betType: MatchBet) {
+    this.betTypeService.removeSelectedBet(betType);
   }
 
   getTotalOdds() {
     let totalOdds = 1;
     for (let betType of this.selectedBets) {
-      totalOdds += betType.currentOdds - 1;
+      totalOdds += (+betType.currentodds - 1);
     }
     return totalOdds;
+  }
+
+  getType(type: number){
+    let message;
+    switch (type) {
+      case Types.Vainqueur:
+        message = 'Vainqueur';
+      break;
+      case Types.Résultat:
+        message = 'Score exact'
+      break;
+      case Types.Buts:
+        message = 'Nombre de buts'
+      break;
+      default:
+        message = 'Autre'
+      break;
+    }
+    return message;
   }
 
   getPotentialGains() {

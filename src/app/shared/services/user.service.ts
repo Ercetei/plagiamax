@@ -10,6 +10,7 @@ export class UserService {
     readonly rootUrl = 'http://localhost:8080';
 
     constructor(private http: HttpClient) {
+        
     }
 
     registerUser(user: User) {
@@ -25,6 +26,14 @@ export class UserService {
         return this.http.post(this.rootUrl + '/user/register', body, {
             withCredentials: true
         });
+    }
+
+    isAuthentified(): Boolean {
+        return !!localStorage.getItem('userToken');
+    }
+
+    getCurrentUser(): User {
+        return JSON.parse(localStorage.getItem('user'));
     }
 
     userAuthentication(username, password, csrf) {

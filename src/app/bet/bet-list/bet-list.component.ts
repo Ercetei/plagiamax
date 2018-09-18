@@ -16,7 +16,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BetListComponent implements OnInit {
   selectedBets: BetType[] = [];
   match: Match;
-  betTypes: BetType[] = [];
 
   betGroupSubscription = new Subscription;
 
@@ -24,18 +23,17 @@ export class BetListComponent implements OnInit {
     (
     private route: ActivatedRoute,
     private matchService: MatchService,
-    private matchBetService: MatchBetService
+    private betTypeService: MatchBetService
     ) {
   }
 
   ngOnInit() {
     this.getMatch();
-    //this.getBetTypes();
-    /*this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
+    this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
       (bts: BetType[]) => {
         this.selectedBets = bts;
       }
-    );*/
+    );
   }
 
   getMatch() {
@@ -55,24 +53,20 @@ export class BetListComponent implements OnInit {
     );
 
     //  .subscribe(match => this.match = match);
-    //console.log(this.match);
+    //  console.log(this.match);
     console.log(this.match);
   }
 
-  getBetTypes() {
-    this.betTypes = this.match.matchbets;
-  }
-
   getWinnerBets() {
-    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 1);
+    if(this.match != null) return this.match.matchbets.filter(x => x.type == 1);
   }
 
   getScoreBets() {
-    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 2);
+    if(this.match != null) return this.match.matchbets.filter(x => x.type == 2);
   }
 
   getGoalsBets() {
-    if(this.betTypes != null) return this.betTypes.filter(x => x.type == 3);
+    if(this.match != null) return this.match.matchbets.filter(x => x.type == 3);
   }
 
   switchBet(id: number) {
@@ -84,14 +78,14 @@ export class BetListComponent implements OnInit {
   }
 
   selectBet(id: number) {
-    this.matchBetService.addSelectedBet(this.betTypes.find(x => x.id == id));
+    this.betTypeService.addSelectedMatchBet(this.match.matchbets.find(x => x.id == id));
   }
 
   unselectBet(id: number) {
-    this.matchBetService.removeSelectedBet(this.betTypes.find(x => x.id == id));
+    this.betTypeService.removeSelectedBet(this.match.matchbets.find(x => x.id == id));
   }
 
   isSelectedBet(id: number) {
-    return this.matchBetService.isSelectedBet(id);
+    return this.betTypeService.isSelectedBet(id);
   }
 }

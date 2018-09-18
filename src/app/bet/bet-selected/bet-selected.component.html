@@ -4,18 +4,20 @@
         <div class="col-md-6"><button class="btn btn-block btn-head" href="#">Combiné</button></div>
     </div>
     <div class="row back">
-        <div class="bet-block" *ngFor="let bet of selectedBets">
+        <div class="bet-block" *ngFor="let bettype of selectedBets">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-12">{{bet.match.teams[0].label}} - {{bet.match.teams[1].label}}</div>
+                    <div class="col-md-12" *ngIf="bettype.match.matchteams">{{bettype.match?.matchteams[0]?.team?.label}}
+                        - {{bettype.match?.matchteams[1]?.team?.label}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-9 text-left">Vainqueur</div>
+                    <div class="col-md-9 text-left">{{getType(bettype.type)}}</div>
+                    <div class="col-md-3">{{bettype.team?.label}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-9 text-left">{{bet.label}}</div>
+                    <div class="col-md-9 text-left">{{bettype.label}}</div>
                     <div class="col-md-3">
-                        <div class="badge badge-warning">{{bet.odds}}</div>
+                        <div class="badge badge-warning">{{bettype.currentodds}}</div>
                     </div>
                 </div>
             </div>
@@ -28,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9 text-left">Mise</div>
-                    <div class="col-md-3"><input class="col-md-12" input [(ngModel)]="amount" /></div>
+                    <div class="col-md-3"><input class="col-md-12" id="amountInput" input [(ngModel)]="amount" /></div>
                 </div>
                 <div class="row">
                     <div class="col-md-9 text-left">Gains potentiels</div>

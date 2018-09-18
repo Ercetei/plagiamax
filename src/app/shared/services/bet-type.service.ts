@@ -1,11 +1,17 @@
 import { Subject } from "node_modules/rxjs";
 import { BetType } from "../models/bet-type.model";
 import { BaseService } from "./base.service";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
+import { MatchBet } from "../models/match-bet.model";
+import { Team } from "../models/team.model";
+import { Match } from "../models/match.model";
+
+const headers = new HttpHeaders()
+    .set('Access-Control-Allow-Origin', '*');
 
 export class BetTypeService extends BaseService {
 
-    protected selectedBets: BetType[] = [];
+    protected selectedBets: MatchBet[] = [];
     public betTypeSubject = new Subject();
     private http: HttpClient
 
@@ -17,25 +23,19 @@ export class BetTypeService extends BaseService {
         this.betTypeSubject.next(this.selectedBets);
     }
 
-    // Ajoute un pari aux paris sélectionnés
-    addSelectedBet(bet: BetType) {
-        this.selectedBets.push(bet);
-        this.emitSelectedBetsSubject();
-    }
-
     // Retire un pari des paris sélectionnés
-    removeSelectedBet(bet: BetType) {
-        this.selectedBets.splice(this.selectedBets.indexOf(bet), 1);
+    removeSelectedBet(betType: MatchBet) {
+        this.selectedBets.splice(this.selectedBets.findIndex(x => x.id == betType.id), 1);
         this.emitSelectedBetsSubject();
     }
 
     // Récupère tous les paris sélectionnés
-    getSelectedBets(): BetType[] {
+    getSelectedBets(): MatchBet[] {
         return this.selectedBets;
     }
 
     // Récupère l'un des paris sélectionnés
-    getSelectedBet(id: number) {
+    getSelectedBet(id: number): MatchBet {
         return this.selectedBets.find(x => x.id == id);
     }
 
