@@ -5,6 +5,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { AuthGuard } from './auth/auth.guard';
 import { BetListComponent } from './bet/bet-list/bet-list.component';
+import { CompetitionComponent } from './competition/competition.component';
 import { HistoryComponent } from './history/history.component';
 import { ShowbetComponent } from './showbet/showbet.component';
 
@@ -12,6 +13,7 @@ export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent },
     { path: 'home', component: HomeComponent, 
         children: [
+            { path: 'sport', component: CompetitionComponent },
             { path: 'history', component: HistoryComponent }
         ] 
     },
