@@ -37,6 +37,8 @@ import { NgModule } from '@angular/core';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireLite } from 'angularfire-lite';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+    AngularFireLite.forRoot(environment.config),
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
