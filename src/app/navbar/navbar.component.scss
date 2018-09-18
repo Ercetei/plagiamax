@@ -4,3 +4,12 @@
     cursor: pointer;
     outline: none;
 }
+
+.navbar-brand{
+    max-width:150px;
+    width:100%;
+
+    img {
+        width:100%;
+    }
+}
