@@ -4,6 +4,8 @@ import { Category } from '../shared/models/category.model';
 import { GeneralService } from '../shared/services/general.service';
 
 import { ActivatedRoute } from '@angular/router';
+import { CompetitionService } from '../shared/services/competition.service';
+import { Competition } from '../shared/models/competition.model';
 
 @Component({
   selector: 'app-competition',
@@ -14,8 +16,10 @@ export class CompetitionComponent implements OnInit {
 
   tabCategories: Category[]=[];
   afficher: String;
+  competitions: Competition[]=[];
 
-  constructor(private generalService: GeneralService, private route: ActivatedRoute) { }
+  constructor(private generalService: GeneralService, private route: ActivatedRoute, private competitionService:CompetitionService) {
+   }
 
   ngOnInit(){
     this.getCategory();
@@ -23,6 +27,7 @@ export class CompetitionComponent implements OnInit {
 
   async getCategory() {
     this.tabCategories = await this.generalService.get("/category");
+
   }
 
   getAfficher(){
@@ -32,5 +37,9 @@ export class CompetitionComponent implements OnInit {
     }
     return this.afficher;
   }
+
+  // setCompetition(cn:Competition){
+  //   this.competitionService.setSelectedCompetition(cn);
+  // }
 
 }

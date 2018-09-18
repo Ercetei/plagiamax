@@ -27,6 +27,7 @@ import { CompetitionComponent } from './competition/competition.component';
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from './shared/services/history.service';
 import { GeneralService } from './shared/services/general.service';
+import { CompetitionService } from './shared/services/competition.service';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -62,7 +63,7 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     AngularFontAwesomeModule
   ],
-  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard,
+  providers: [UserService, GeneralService, HistoryService, CompetitionService, BetService, MatchService, AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

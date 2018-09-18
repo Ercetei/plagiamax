@@ -9,8 +9,11 @@
   
         <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
   
-          <!-- <div *ngFor="let country of cy.countries">{{ country.label }}</div> -->
-          <a class="dropdown-item" *ngFor="let cn of cy.competitions" [routerLink]="['/football/competition', cn.id ]">{{ cn.label }}</a>
+          <button class="dropdown-item" *ngFor="let cn of cy.competitions" 
+                  [routerLink]="['/football/competition', cn.id ]">
+              {{ cn.label }}
+          </button>
+
         </div>
   
       </td>
