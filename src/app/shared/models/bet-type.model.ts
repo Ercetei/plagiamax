@@ -19,6 +19,6 @@ export class BetType{
         this.currentOdds = currentOdds;
         this.status = status;
         this.type = type;
-        this.betLines = this.betLines;
+        this.betLines = betLines;
     }
 }

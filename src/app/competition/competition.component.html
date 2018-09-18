@@ -1,0 +1,19 @@
+<div *ngIf="getAfficher() == 'HistoryComponent' ; else affichageBlock">
+</div>
+
+<ng-template #affichageBlock>
+  <table>
+    <tr *ngFor="let cy of tabCategories">
+      <td class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01" ngbDropdownToggle>{{ cy.label }}</a>
+  
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+  
+          <!-- <div *ngFor="let country of cy.countries">{{ country.label }}</div> -->
+          <a class="dropdown-item" *ngFor="let cn of cy.competitions" [routerLink]="['/football/competition', cn.id ]">{{ cn.label }}</a>
+        </div>
+  
+      </td>
+    </tr> 
+  </table>
+</ng-template>

@@ -1,0 +1,28 @@
+
+<div class="form-control-format">
+Status
+<select class="form-control" value="Status" [(ngModel)]="statusSelected" (change)="onChange($event)">
+    <option *ngFor="let status of tabStatus" [value]="status.id">{{ status.status }}</option>
+</select>
+</div>
+<br>
+
+<table class="historical-block" >
+
+  <tr class="historical-block-head">
+    <th> JEU </th>
+    <th> DATE </th>
+    <th> HEURE </th>
+    <th> MISE </th>
+    <th> GAIN TOTAL </th>
+    <th> STATUS </th>
+  </tr>
+  <tr *ngFor = "let hb of tabBetStatus" >
+      <td> {{ hb.label }} </td>
+      <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
+      <td> {{ hb.betdate | date: 'HH:mm' }}  </td>
+      <td> {{ hb.betamount.toFixed(2) }}€ </td>
+      <td> {{ getHistoGain(hb).toFixed(2) }}€ </td>
+      <td> {{ tabStatus[hb.status].status }} </td>
+  </tr>
+</table>

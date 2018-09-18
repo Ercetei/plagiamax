@@ -11,7 +11,6 @@ const headers = new HttpHeaders()
 @Injectable()
 export class MatchService extends BaseService {
 
-    
     // TODO: A supprimer avec la BDD
     /*match1: Match = new Match(0, "Trophée des champions", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "Monaco")]);
     
@@ -118,4 +117,50 @@ export class MatchService extends BaseService {
             withCredentials: true
         });
     }
+
+    getLabelMatchs(label: String) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getLabelMatch(label: String) : Observable<Match> {
+         return of(this.matchs.find(x => x.label == label));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getStatusMatchs(status: number) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getStatusMatch(status: number) : Observable<Match> {
+         return of(this.matchs.find(x => x.status == status));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getPlaceMatchs(place: Place) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getPlaceMatch(place: Place) : Observable<Match> {
+         return of(this.matchs.find(x => x.place == place));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getTeamMatchs(teams: Team[]) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getTeamsMatch(teams: Team[]) : Observable<Match> {
+         return of(this.matchs.find(x => x.teams == teams));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
+     getBetMatchs(bets: BetType[]) : Observable<Match[]> {
+        return of(this.matchs);
+        //return this.http.get<Match[]>(this.rootUrl+'/match');
+     }
+ 
+     getBetMatch(bets: BetType[]) : Observable<Match> {
+         return of(this.matchs.find(x => x.bets == bets));
+         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+     }
 }

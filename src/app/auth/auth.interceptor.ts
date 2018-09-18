@@ -1,5 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent } from "@angular/common/http";
 import { UserService } from "../shared/services/user.service";
+
 import 'rxjs/add/operator/do';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
@@ -31,6 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             this.router.navigateByUrl('/login');
           }
+
         }
         );
     } else {
