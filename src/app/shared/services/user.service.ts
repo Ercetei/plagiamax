@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response, URLSearchParams } from "@angular/http";
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
 import { BaseService } from './base.service';
@@ -13,7 +11,7 @@ export class UserService {
     }
 
     registerUser(user: User) {
-        const body: User = {
+        const body: any = {
             username: user.username,
             password: user.password,
             mail: user.mail,
@@ -42,16 +40,13 @@ export class UserService {
             _csrf: csrf
         };
 
-        const headers = new HttpHeaders()
-            .set('Content-Type', 'application/x-www-form-urlencoded');
-
         const body = new URLSearchParams();
         body.set('username', user.username);
         body.set('password', user.password);
         body.set('_csrf', user._csrf);
 
         return this.baseService.http.post(this.baseService.rootUrl + '/login', body.toString(), {
-            headers: headers,
+            headers: this.baseService.textHeaders,
             responseType: 'json',
             withCredentials: true
         });

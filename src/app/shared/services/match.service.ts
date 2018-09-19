@@ -4,9 +4,6 @@ import { Match } from '../models/match.model';
 import { HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
 
-const headers = new HttpHeaders()
-.set('Access-Control-Allow-Origin', '*');
-
 @Injectable()
 export class MatchService {
 
@@ -83,7 +80,7 @@ export class MatchService {
         //return of(this.matchs);
 
         return this.baseService.http.get<Match[]>(this.baseService.rootUrl + '/match', {
-            headers: headers,
+            headers: this.baseService.allowAccessHeaders,
             responseType: 'json',
             withCredentials: true
         });
@@ -91,7 +88,7 @@ export class MatchService {
 
     getMatch(id: number): Observable<Match> {
         return this.baseService.http.get<Match>(this.baseService.rootUrl + '/match/' + id, {
-            headers: headers,
+            headers: this.baseService.allowAccessHeaders,
             responseType: 'json',
             withCredentials: true
         });

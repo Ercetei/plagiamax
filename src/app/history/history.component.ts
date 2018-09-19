@@ -54,10 +54,8 @@ export class HistoryComponent implements OnInit {
 
   getHistoGain(bet: Bet) {
     let gainPotentiel: number = 0.00;
-    let oddsTotal: number = 0.00;
-    for (let betlinetest of bet.betlines) {
-      oddsTotal += betlinetest.momentodds;
-    }
+    let oddsTotal = bet.momentodds;
+
     gainPotentiel = bet.betamount * oddsTotal;
 
     return gainPotentiel;

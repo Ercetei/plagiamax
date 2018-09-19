@@ -1,12 +1,8 @@
 import { Subject } from "node_modules/rxjs";
-import { BetType } from "../models/bet-type.model";
 import { BaseService } from "./base.service";
-import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { MatchBet } from "../models/match-bet.model";
 import { Injectable } from "@angular/core";
 
-const headers = new HttpHeaders()
-    .set('Access-Control-Allow-Origin', '*');
 
 @Injectable()
 export class BetTypeService {

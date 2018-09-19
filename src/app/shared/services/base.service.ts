@@ -1,11 +1,13 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 @Injectable()
 export class BaseService {
 
     public readonly rootUrl = 'http://localhost:8080';
-    
+    public noAuthHeaders = new HttpHeaders().set('No-Auth', 'True');
+    public allowAccessHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+    public textHeaders = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
     constructor(public http: HttpClient) {
 

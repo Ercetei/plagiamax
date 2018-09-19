@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { MatchBetService } from '../shared/services/match-bet.service';
 import { MatchBet } from '../shared/models/match-bet.model';
 import { Types } from '../shared/enums/types.enum';
 import { BetTypeService } from '../shared/services/bet-type.service';
 import { BetType } from '../shared/models/bet-type.model';
 import { BetSelectedComponent } from './bet-selected/bet-selected.component';
+import { BetService } from '../shared/services/bet.service';
 
 @Component({
   selector: 'app-side-panel',
@@ -12,7 +13,7 @@ import { BetSelectedComponent } from './bet-selected/bet-selected.component';
   styleUrls: ['./side-panel.component.scss']
 })
 export class SidePanelComponent implements OnInit {
-  @ViewChildren('app-bet-selected') components: QueryList<BetSelectedComponent>;
+  @ViewChildren(BetSelectedComponent) betSelectedComponents: QueryList<BetSelectedComponent>;
   selectedBets: BetType[] = [];
   combined: Boolean = false;
   @Input() amount: number;
@@ -20,7 +21,8 @@ export class SidePanelComponent implements OnInit {
   constructor
     (
     private betTypeService: BetTypeService,
-    private matchBetService: MatchBetService
+    private matchBetService: MatchBetService,
+    private betService: BetService
     ) {
 
   }
@@ -45,7 +47,7 @@ export class SidePanelComponent implements OnInit {
   getTotalOdds() {
     let totalOdds = 1;
     for (let betType of this.selectedBets) {
-      totalOdds += (+betType.currentodds - 1);
+      totalOdds *= +betType.currentodds;
     }
     return totalOdds;
   }
@@ -75,7 +77,7 @@ export class SidePanelComponent implements OnInit {
     if (this.amount > 0) {
       return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(this.getTotalOdds() * this.amount);
     } else {
-      return 0;
+      return "";
     }
   }
 
@@ -88,10 +90,17 @@ export class SidePanelComponent implements OnInit {
   }
 
   onValidate() {
-    console.log("bidule");
-    this.components.forEach(BetSelectedComponent => {
-      BetSelectedComponent.generateBet();
-    });
-
+    if (this.combined) {
+      let betType: BetType[] = [];
+      this.betSelectedComponents.forEach(BetSelectedComponent => {
+        betType.push(BetSelectedComponent.getBetType());
+      });
+      this.betService.createCombinedBet(betType, this.amount, this.getTotalOdds());
+    }else{
+      this.betSelectedComponents.forEach(BetSelectedComponent => {
+        BetSelectedComponent.getAmount();
+      });
+    }
+   
   }
 }

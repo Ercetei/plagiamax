@@ -3,10 +3,6 @@ import { Observable, of } from 'rxjs';
 import { Match } from '../models/match.model';
 import { BetTypeService } from './bet-type.service';
 import { MatchBet } from '../models/match-bet.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const headers = new HttpHeaders()
-    .set('Access-Control-Allow-Origin', '*');
 
 @Injectable()
 export class MatchBetService {
@@ -28,7 +24,7 @@ export class MatchBetService {
     addSelectedMatchBet(betType: MatchBet) {
         let betToAdd: MatchBet;
         this.betTypeService.baseService.http.get<MatchBet>(this.betTypeService.baseService.rootUrl + '/bettype/' + betType.id, {
-            headers: headers,
+            headers: this.betTypeService.baseService.allowAccessHeaders,
             responseType: 'json',
             withCredentials: true
         }).subscribe(data => {
@@ -40,7 +36,7 @@ export class MatchBetService {
     getBetTypeInfos(bettype: MatchBet = null) {
         for (let betType of this.betTypeService.getSelectedBets()) {
             this.betTypeService.baseService.http.get<Match>(this.betTypeService.baseService.rootUrl + '/match/' + betType.match.id, {
-                headers: headers,
+                headers: this.betTypeService.baseService.allowAccessHeaders,
                 responseType: 'json',
                 withCredentials: true
             }).subscribe(async data => {

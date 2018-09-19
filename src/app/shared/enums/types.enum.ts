@@ -3,3 +3,5 @@ export enum Types {
     Résultat  = 2,
     Buts = 3
 }
+
+// Gérer +0.5 -0.5
