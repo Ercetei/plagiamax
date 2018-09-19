@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Match } from '../models/match.model';
-import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
-import { HttpClient } from '@angular/common/http';
 
 const headers = new HttpHeaders()
 .set('Access-Control-Allow-Origin', '*');
 
 @Injectable()
-export class MatchService extends BaseService {
+export class MatchService {
 
     // TODO: A supprimer avec la BDD
     /*match1: Match = new Match(0, "Trophée des champions", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "Monaco")]);
@@ -59,8 +58,7 @@ export class MatchService extends BaseService {
 
 
 
-    constructor(private http: HttpClient) {
-        super();
+    constructor(private baseService: BaseService) {
         //this.match1.bets = this.betsT1;
         //this.match2.bets = this.betsT2;
     }
@@ -84,7 +82,7 @@ export class MatchService extends BaseService {
     getMatchs(): Observable<Match[]> {
         //return of(this.matchs);
 
-        return this.http.get<Match[]>(this.rootUrl + '/match', {
+        return this.baseService.http.get<Match[]>(this.baseService.rootUrl + '/match', {
             headers: headers,
             responseType: 'json',
             withCredentials: true
@@ -92,33 +90,14 @@ export class MatchService extends BaseService {
     }
 
     getMatch(id: number): Observable<Match> {
-        //return of(this.matchs.find(x => x.id == id));
-       
-
-        /*this.http.get<Match>(this.rootUrl+'/match/'+id , {
-            headers: headers,
-            responseType: 'json',
-            withCredentials: true
-        }).subscribe(
-            data => {
-                console.log(data)
-        },
-        (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-                console.log('Client-side error occured.');
-            } else {
-                console.log('Server-side error occured.');
-            }
-        }
-        );*/
-        return this.http.get<Match>(this.rootUrl + '/match/' + id, {
+        return this.baseService.http.get<Match>(this.baseService.rootUrl + '/match/' + id, {
             headers: headers,
             responseType: 'json',
             withCredentials: true
         });
     }
 
-    getLabelMatchs(label: String) : Observable<Match[]> {
+    /*getLabelMatchs(label: String) : Observable<Match[]> {
         return of(this.matchs);
         //return this.http.get<Match[]>(this.rootUrl+'/match');
      }
@@ -162,5 +141,5 @@ export class MatchService extends BaseService {
      getBetMatch(bets: BetType[]) : Observable<Match> {
          return of(this.matchs.find(x => x.bets == bets));
          //return this.http.get<Match>(this.rootUrl+'/match/'+id);
-     }
+     }*/
 }

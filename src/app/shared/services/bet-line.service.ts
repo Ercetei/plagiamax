@@ -1,8 +1,7 @@
 import { BaseService } from "./base.service";
 
-export class BetLineService extends BaseService {
+export class BetLineService {
 
-    constructor() {
-        super();
+    constructor(private baseService: BaseService) {
     }
 }

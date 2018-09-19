@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 // import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Bet } from '../models/bet.model';
+import { BaseService } from './base.service';
 // import { BetLine } from '../models/bet-line.model';
 // import { BetType } from '../models/bet-type.model';
 
@@ -25,7 +26,7 @@ export class HistoryService {
 
     // histoBetType = new BetType(1, "Match", 1, 3.75, 1, 1);
 
-    constructor(){
+    constructor(private baseService: BaseService){
     }
 
     getHistoBetUserStatus(histoBetUser:Bet[], userId:number, idStatus : number){

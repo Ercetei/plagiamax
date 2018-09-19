@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { Season } from '../models/season.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class SeasonService {
 
     seasons: Season[] = []
-    
-    readonly rootUrl = 'http://localhost:1234';
 
-    constructor(private http: HttpClient) { 
+    constructor(private baseService: BaseService) { 
     }
 
     getSeasons(id: number) : Observable<Season[]> {

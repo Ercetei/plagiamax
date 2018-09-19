@@ -5,13 +5,13 @@ export class BetLine {
 
     id: number;
     idBet: number;
-    momentOdds: number;
+    momentodds: number;
     betType: BetType;
 
-    constructor(id: number = 0, idBet: number = 0, betType: BetType = null, momentOdds: number = 0) {
+    constructor(id: number = 0, idBet: number = 0, betType: BetType = null, momentodds: number = 0) {
         this.id = id;
         this.idBet = idBet;
         this.betType = betType;
-        this.momentOdds = momentOdds;
+        this.momentodds = momentodds;
     }
 }

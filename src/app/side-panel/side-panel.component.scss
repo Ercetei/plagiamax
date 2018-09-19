@@ -2,6 +2,7 @@
     background-color: lightgray;
     padding-top:8px;
 }
+
 .bet-block {
     background-color: white;
     margin: 0px 8px 8px 8px;
@@ -12,9 +13,19 @@
         padding: 0 0 0 0;
     }
 }
-.btn-head{
-    background-color: white;
-}
+
 .btn-head:hover {
     background-color: lightgray;
+}
+
+.light{
+    background-color: white;
+}
+
+.dark {
+    background-color: lightgray;
+}
+
+.btn-block{
+    margin-bottom: 10px;
 }

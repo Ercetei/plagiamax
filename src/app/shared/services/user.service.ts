@@ -4,13 +4,12 @@ import { Response, URLSearchParams } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
-import { GeneralService } from '../services/general.service';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class UserService {
-    readonly rootUrl = 'http://localhost:8080';
 
-    constructor(private http: HttpClient, private generalService:GeneralService) {
+    constructor(private baseService: BaseService) {
     }
 
     registerUser(user: User) {
@@ -23,7 +22,7 @@ export class UserService {
             lastname: user.lastname
         };
 
-        return this.http.post(this.rootUrl + '/user/register', body, {
+        return this.baseService.http.post(this.baseService.rootUrl + '/user/register', body, {
             withCredentials: true
         });
     }
@@ -51,7 +50,7 @@ export class UserService {
         body.set('password', user.password);
         body.set('_csrf', user._csrf);
 
-        return this.http.post(this.rootUrl + '/login', body.toString(), {
+        return this.baseService.http.post(this.baseService.rootUrl + '/login', body.toString(), {
             headers: headers,
             responseType: 'json',
             withCredentials: true
@@ -59,7 +58,7 @@ export class UserService {
     }
 
     getUserClaims(idUser) {
-        return this.http.get(this.rootUrl + '/user/' + idUser + '/claims');
+        return this.baseService.http.get(this.baseService.rootUrl + '/user/' + idUser + '/claims');
     }
 
 }

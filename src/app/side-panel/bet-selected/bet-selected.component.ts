@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { MatchBetService } from '../../shared/services/match-bet.service';
 import { MatchBet } from '../../shared/models/match-bet.model';
 import { Types } from '../../shared/enums/types.enum';
+import { BetTypeService } from '../../shared/services/bet-type.service';
 
 @Component({
   selector: 'app-bet-selected',
@@ -10,46 +10,32 @@ import { Types } from '../../shared/enums/types.enum';
   styleUrls: ['./bet-selected.component.scss']
 })
 export class BetSelectedComponent implements OnInit {
-  selectedBets: any[] = [];
+  @Input() betType: MatchBet;
+  @Input() combined: Boolean;
   @Input() amount: number;
-
-  betGroupSubscription = new Subscription;
 
   constructor
     (
-      private betTypeService: MatchBetService
+      private betTypeService: BetTypeService,
+      private matchBetService: MatchBetService
     ) {
 
   }
 
+  // A l'initialisation, on récupère les ifos du bet en question
   ngOnInit() {
-    this.betTypeService.betTypeSubject.subscribe(
-      (bts: any[]) => {
-        this.selectedBets = bts;
-        this.betTypeService.getBetTypeInfos();
-      }
-    ); 
+    
   }
 
-  do(bts){
-    this.selectedBets = bts;
+  // Retire le pari du side panel
+  removeBet() {
+    this.betTypeService.removeSelectedBet(this.betType);
   }
 
-  removeBet(betType: MatchBet) {
-    this.betTypeService.removeSelectedBet(betType);
-  }
-
-  getTotalOdds() {
-    let totalOdds = 1;
-    for (let betType of this.selectedBets) {
-      totalOdds += (+betType.currentodds - 1);
-    }
-    return totalOdds;
-  }
-
-  getType(type: number){
+  // Récupère le type de pari
+  getType(){
     let message;
-    switch (type) {
+    switch (this.betType.type) {
       case Types.Vainqueur:
         message = 'Vainqueur';
       break;
@@ -66,11 +52,19 @@ export class BetSelectedComponent implements OnInit {
     return message;
   }
 
+  // Calcule les gains potentiels par rapport à la cote
   getPotentialGains() {
     if (this.amount > 0) {
-      return this.getTotalOdds() * this.amount;
+      return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(this.betType.currentodds* this.amount);
     } else {
       return 0;
     }
+  }
+
+  generateBet(){
+    if(this.amount > 0){
+      console.log(this.getPotentialGains);
+    }
+    console.log(this.amount);
   }
 }

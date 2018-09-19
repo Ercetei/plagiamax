@@ -9,10 +9,9 @@ const headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*');
 
 @Injectable()
-export class MatchBetService extends BetTypeService {
+export class MatchBetService {
 
-    constructor(private httpClient: HttpClient) {
-        super();
+    constructor(private betTypeService: BetTypeService) {
     }
 
     getBetTypes(match: Match): Observable<MatchBet[]> {
@@ -21,33 +20,31 @@ export class MatchBetService extends BetTypeService {
 
     // Récupère les MatchBet dans la BDD pour un match défini
     getBetsByMatch(match: Match): Observable<MatchBet[]> {
-        return this.httpClient.get<MatchBet[]>(this.rootUrl + '/matchbet/' + match.id);
+        return this.betTypeService.baseService.http.get<MatchBet[]>(this.betTypeService.baseService.rootUrl + '/matchbet/' + match.id);
     }
 
 
     // Ajoute un pari aux paris sélectionnés
     addSelectedMatchBet(betType: MatchBet) {
         let betToAdd: MatchBet;
-        this.httpClient.get<MatchBet>(this.rootUrl + '/bettype/' + betType.id,{
+        this.betTypeService.baseService.http.get<MatchBet>(this.betTypeService.baseService.rootUrl + '/bettype/' + betType.id, {
             headers: headers,
             responseType: 'json',
             withCredentials: true
         }).subscribe(data => {
             betToAdd = data
-            this.selectedBets.push(betToAdd);
-            this.emitSelectedBetsSubject();
+            this.betTypeService.addSelectedBet(betToAdd);
         });
     }
 
-    getBetTypeInfos() {
-        console.log(this.selectedBets);
-        for (let betType of this.selectedBets) {
-            this.httpClient.get<Match>(this.rootUrl + '/match/' + betType.match.id, {
+    getBetTypeInfos(bettype: MatchBet = null) {
+        for (let betType of this.betTypeService.getSelectedBets()) {
+            this.betTypeService.baseService.http.get<Match>(this.betTypeService.baseService.rootUrl + '/match/' + betType.match.id, {
                 headers: headers,
                 responseType: 'json',
                 withCredentials: true
             }).subscribe(async data => {
-                await (betType.match = data); 
+                await (betType.match = data);
             });
         }
     }

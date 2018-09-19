@@ -1,0 +1,30 @@
+<div class="container-fluid" *ngIf="selectedBets.length > 0">
+    <div class="row">
+        <div class="col-md-6"><button class="btn btn-block btn-head" [ngClass]="!combined ? 'dark' : 'light'" (click)="setSimple()">Simple</button></div>
+        <div class="col-md-6"><button class="btn btn-block btn-head" [ngClass]="combined ? 'dark' : 'light'" (click)="setCombined()">Combiné</button></div>
+    </div>
+    <div class="row back">
+        <app-bet-selected *ngFor="let bettype of selectedBets" [betType]="bettype" [combined]="combined" ></app-bet-selected>
+        <div class="bet-block" *ngIf="combined">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-9 text-left">Cote totale</div>
+                    <div class="col-md-3">{{getTotalOdds()}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 text-left">Mise</div>
+                    <div class="col-md-3"><input class="col-md-12" id="amountInput" input [(ngModel)]="amount" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 text-left">Gains potentiels</div>
+                    <div class="col-md-3">{{getPotentialGains()}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12"><button class="btn btn-block btn-secondary" (click)="onValidate()">Valider</button></div>
+            </div>
+        </div>
+    </div>
+</div>

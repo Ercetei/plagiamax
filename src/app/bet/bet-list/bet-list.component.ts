@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
 import { BetType } from '../../shared/models/bet-type.model';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Bet } from '../../shared/models/bet.model';
 import { Match } from '../../shared/models/match.model';
 import { MatchService } from '../../shared/services/match.service';
 import { BetTypeService } from '../../shared/services/bet-type.service';
@@ -18,25 +16,31 @@ export class BetListComponent implements OnInit {
   selectedBets: BetType[] = [];
   match: Match;
 
-  betGroupSubscription = new Subscription;
-
   constructor
-  (
+    (
     private route: ActivatedRoute,
     private matchService: MatchService,
-    private betTypeService: MatchBetService
+    private matchBetService: MatchBetService,
+    private betTypeService: BetTypeService
     ) {
   }
 
+  // A l'initialisation, fait en sorte de charger le match au changement d'URL et on s'abonne à la liste de paris du side panel.
   ngOnInit() {
-    this.getMatch();
-    this.betGroupSubscription = this.betTypeService.betTypeSubject.subscribe(
+    this.route.params.subscribe(data => this.reload());
+    this.betTypeService.betTypeSubject.subscribe(
       (bts: BetType[]) => {
         this.selectedBets = bts;
       }
     );
   }
 
+  // On charge les infos du match
+  reload() {
+    this.getMatch();
+  }
+
+  // Récupère le match en cours
   getMatch() {
     console.log('Récupération du match');
     const match_id = +this.route.snapshot.paramMap.get('id');
@@ -52,24 +56,24 @@ export class BetListComponent implements OnInit {
         }
       }
     );
-
-    //  .subscribe(match => this.match = match);
-    //  console.log(this.match);
-    console.log(this.match);
   }
 
+  // Récupère les paris sur l'équipe gagnante
   getWinnerBets() {
-    if(this.match != null) return this.match.matchbets.filter(x => x.type == 1);
+    if (this.match != null) return this.match.matchbets.filter(x => x.type == 1);
   }
 
+  // Récupère les paris sur le score exact
   getScoreBets() {
-    if(this.match != null) return this.match.matchbets.filter(x => x.type == 2);
+    if (this.match != null) return this.match.matchbets.filter(x => x.type == 2);
   }
 
+  // Récupère les paris sur le nombre de buts
   getGoalsBets() {
-    if(this.match != null) return this.match.matchbets.filter(x => x.type == 3);
+    if (this.match != null) return this.match.matchbets.filter(x => x.type == 3);
   }
 
+  // Sélectionne ou déselectionne un pari
   switchBet(id: number) {
     if (this.isSelectedBet(id)) {
       this.unselectBet(id);
@@ -78,14 +82,17 @@ export class BetListComponent implements OnInit {
     }
   }
 
+  // Ajoute un pari dans le side panel
   selectBet(id: number) {
-    this.betTypeService.addSelectedMatchBet(this.match.matchbets.find(x => x.id == id));
+    this.matchBetService.addSelectedMatchBet(this.match.matchbets.find(x => x.id == id));
   }
 
+  // Retire un pari du side panel
   unselectBet(id: number) {
     this.betTypeService.removeSelectedBet(this.match.matchbets.find(x => x.id == id));
   }
 
+  // Contrôle si un pari est dans le side panel
   isSelectedBet(id: number) {
     return this.betTypeService.isSelectedBet(id);
   }

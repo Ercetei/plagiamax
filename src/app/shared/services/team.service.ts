@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { Team } from '../models/team.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class TeamService {
@@ -49,10 +48,8 @@ export class TeamService {
     // ];
 
     teams: Team[] = []
-    
-    readonly rootUrl = 'http://localhost:1234';
 
-    constructor(private http: HttpClient) { 
+    constructor(private baseService: BaseService) { 
     }
 
     getTeams(id: number) : Observable<Team[]> {

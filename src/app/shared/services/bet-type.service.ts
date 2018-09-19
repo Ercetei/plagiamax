@@ -3,24 +3,28 @@ import { BetType } from "../models/bet-type.model";
 import { BaseService } from "./base.service";
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { MatchBet } from "../models/match-bet.model";
-import { Team } from "../models/team.model";
-import { Match } from "../models/match.model";
+import { Injectable } from "@angular/core";
 
 const headers = new HttpHeaders()
     .set('Access-Control-Allow-Origin', '*');
 
-export class BetTypeService extends BaseService {
+@Injectable()
+export class BetTypeService {
 
     protected selectedBets: MatchBet[] = [];
     public betTypeSubject = new Subject();
-    private http: HttpClient
 
-    constructor() {
-        super();
+    constructor(public baseService: BaseService) {
+
     }
 
     emitSelectedBetsSubject() {
         this.betTypeSubject.next(this.selectedBets);
+    }
+
+    addSelectedBet(betType: MatchBet){
+        this.selectedBets.push(betType);
+        this.emitSelectedBetsSubject();
     }
 
     // Retire un pari des paris sélectionnés
