@@ -1,112 +1,90 @@
-<h2> {{ competitionName }} </h2>
-<!-- <app-bet-list></app-bet-list> -->
-<div class="" style="margin: auto; width : 50%">
-	<select class="form-control" [(ngModel)]="daySelected" (change)="onChange($event)">
-		<option [value]="0">Sélectionnez votre journée de championnat</option>
-		<option *ngFor="let day of calendar" [value]="day.id">{{day.label}}</option>    
-	</select>
-  <br>
-</div>
 <br>
-<br>
-
-<br><br>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3 class="text-center subtitle"> Journée {{daySelected}} de {{ competitionName }} </h3>
-      		<h6 class="text-center subtitle">Championnat de France</h6>
-			<div class="row">
-				<div class="col-md-6">
+<div *ngIf="competitionName != ''" >
+	<h2> {{ competitionName }} </h2>
+	<div class="" style="margin: auto; width : 50%">
+		<select class="form-control" [(ngModel)]="daySelected" (change)="onChange($event)">
+			<option [value]="0">Sélectionnez votre journée de championnat</option>
+			<option *ngFor="let day of calendar" [value]="day.id">{{day.label}}</option>    
+		</select>
+	</div>
+	<br>
+	<div class="container-fluid" *ngIf="matchBets?.length != 0 ">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="text-center subtitle">{{ labelCalendar }} de {{ competitionName }}</h3>
+				<h6 class="text-center subtitle">Championnat de France</h6>
+				<div class="row">
+					<div class="col-md-6">
+					</div>
+					<div class="col-md-2 text-center">
+						<span class="badge badge-default">1</span>
+					</div>
+					<div class="col-md-2 text-center">
+						<span class="badge badge-default">N</span>
+					</div> 
+					<div class="col-md-2 text-center">
+						<span class="badge badge-default">2</span>
+					</div>
 				</div>
-				<div class="col-md-2 text-center">
-					 <span class="badge badge-default">1</span>
-				</div>
-				<div class="col-md-2 text-center">
-					 <span class="badge badge-default">N</span>
-				</div> 
-				<div class="col-md-2 text-center">
-					 <span class="badge badge-default">2</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<h3> {{ betsT5[0].label }} - {{ betsT5[2].label }} </h3>
-				</div>
-				<div class="col-md-2 text-center">
-					 <button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[0].odds }}</button>
-				</div>
-				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[1].odds }}</button>
-				</div>
-				<div class="col-md-2 text-center">
-					 <button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{ betsT5[2].odds }}</button>
-				</div>
-			</div>
-			<div class="row">
+				<div *ngFor="let mb of matchBets">
+					<div class="row">
 						<div class="col-md-6">
-							<h3>
-								{{ betsT1[0].label }} - {{ betsT1[2].label }}
-							</h3>
+							<h5> {{ mb.matchbets[0].label }} - {{ mb.matchbets[2].label }} </h5>
 						</div>
 						<div class="col-md-2 text-center">
-							<button class="btn" [ngClass]="btn4Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[0].odds }}</button>
+							<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">
+								{{ mb.matchbets[0].currentodds }}
+							</button>
 						</div>
 						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn5Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[1].odds }}</button>
+							<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">
+								{{ mb.matchbets[1].currentodds }}
+							</button>
 						</div>
 						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn6Active==true ? 'btn-active' : 'btn-bet'">{{ betsT1[2].odds }}</button>
+							<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">
+								{{ mb.matchbets[2].currentodds }}
+							</button>
 						</div>
-			</div>
-			<div class="row">
-						<div class="col-md-6">
-							<h3>
-								{{ betsT2[0].label }} - {{ betsT2[2].label }}
-							</h3>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn" [ngClass]="btn7Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[0].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn8Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[1].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn9Active==true ? 'btn-active' : 'btn-bet'">{{ betsT2[2].odds }}</button>
-						</div>
-			</div>
-			<div class="row">
-						<div class="col-md-6">
-							<h3>
-								{{ betsT3[0].label }} - {{ betsT3[2].label }}
-							</h3>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn" [ngClass]="btn10Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[0].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn11Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[1].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn12Active==true ? 'btn-active' : 'btn-bet'">{{ betsT3[2].odds }}</button>
-						</div>
-			</div>
-			<div class="row">
-						<div class="col-md-6">
-							<h3>
-								{{ betsT4[0].label }} - {{ betsT4[2].label }}
-							</h3>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn" [ngClass]="btn13Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[0].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn14Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[1].odds }}</button>
-						</div>
-						<div class="col-md-2 text-center">
-							<button class="btn btn-bet" [ngClass]="btn15Active==true ? 'btn-active' : 'btn-bet'">{{ betsT4[2].odds }}</button>
-						</div>
-			</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<div *ngIf="competitionName == ''" >
+	<h3 class="text-center subtitle">Liste des matchs à venir</h3>
+	<div class="row">
+		<div class="col-md-6">
+		</div>
+		<div class="col-md-2 text-center">
+			<span class="badge badge-default">1</span>
+		</div>
+		<div class="col-md-2 text-center">
+			<span class="badge badge-default">N</span>
+		</div> 
+		<div class="col-md-2 text-center">
+			<span class="badge badge-default">2</span>
+		</div>
+	</div>
+	<div *ngFor="let m of match">
+		<div class="row" *ngIf="m.status == 3 || m.status == 4">
+			<div class="col-md-6">
+				<h5>
+					{{ m.matchbets[0].label }} - {{ m.matchbets[2].label }}
+				</h5>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[0].currentodds }}</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[1].currentodds }}</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[2].currentodds }}</button>
+			</div>
+		</div>
+	</div>
+</div>

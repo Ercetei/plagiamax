@@ -30,12 +30,12 @@ export class CompetitionComponent implements OnInit {
 
   }
 
-  getAfficher(){
+  onAfficher(){
     this.afficher = "" ;
     if (this.route.snapshot.children[0] != undefined){
         this.afficher = this.route.snapshot.children[0].component['name'] ;
     }
-    return this.afficher;
+    return this.afficher ;
   }
 
   // setCompetition(cn:Competition){

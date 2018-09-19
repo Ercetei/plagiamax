@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
@@ -19,13 +19,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./showbet.component.scss']
 })
 export class ShowbetComponent {
+
+  daySelected:String;
+  newVal: number = 0; 
+  calendar:Calendar[];
+  labelCalendar: any;
+  team:Team[];
+
   competitionName:String;
   competition_id: number;
   competition:Competition;
-  daySelected:String;
-  newVal:Number = 0; 
-  calendar:Calendar[];
-  team:Team[];
+  match:any[];
+  matchBets: BetType[] ;
 
   // TODO: A supprimer avec la BDD
   match1: Match = new Match(0, "Ligue 1", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "OM")]);
@@ -66,56 +71,56 @@ export class ShowbetComponent {
 
   constructor(private generalService: GeneralService, private route: ActivatedRoute) {
     route.params.subscribe(data => this.getCompetition());
-   }
+  }
 
   ngOnInit() {
-    this.getCompetition();
-    this.getCalendar();
-    // this.calendar = [
-    //   {id:0,label:"Sélectionnez votre journée de championnat"},
-    //   {id:1,label:"Journée 1 sur 38"},
-    //   {id:2,label:"Journée 2 sur 38"},
-    //   {id:3,label:"Journée 3 sur 38"}
-    // ];
+    this.newVal = 1 ;
     this.daySelected="1";
 
-    // this.team = [
-    //   {id:1,label:"Amiens"},
-    //   {id:2,label:"Marseille"},
-    //   {id:3,label:"Paris SG"},
-    //   {id:4,label:"Lyon"},
-    //   {id:5,label:"As Monaco"},
-    //   {id:6,label:"Nantes"},
-    //   {id:7,label:"Rennes"},
-    //   {id:8,label:"Caen"},
-    //   {id:9,label:"Le Mans"},
-    //   {id:10,label:"Strasbourg"},
-    // ];
-
-    this.newVal = 0;
-
+    this.getCompetition();
+    this.getCalendar();
+    this.getMatch();
+    this.getMatchBets();
   }
 
   public onChange(event): void {  // event will give you full breif of action
     this.newVal = event.target.value;
-    console.log(this.newVal);
+    this.labelCalendar = this.calendar[this.newVal - 1].label ;
+    this.getMatchBets();
   }
 
   async getCompetition(){
     this.competition_id = +this.route.snapshot.paramMap.get('id');
-
     if (this.competition_id > 0){
       this.competition = await this.generalService.get("/competition/" + this.competition_id);  
       this.competitionName = this.competition.label ;
+      this.getCalendar();
+      this.getMatch();
+      this.getMatchBets();
     }else{
-      this.competition = await this.generalService.get("/competition/1");
-      this.competitionName = "Ligue 1" ;
+      this.competition = await this.generalService.get("/competition");
+      this.competitionName = "" ;
     }
-
   }
 
   async getCalendar() {
+    this.labelCalendar = "" ;
+    this.calendar = [] ;
     this.calendar = await this.generalService.get("/competition/" + this.competition_id  + "/matchdays");
+    if (this.calendar.length == 0){
+      this.labelCalendar = "" ;
+    }else{
+      this.labelCalendar = this.calendar[0].label ;
+    }
+  }
+
+  async getMatch() {
+    this.match = await this.generalService.get("/match/");
+  }
+
+  async getMatchBets(){
+    this.matchBets = [] ;
+    this.matchBets = await this.generalService.get("/matchday/" + this.newVal + "/" + this.competition_id  + "/matchs");
   }
 
 }

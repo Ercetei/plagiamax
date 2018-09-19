@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -19,9 +19,10 @@ export class HomeComponent implements OnInit {
     "../../assets/img/banner-1.jpg",
     "../../assets/img/banner-2.jpg"
   ]
+  afficher: String;
 
   constructor(private router: Router, private userService: UserService, config: NgbCarouselConfig, 
-            private http: HttpClient, private generalService : GeneralService) {
+            private http: HttpClient, private generalService : GeneralService, private route: ActivatedRoute) {
     // customize default values of carousels used by this component tree
     config.interval = 10000;
     config.wrap = true;
@@ -40,5 +41,13 @@ export class HomeComponent implements OnInit {
   //   localStorage.removeItem('userToken');
   //   this.router.navigate(['/login']);
   // }
+
+  onAfficher(){
+    this.afficher = "" ;
+    if (this.route.snapshot.children[0] != undefined){
+        this.afficher = this.route.snapshot.children[0].component['name'] ;
+    }
+    return this.afficher ;
+  }
 
 }
