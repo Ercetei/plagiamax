@@ -26,17 +26,25 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
+<<<<<<< HEAD
 import { ShowbetComponent } from './showbet/showbet.component';
+=======
 import { CcComponent } from './cc/cc.component';
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
 import { CompetitionComponent } from './competition/competition.component';
-
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from './shared/services/history.service';
+<<<<<<< HEAD
+
+import { CookieService } from 'ngx-cookie-service';
+
+=======
 import { GeneralService } from './shared/services/general.service';
 import { CompetitionService } from './shared/services/competition.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CreditCardService } from './cc/services/creditCard-service';
@@ -50,8 +58,6 @@ import { BaseService } from './shared/services/base.service';
   declarations: [
     ShowbetComponent,
     AppComponent,
-    BetListComponent,
-    BetSelectedComponent,
     SignUpComponent,
     UserComponent,
     SignInComponent,
@@ -79,7 +85,12 @@ import { BaseService } from './shared/services/base.service';
     ReactiveFormsModule,
     IgxDatePickerModule, IgxMaskModule
   ],
-  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, CompetitionService, MatchService, BaseService, AuthGuard,  CreditCardService,
+<<<<<<< HEAD
+  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, MatchService, BaseService, AuthGuard,
+=======
+
+  providers: [UserService, GeneralService, HistoryService, CompetitionService, BetService, MatchService, AuthGuard, CreditCardService,
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

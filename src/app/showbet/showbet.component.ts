@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
@@ -8,6 +8,9 @@ import { BetType } from './models/bet-type';
 import { Bet } from './models/bet';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Calendar } from './models/calendar';
+import { GeneralService } from '../shared/services/general.service';
+import { Competition } from '../shared/models/competition.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 @Component({
@@ -16,20 +19,24 @@ import { Calendar } from './models/calendar';
   styleUrls: ['./showbet.component.scss']
 })
 export class ShowbetComponent {
+
   daySelected:String;
-  newVal:Number = 0; 
+  newVal: number = 0; 
   calendar:Calendar[];
+  labelCalendar: any;
   team:Team[];
+
+  competitionName:String;
+  competition_id: number;
+  competition:Competition;
+  match:any[];
+  matchBets: BetType[] ;
 
   // TODO: A supprimer avec la BDD
   match1: Match = new Match(0, "Ligue 1", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "OM")]);
-    
   match2: Match = new Match(1, "Ligue 1", 0, [ new Team(2, "SRFC"), new Team(3, "Dijon")]);
-
   match3: Match = new Match(2, "Ligue 1", 0, [ new Team(4, "OL"), new Team(5, "OGC Nice")]);
-
   match4: Match = new Match(3, "Ligue 1", 0, [ new Team(6, "Caen"), new Team(7, "Angers")]);
-
   match5: Match = new Match(4, "Ligue 1", 0, [ new Team(8, "Nimes"), new Team(9, "Strasbourg")]);
   
   betsT1: BetType[] = [
@@ -62,45 +69,58 @@ export class ShowbetComponent {
     new BetType(3, 'Strasbourg', 3.15, 1, this.match5)
   ];
 
-  constructor() { }
+  constructor(private generalService: GeneralService, private route: ActivatedRoute) {
+    route.params.subscribe(data => this.getCompetition());
+  }
 
   ngOnInit() {
-    
-    this.calendar = [
-      {id:0,label:"Sélectionnez votre journée de championnat"},
-      {id:1,label:"Journée 1 sur 38"},
-      {id:2,label:"Journée 2 sur 38"},
-      {id:3,label:"Journée 3 sur 38"},
-      {id:4,label:"Journée 4 sur 38"},
-      {id:5,label:"Journée 5 sur 38"},
-      {id:6,label:"Journée 6 sur 38"},
-      {id:7,label:"Journée 7 sur 38"},
-      {id:8,label:"Journée 8 sur 38"},
-      {id:9,label:"Journée 9 sur 38"},
-      {id:10,label:"Journée 10 sur 38"},
-    ];
-    this.daySelected="0";
+    this.newVal = 1 ;
+    this.daySelected="1";
 
-    // this.team = [
-    //   {id:1,label:"Amiens"},
-    //   {id:2,label:"Marseille"},
-    //   {id:3,label:"Paris SG"},
-    //   {id:4,label:"Lyon"},
-    //   {id:5,label:"As Monaco"},
-    //   {id:6,label:"Nantes"},
-    //   {id:7,label:"Rennes"},
-    //   {id:8,label:"Caen"},
-    //   {id:9,label:"Le Mans"},
-    //   {id:10,label:"Strasbourg"},
-    // ];
-
-    this.newVal = 0;
-
+    this.getCompetition();
+    this.getCalendar();
+    this.getMatch();
+    this.getMatchBets();
   }
 
   public onChange(event): void {  // event will give you full breif of action
     this.newVal = event.target.value;
-    console.log(this.newVal);
+    this.labelCalendar = this.calendar[this.newVal - 1].label ;
+    this.getMatchBets();
+  }
+
+  async getCompetition(){
+    this.competition_id = +this.route.snapshot.paramMap.get('id');
+    if (this.competition_id > 0){
+      this.competition = await this.generalService.get("/competition/" + this.competition_id);  
+      this.competitionName = this.competition.label ;
+      this.getCalendar();
+      this.getMatch();
+      this.getMatchBets();
+    }else{
+      this.competition = await this.generalService.get("/competition");
+      this.competitionName = "" ;
+    }
+  }
+
+  async getCalendar() {
+    this.labelCalendar = "" ;
+    this.calendar = [] ;
+    this.calendar = await this.generalService.get("/competition/" + this.competition_id  + "/matchdays");
+    if (this.calendar.length == 0){
+      this.labelCalendar = "" ;
+    }else{
+      this.labelCalendar = this.calendar[0].label ;
+    }
+  }
+
+  async getMatch() {
+    this.match = await this.generalService.get("/match/");
+  }
+
+  async getMatchBets(){
+    this.matchBets = [] ;
+    this.matchBets = await this.generalService.get("/matchday/" + this.newVal + "/" + this.competition_id  + "/matchs");
   }
 
 }

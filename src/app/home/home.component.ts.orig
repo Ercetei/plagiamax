@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,8 +20,16 @@ export class HomeComponent implements OnInit {
   ];
   afficher: String;
 
+<<<<<<< HEAD
+  constructor(private router: Router,
+    private userService: UserService,
+    config: NgbCarouselConfig,
+    private http: HttpClient
+  ) {
+=======
   constructor(private router: Router, private userService: UserService, config: NgbCarouselConfig, 
-            private http: HttpClient, private route: ActivatedRoute) {
+            private http: HttpClient, private generalService : GeneralService, private route: ActivatedRoute) {
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
     // customize default values of carousels used by this component tree
     config.interval = 10000;
     config.wrap = true;
@@ -33,6 +40,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
   }
+<<<<<<< HEAD
+=======
 
   // Logout() {
   //   localStorage.removeItem('userToken');
@@ -47,4 +56,5 @@ export class HomeComponent implements OnInit {
     return this.afficher ;
   }
 
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
 }

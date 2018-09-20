@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+<<<<<<< HEAD
 import { Response, URLSearchParams } from "@angular/http";
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
 import { BaseService } from './base.service';
-import { Body } from '@angular/http/src/body';
 
 @Injectable()
 export class UserService {
@@ -13,23 +11,19 @@ export class UserService {
     constructor(private baseService: BaseService) {
     }
 
-  registerUser(user: User) {
-    const body: User = {
-      username: user.username,
-      password: user.password,
-      mail: user.mail,
-      birthdate: new Date(user.birthdate),
-      firstname: user.firstname,
-      lastname: user.lastname,
-      creditcard: user.creditcard,
-      cryptogram: user.cryptogram,
-      expirationdate: user.expirationdate,
-      wallet: user.wallet
-    };
+    registerUser(user: User) {
+        const body: any = {
+            username: user.username,
+            password: user.password,
+            mail: user.mail,
+            birthdate: new Date(user.birthdate),
+            firstname: user.firstname,
+            lastname: user.lastname
+        };
 
-       return this.baseService.http.post(this.baseService.rootUrl + '/user/register', body, {
-           withCredentials: true
-       });
+        return this.baseService.http.post(this.baseService.rootUrl + '/user/register', body, {
+            withCredentials: true
+        });
     }
 
     isAuthentified(): Boolean {
@@ -62,6 +56,66 @@ export class UserService {
     getUserClaims(idUser) {
         return this.baseService.http.get(this.baseService.rootUrl + '/user/' + idUser + '/claims');
     }
+=======
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from "@angular/http";
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import { User } from '../models/user.model';
+import { Body } from '@angular/http/src/body';
+
+@Injectable()
+export class UserService {
+  readonly rootUrl = 'http://localhost:8080';
+  constructor(private http: HttpClient) {
+
+  }
+  tabUser: User[] = [];
+
+  registerUser(user: User) {
+    const body: User = {
+      username: user.username,
+      password: user.password,
+      mail: user.mail,
+      birthdate: new Date(user.birthdate),
+      firstname: user.firstname,
+      lastname: user.lastname,
+      creditcard: user.creditcard,
+      cryptogram: user.cryptogram,
+      expirationdate: user.expirationdate,
+      wallet: user.wallet
+    };
+
+    return this.http.post(this.rootUrl + '/user/register', body, {
+      withCredentials: true
+    });
+  }
+
+  userAuthentication(username, password, csrf) {
+    var user = {
+      username: username,
+      password: password,
+      _csrf: csrf
+    };
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+
+    const body = new URLSearchParams();
+    body.set('username', user.username);
+    body.set('password', user.password);
+    body.set('_csrf', user._csrf);
+
+    return this.http.post(this.rootUrl + '/login', body.toString(), {
+      headers: headers,
+      responseType: 'json',
+      withCredentials: true
+    });
+  }
+
+  getUserClaims(idUser) {
+    return this.http.get(this.rootUrl + '/user/' + idUser + '/claims');
+  }
 
   getUserBDD(): Observable<User[]> {
 
@@ -100,6 +154,7 @@ export class UserService {
     }).subscribe();
   }
 
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b
 
     removeFromWallet(amount: number) {
         let wallet = this.getCurrentUser().wallet - amount;

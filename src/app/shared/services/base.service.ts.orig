@@ -1,6 +1,11 @@
+<<<<<<< HEAD:src/app/shared/services/base.service.ts
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+=======
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b:src/app/shared/services/general.service.ts
 
 @Injectable()
 export class BaseService {
@@ -12,6 +17,10 @@ export class BaseService {
 
     constructor(public http: HttpClient) {
 
+<<<<<<< HEAD:src/app/shared/services/base.service.ts
+=======
+    constructor(private http: HttpClient, private route: ActivatedRoute){
+>>>>>>> f9375c377ff3f10b2c7f85e0f19268e28077684b:src/app/shared/services/general.service.ts
     }
 
     async get(requestMapping: string): Promise<any> {
@@ -28,7 +37,7 @@ export class BaseService {
                 responseType: 'json',
                 // enable to use credentials/certificates
                 withCredentials: true
-            // transform to promise to be able asynchronous
+                // transform to promise to be able asynchronous
             }).toPromise()
         // return request response
         return requestResponse;
