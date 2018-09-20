@@ -26,6 +26,7 @@ import { CompetitionComponent } from './competition/competition.component';
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from './shared/services/history.service';
 import { GeneralService } from './shared/services/general.service';
+import { CompetitionService } from './shared/services/competition.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
@@ -36,7 +37,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
 import { AngularFireLite } from 'angularfire-lite';
 import { environment } from '../environments/environment';
-
 
 @NgModule({
   declarations: [
@@ -69,7 +69,7 @@ import { environment } from '../environments/environment';
     IgxDatePickerModule, IgxMaskModule
   ],
 
-  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard, CreditCardService,
+  providers: [UserService, GeneralService, HistoryService, CompetitionService, BetService, MatchService, AuthGuard, CreditCardService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
