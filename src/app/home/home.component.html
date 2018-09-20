@@ -20,14 +20,18 @@
 
 <div class="d-flex flex-row justify-content-around">
   <div class="p-2 col-3 text-center">
-      <br>
-      <div class="divListCategory">
-        <app-competition></app-competition>
-      </div>
-      <br>
+    <br>
+    <div class="divListCategory">
+      <app-competition></app-competition>
+    </div>
+    <br>
   </div>
-  <div class="p-2 col-6"><router-outlet></router-outlet></div>
-  <div class="p-2 col-3 text-center"><app-side-panel></app-side-panel></div>
+  <div class="p-2 col-6">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="p-2 col-3 text-center">
+    <app-side-panel></app-side-panel>
+  </div>
 </div>
 
 <!-- <app-showbet></app-showbet> -->

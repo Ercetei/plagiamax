@@ -56,4 +56,15 @@ export class UserService {
         return this.baseService.http.get(this.baseService.rootUrl + '/user/' + idUser + '/claims');
     }
 
+    removeFromWallet(amount: number) {
+        let wallet = this.getCurrentUser().wallet - amount;
+        let body = {
+            wallet
+        }
+
+        this.baseService.http.patch(this.baseService.rootUrl + '/user/' + this.getCurrentUser().id, body, {
+            responseType: 'json',
+            withCredentials: true
+        }).subscribe();
+    }
 }

@@ -72,4 +72,8 @@ export class BetSelectedComponent implements OnInit {
       return this.amount;
     }
   }
+
+  getBetLabel(){
+    return this.betTypeService.getBetLabel(this.betType.type, this.betType.label);
+  }
 }

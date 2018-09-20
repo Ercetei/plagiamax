@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="selectedBets.length > 0">
     <div class="row">
         <div class="col-md-6"><button class="btn btn-block btn-head" [ngClass]="!combined ? 'dark' : 'light'" (click)="setSimple()">Simple</button></div>
-        <div class="col-md-6"><button class="btn btn-block btn-head" [ngClass]="combined ? 'dark' : 'light'" (click)="setCombined()">Combiné</button></div>
+        <div class="col-md-6"><button class="btn btn-block btn-head" [disabled]="selectedBets.length < 2" [ngClass]="combined ? 'dark' : 'light'" (click)="setCombined()">Combiné</button></div>
     </div>
     <div class="back">
 
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col text-left">Cote totale</div>
                     <div class="col">
-                        <div class="badge badge-warning">{{getTotalOdds()}}</div>
+                        <div class="badge badge-warning">{{formatToNumeric(getTotalOdds())}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -23,7 +23,6 @@
                     <div class="col">{{getPotentialGains()}}</div>
                 </div>
             </div>
-            
         </div>
         <div class="container">
             <div class="row">
@@ -31,4 +30,6 @@
             </div>
         </div>
     </div>
+    <ngb-alert *ngIf="!auth" class="red-text center error-message">Veuillez vous connecter</ngb-alert>
+    <ngb-alert *ngIf="errNotEnoughMoney" class="red-text center error-message">Vous n'avez pas assez d'argent</ngb-alert>
 </div>

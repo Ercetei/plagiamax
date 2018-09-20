@@ -2,45 +2,39 @@ import { Injectable } from '@angular/core';
 import { Bet } from '../models/bet.model';
 import { BetType } from '../models/bet-type.model';
 import { BaseService } from './base.service';
-import { getLocaleDateFormat } from '@angular/common';
 import { UserService } from './user.service';
-import { BetLine } from '../models/bet-line.model';
+import { BetLineService } from './bet-line.service';
+import { when } from 'q';
 
 @Injectable()
 export class BetService {
 
-    constructor(private baseService: BaseService, private userService: UserService) {
+    constructor(private baseService: BaseService, private userService: UserService, private betLineService: BetLineService) {
     }
 
-    createCombinedBet(betTypes: BetType[], amount: number, odds: number) {
+    async createBet(betTypes: BetType[], amount: number, odds: number) {
 
         let body = {
             status: 1,
             betamount: amount,
-            odds: odds,
+            momentodds: odds,
             betdate: new Date().toJSON(),
             user: this.userService.getCurrentUser()
         }
 
         console.log(body);
 
-        /*let betlines: BetLine[] = [];
-        for(let betType of betTypes){
-            let betLine: BetLine = new BetLine();
-            betLine.betType = betType;
-            betLine.status = 1;
-            betlines.push(betLine);
-        }
-
-        bet.betlines = betlines;*/
-
-        this.baseService.http.post<Bet>(this.baseService.rootUrl + '/bet', body, {
+        let bet: Bet;
+        await this.baseService.http.post<Bet>(this.baseService.rootUrl + '/bet', body, {
             withCredentials: true,
             responseType: 'json'
-        }).subscribe(data => console.log(data));
-    }
-
-    createSingleBet(betType: BetType, amount) {
-
+        }).subscribe(async (data: Bet) => {
+            console.log(data);
+            bet = await data;
+            for(let betType of betTypes){
+                this.betLineService.createBetLine(betType, bet);
+            }
+        });
+        this.userService.removeFromWallet(amount);
     }
 }

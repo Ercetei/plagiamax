@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
@@ -9,6 +9,7 @@ import { BetTypeService } from './shared/services/bet-type.service';
 import { UserService } from './shared/services/user.service';
 import { MatchService } from './shared/services/match.service';
 import { BetService } from './shared/services/bet.service';
+import { BetLineService } from './shared/services/bet-line.service';
 import { MatchBetService } from './shared/services/match-bet.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -67,11 +68,11 @@ import { BaseService } from './shared/services/base.service';
     NgbModule,
     AngularFontAwesomeModule
   ],
-  providers: [UserService, HistoryService, BetTypeService, BetService, MatchBetService, MatchService, BaseService, AuthGuard,
+  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, MatchService, BaseService, AuthGuard,
     {
-      provide : HTTP_INTERCEPTORS,
-      useClass : AuthInterceptor,
-      multi : true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     CookieService,
     NgbAlertConfig

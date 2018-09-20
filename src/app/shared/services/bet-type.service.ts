@@ -18,7 +18,7 @@ export class BetTypeService {
         this.betTypeSubject.next(this.selectedBets);
     }
 
-    addSelectedBet(betType: MatchBet){
+    addSelectedBet(betType: MatchBet) {
         this.selectedBets.push(betType);
         this.emitSelectedBetsSubject();
     }
@@ -42,5 +42,34 @@ export class BetTypeService {
     // Teste si un pari est sélectionné
     isSelectedBet(id: number) {
         return this.selectedBets.findIndex(x => x.id == id) > -1;
+    }
+
+    getBetLabel(type: number, value: string) {
+        let labelToDisplay: string;
+        switch (type) {
+            case 1:
+                labelToDisplay = value;
+                break;
+            case 2:
+                labelToDisplay = value;
+                break;
+            case 3:
+                if (value.substring(0, 1) == "+") {
+                    labelToDisplay = "Plus de ";
+                } else if (value.substring(0, 1) == "-") {
+                    labelToDisplay = "Moins de ";
+                } else {
+                    labelToDisplay = "ERROR ";
+                }
+                labelToDisplay += value.substring(1) + " buts";
+                break;
+            default:
+                break;
+        }
+        return labelToDisplay;
+    }
+
+    removeSelectedBets(){
+        this.selectedBets.splice(0, this.selectedBets.length);
     }
 }

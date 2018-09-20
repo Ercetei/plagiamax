@@ -96,4 +96,8 @@ export class BetListComponent implements OnInit {
   isSelectedBet(id: number) {
     return this.betTypeService.isSelectedBet(id);
   }
+
+  getBetLabel(matchbet: BetType){
+    return this.betTypeService.getBetLabel(matchbet.type, matchbet.label);
+  }
 }
