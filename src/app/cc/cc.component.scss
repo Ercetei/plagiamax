@@ -1,4 +1,32 @@
 input
 {
-  height: 25px;
+  height: 35px;
+}
+
+.form-control{
+  width: 20%;
+}
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}
+
+#creditCardNumber{
+  width: 145%;
+  margin: 5%;
+}
+
+#wallet{
+  width: 100%;
+}
+
+#cvc{
+  width: 50%;
+}
+
+#drop{
+  width: 50%;
+  margin: 5%;
 }

@@ -74,19 +74,27 @@ export class UserService {
       withCredentials: true
     });
   }
-  uw(id, wallet){
+  uWallet(id, wallet){
     let body = {wallet}
     this.http.patch(this.rootUrl + '/user/' + id, body, {
       responseType: 'json',
       withCredentials: true
     }).subscribe();
   }
-  // put(user) {
-  //   return new Promise(resolve => {
-  //     user.wallet = user.wallet;
-  //     resolve(user);
-  //   });
+  uDateExp(id, expirationdate){
+    let body = {expirationdate}
+    this.http.patch(this.rootUrl + '/user/' + id, body, {
+      responseType: 'json',
+      withCredentials: true
+    }).subscribe();
+  }
+  uCreditCard(id, creditcard){
+    let body = {creditcard}
+    this.http.patch(this.rootUrl + '/user/' + id, body, {
+      responseType: 'json',
+      withCredentials: true
+    }).subscribe();
+  }
 
-  // }
 
 }

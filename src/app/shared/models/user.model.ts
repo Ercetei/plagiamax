@@ -6,7 +6,7 @@ export class User{
     lastname: string;
     birthdate: any;
     creditcard:string;
-    cryptogram:string;
+    cryptogram:number;
     expirationdate:string;
     wallet:number;
 }

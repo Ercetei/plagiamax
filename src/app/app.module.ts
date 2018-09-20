@@ -31,7 +31,9 @@ import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { CreditCardService } from './cc/services/creditCard-service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -58,10 +60,12 @@ import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule,
+    IgxDatePickerModule, IgxMaskModule
   ],
 
-  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard,
+  providers: [UserService, GeneralService, HistoryService, BetService, MatchService, AuthGuard, CreditCardService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

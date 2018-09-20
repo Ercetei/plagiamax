@@ -7,12 +7,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { BetListComponent } from './bet/bet-list/bet-list.component';
 import { HistoryComponent } from './history/history.component';
 import { ShowbetComponent } from './showbet/showbet.component';
+import { CcComponent } from './cc/cc.component';
 
 export const appRoutes: Routes = [
     // { path: 'home', component: HomeComponent },
     { path: 'home', component: HomeComponent, 
         children: [
-            { path: 'history', component: HistoryComponent }
+            { path: 'history', component: HistoryComponent },
+            { path: 'cagnotte', component: CcComponent }
         ] 
     },
     // {

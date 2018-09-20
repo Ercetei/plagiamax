@@ -1,49 +1,82 @@
-<div class="" style="margin: auto; width : 50%">
-<form stripe:form="saveCreditCard">
+<div class="" class="form-row" style="margin: auto; width : 50%">
+    <p *ngIf="isValidFormSubmitted && ccForm.pristine" [ngClass] = "'success'">
+        OK.
+    </p>
+  <form [formGroup]="ccForm" (ngSubmit)="onFormSubmit()">
     <div class="form-row">
+      
     <label>
       <span>Card Number</span> &nbsp;
-      <input placeholder="Numéro Carte" [(ngModel)]="number" name="number" type="text" size="20"
-      data-stripe="number" id="number" maxlength="20"/>
+      <input igxInput [igxMask]="'# # # # - # # # # - # # # # - # # # #'" 
+      class="form-control" type="text" 
+      formControlName="creditCardNumber" 
+      placeholder="Numéro Carte"
+      required 
+      autofocus
+      id="creditCardNumber">
       </label>
+    <div *ngIf="creditCardNumber.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+        <div *ngIf="creditCardNumber.errors.minlength">
+        Doit comporter 16 chiffres.
+        </div> 
+        <!-- <div *ngIf="creditCardNumber.errors.maxlength"> 
+        Doit comporter un maximum de 19 chiffres.
+        </div>	 -->
     </div>
-    <div class="form-row">
+   
+    </div>
     <label>
-      <span>Expiration (MM/YY)</span> &nbsp;
-      <input placeholder="mois" [(ngModel)]="expMonth" type="text" size="2" [ngModelOptions]="{standalone: true}"
-      data-stripe="exp-month" id="expMonth" maxlength="2"/> 
-      &nbsp;
-    </label>&nbsp; 
-      <span>/</span> &nbsp;
-      <input placeholder="année" [(ngModel)]="expYear" type="text" size="2" [ngModelOptions]="{standalone: true}" 
-      data-stripe="exp-year" id="expYear" maxlength="2"/>
+        <span>Expiration (MM/YYYY)</span> &nbsp;</label>
+        <div class="form-row">
+        <select class="form-control" id="drop" [(ngModel)]="monthSelected" (change)="onChangeMonth($event)" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let month of calendarMonth" [value]="month.id">{{month.label}}</option>    
+        </select>
+        <select placeholder="Année" id="drop" class="form-control" [(ngModel)]="yearSelected" (change)="onChangeYear($event)" [ngModelOptions]="{standalone: true}">
+            <option placeholder="Année" *ngFor="let year of calendarYear" [value]="year.label">{{year.label}}</option>    
+        </select>
+        </div>
+    <div class="form-row">
+        <label>
+          <span >Cryptogram</span>
+          <input igxInput [igxMask]="'# # #'" 
+          formControlName="cvcNumber"
+          type="text"  
+          class="form-control" 
+          placeholder="cvc"
+          required autofocus
+          id="cvc">
+        </label>
+        <div *ngIf="cvcNumber.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+            <div *ngIf="cvcNumber.errors.minlength">
+            Doit comporter 3 chiffres.
+            </div> 
+            <!-- <div *ngIf="cvcNumber.errors.maxlength"> 
+            Doit comporter un maximum de 19 chiffres.
+            </div> -->
+        </div>
     </div>
+  
     <br>
     <div class="form-row">
-      <input placeholder="cvc" [(ngModel)]="cvc" type="text" size="4" [ngModelOptions]="{standalone: true}"
-       data-stripe="cvc" id="cvc" maxlength="3"/>
-    </div>
-    <br>
+    <h3><span class="badge badge-light">Cagnotte</span></h3>&nbsp;&nbsp;
     <div>
-        <input 
+        <input
+        class="form-control"
+        id="wallet"
         #newWallet
         placeholder="wallet" 
         [value]="wallet" 
         [(ngModel)]="wallet" 
         [ngModelOptions]="{standalone: true}"
-        (keyup.enter)="onUpdateWallet(newWallet.value)"
         type = "text"
         size="4" id="wallet" maxlength="5"/>
     </div>
+  </div>
+    <br>
     <div>
-    <button (click)="onUpdateWallet()" type="submit">MAJ Cagnotte</button>
- 
-  </div>
-</form>
-  <div *ngFor="let user of tabUser">
-    <p>
-        Affichage User : {{ user.wallet }}
-    </p>
-  </div>
-
+    <button class="btn btn-primary" type="submit">MAJ Cagnotte</button>
+    &nbsp;
+    &nbsp;
+  </div></form>
 </div>
+<br><br><br>
