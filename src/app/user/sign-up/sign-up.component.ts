@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr'
@@ -25,16 +26,20 @@ export class SignUpComponent implements OnInit {
       form.reset();
     }
 
-    this.user = {
+      this.user = {
       username: '',
       password: '',
       mail: '',
       birthdate: new Date(),
       firstname: '',
-      lastname: ''
+      lastname: '',
+      creditcard: '',
+      cryptogram: '',
+      expirationdate: '',
+      wallet: 0
+
     }
   }
-
   OnSubmit(form: NgForm) {
     this.userService.registerUser(form.value)
       .subscribe(

@@ -21,36 +21,37 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
-
+import { CcComponent } from './cc/cc.component';
 import { CompetitionComponent } from './competition/competition.component';
-
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from './shared/services/history.service';
 import { GeneralService } from './shared/services/general.service';
 import { CompetitionService } from './shared/services/competition.service';
-
 import { CookieService } from 'ngx-cookie-service';
-
 import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
-
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CreditCardService } from './cc/services/creditCard-service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
+
 import { AngularFireLite } from 'angularfire-lite';
 import { environment } from '../environments/environment';
 
-
 @NgModule({
   declarations: [
+    ShowbetComponent,
     AppComponent,
-    BetListComponent,
-    BetSelectedComponent,
     SignUpComponent,
     UserComponent,
     SignInComponent,
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+    CcComponent,
+    BetSelectedComponent,
+    BetListComponent,
     CompetitionComponent,
     HistoryComponent,
     ShowbetComponent
@@ -64,9 +65,12 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule,
+    IgxDatePickerModule, IgxMaskModule
   ],
-  providers: [UserService, GeneralService, HistoryService, CompetitionService, BetService, MatchService, AuthGuard,
+
+  providers: [UserService, GeneralService, HistoryService, CompetitionService, BetService, MatchService, AuthGuard, CreditCardService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,

@@ -1,7 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { Router } from '@angular/router';
-
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,7 @@ import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 export class SignInComponent implements OnInit {
   isLoginError: boolean = false;
   csrf = '';
+
 
   constructor(private userService: UserService,
     private router: Router,
