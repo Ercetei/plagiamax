@@ -4,7 +4,6 @@ import { HistoryService } from '../shared/services/history.service';
 import { GeneralService } from '../shared/services/general.service';
 
 import { Bet } from '../shared/models/bet.model';
-import { BetLine } from '../shared/models/bet-line.model';
 
 @Component({
   selector: 'app-history',
@@ -19,10 +18,8 @@ export class HistoryComponent implements OnInit {
     {id: 2, status:'Terminé'}
   ];
 
-  tabBet:Bet[];
   tabBetUser:Bet[];
-
-  tabBetLine:BetLine[]=[];
+  tabBetStatus:Bet[];
 
   gain:number = 0;
   newVal:number = 0;
@@ -43,16 +40,16 @@ export class HistoryComponent implements OnInit {
   public onChange(event): void {  // event will give you full breif of action
     this.newVal = event.target.value;
     if (this.newVal == 0){
-      this.tabBetUser=this.historyService.getHistoBetUser(this.tabBet, this.currentIdUser) ;
+      this.tabBetStatus=this.tabBetUser ;
     }
     else {
-      this.tabBetUser=this.historyService.getHistoBetUserStatus(this.tabBet, this.currentIdUser, this.newVal) ;
+      this.tabBetStatus=this.historyService.getHistoBetUserStatus(this.tabBetUser, this.currentIdUser, this.newVal) ;
     }
   }
   
   async getBetUser() {
-    this.tabBet = await this.generalService.get("/bet");
-    this.tabBetUser = this.historyService.getHistoBetUser(this.tabBet, this.currentIdUser) ;
+    this.tabBetUser = await this.generalService.get("/user/" + this.currentIdUser + "/bets");
+    this.tabBetStatus=this.tabBetUser ;
   }
 
   getHistoGain(bet:Bet){
@@ -61,7 +58,6 @@ export class HistoryComponent implements OnInit {
     for(let betlinetest of bet.betlines){
       oddsTotal += betlinetest.momentodds ;
     }
-    // gainPotentiel =  tabHistoBetBDD.betamount * tabHistoBetBDD.betlines[0].momentodds ;
     gainPotentiel =  bet.betamount * oddsTotal ;
     
     return gainPotentiel ;

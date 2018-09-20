@@ -28,19 +28,8 @@ export class HistoryService {
     constructor(){
     }
 
-    getHistoBetUser(tabHistoBetBDD:Bet[], userId:number){
-        this.histoBetUser = [];
-        for (let lineHistoBet of tabHistoBetBDD){
-            // if ( lineHistoBet.user == userId){
-            if ( lineHistoBet.user.id == userId){
-                this.histoBetUser.push(lineHistoBet) ;
-            }
-        }
-        return this.histoBetUser ;
-    }
-    getHistoBetUserStatus(tabHistoBetBDD:Bet[], userId:number, idStatus : number){
+    getHistoBetUserStatus(histoBetUser:Bet[], userId:number, idStatus : number){
         this.histoBetUserStatus = [];
-        let histoBetUser = this.getHistoBetUser(tabHistoBetBDD, userId) ;
         for (let lineHistoBetUser of histoBetUser){
             if ( lineHistoBetUser.status == idStatus){
                 this.histoBetUserStatus.push(lineHistoBetUser) ;

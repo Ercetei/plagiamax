@@ -31,9 +31,15 @@ import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
 import { CreditCardService } from './cc/services/creditCard-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
+=======
+import { AngularFireLite } from 'angularfire-lite';
+import { environment } from '../environments/environment';
+
+>>>>>>> e3f63c4968e83d0ddebea5f556881f40c42d220d
 
 @NgModule({
   declarations: [
@@ -54,6 +60,7 @@ import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
   ],
   imports: [
     BrowserModule,
+    AngularFireLite.forRoot(environment.config),
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
