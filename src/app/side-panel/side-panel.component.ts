@@ -49,7 +49,6 @@ export class SidePanelComponent implements OnInit {
   reset() {
     this.auth = true;
     this.errNotEnoughMoney = false;
-
   }
 
   // Retire un pari du side panel

@@ -106,15 +106,9 @@ export class BetListComponent implements OnInit {
   getFormattedTeams() {
     if (this.match.matchteams.length > 0) {
       let result: string = "";
-      /*for(let matchteam of this.match.matchteams){
-        if(matchteam.isHomeTeam)result += matchteam.team.label;
-      }*/
-
-      //console.log(this.match.matchteams.find((element) => element.isHomeTeam));
-      //result += .team.label;
-      //result += " - " + (this.match.matchteams.find(x => !x.isHomeTeam)).team.label;
+      result += this.match.matchteams.find(x => x.ishometeam).team.label;
+      result += " - " + this.match.matchteams.find(x => !x.ishometeam).team.label;
       return result;
     }
-    return "machin";
   }
 }

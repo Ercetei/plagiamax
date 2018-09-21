@@ -76,4 +76,13 @@ export class BetSelectedComponent implements OnInit {
   getBetLabel(){
     return this.betTypeService.getBetLabel(this.betType.type, this.betType.label);
   }
+
+  getFormattedTeams() {
+    if (this.betType.match.matchteams.length > 0) {
+      let result: string = "";
+      result += this.betType.match.matchteams.find(x => x.ishometeam).team.label;
+      result += " - " + this.betType.match.matchteams.find(x => !x.ishometeam).team.label;
+      return result;
+    }
+  }
 }

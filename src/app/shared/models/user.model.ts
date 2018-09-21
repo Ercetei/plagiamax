@@ -6,8 +6,8 @@ export class User {
     firstname: string;
     lastname: string;
     birthdate: any;
-    creditcard:string;
-    cryptogram:string;
-    expirationdate:string;
-    wallet:number;
+    creditcard: string;
+    cryptogram: string;
+    expirationdate: string;
+    wallet: number;
 }

@@ -12,7 +12,6 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center subtitle">{{ labelCalendar }} de {{ competitionName }}</h3>
-				<h6 class="text-center subtitle">Championnat de France</h6>
 				<div class="row">
 					<div class="col-md-6">
 					</div>
@@ -26,24 +25,24 @@
 						<span class="badge badge-default">2</span>
 					</div>
 				</div>
-				<div *ngFor="let matchbet of matchBets">
+				<div *ngFor="let match of matchBets">
 					<div class="row">
 						<div class="col-md-6">
-							<h5> {{ matchbet.matchbets[0].label }} - {{ matchbet.matchbets[2].label }} </h5>
+							<h5><a [routerLink]="['/football/match', match.id]"> {{getFormattedTeams(match)}} </a></h5>
 						</div>
 						<div class="col-md-2 text-center">
 							<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">
-								{{ matchbet.matchbets[0].currentodds }}
+								{{ match.matchbets[0].currentodds }}
 							</button>
 						</div>
 						<div class="col-md-2 text-center">
 							<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">
-								{{ matchbet.matchbets[1].currentodds }}
+								{{ match.matchbets[1].currentodds }}
 							</button>
 						</div>
 						<div class="col-md-2 text-center">
 							<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">
-								{{ matchbet.matchbets[2].currentodds }}
+								{{ match.matchbets[2].currentodds }}
 							</button>
 						</div>
 					</div>
