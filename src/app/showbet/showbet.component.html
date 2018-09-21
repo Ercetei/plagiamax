@@ -27,23 +27,23 @@
 					</div>
 					<div *ngFor="let row of matchs | async">
 						<div *ngFor="let match of row">
-							<div class="row" *ngIf="match.matchday[0].id == daySelected && match.status == 3">
+							<div class="row" *ngIf="match.matchday[0]?.id == daySelected && match.status == 3">
 
 									<div class="col-md-6">
-										<h5><a [routerLink]="['/football/match', match.id]"> {{ match.matchbets[0].label }} - {{ match.matchbets[2].label }} </a></h5>
+										<h5><a [routerLink]="['/football/match', match.id]"> {{ match.matchteams[0].team.label }} - {{ match.matchteams[1].team.label }} </a></h5>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">
+										<button class="btn" [ngClass]="isSelectedBet(match.matchbets[0]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[0]?.id, match?.matchbets[0])">
 											{{ match.matchbets[0].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">
+										<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[1]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[1]?.id, match?.matchbets[1])">
 											{{ match.matchbets[1].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">
+										<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[2]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[2]?.id, match?.matchbets[2])">
 											{{ match.matchbets[2].currentodds }}
 										</button>
 									</div>
@@ -76,22 +76,22 @@
 	</div>
 
 
-	<div *ngFor="let match of matchs | async">
-		<div *ngFor="let m of match">
-			<div class="row" *ngIf="m.status == 3 || m.status == 4">
+	<div *ngFor="let obsmatch of matchs | async">
+		<div *ngFor="let match of obsmatch">
+			<div class="row" *ngIf="match.status == 3 || match.status == 4">
 				<div class="col-md-6">
 					<h5>
-							<a [routerLink]="['/football/match', m.id]">{{ m.matchbets[0].label }} - {{ m.matchbets[2].label }}</a>
+							<a [routerLink]="['/football/match', match.id]">{{ match.matchbets[0].label }} - {{ match.matchbets[2].label }}</a>
 					</h5>
 				</div>
 				<div class="col-md-2 text-center">
-					<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[0].currentodds }}</button>
+					<button class="btn" [ngClass]="isSelectedBet(match.matchbets[0]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[0]?.id, match?.matchbets[0])">{{ match.matchbets[0].currentodds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[1].currentodds }}</button>
+					<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[1]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[1]?.id, match?.matchbets[1])">{{ match.matchbets[1].currentodds }}</button>
 				</div>
 				<div class="col-md-2 text-center">
-					<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[2].currentodds }}</button>
+					<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[2]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[2]?.id, match?.matchbets[2])">{{ match.matchbets[2].currentodds }}</button>
 				</div>
 			</div>
 		</div>
