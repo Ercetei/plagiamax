@@ -8,7 +8,6 @@ import { Competition } from '../shared/models/competition.model';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 import { BaseService } from '../shared/services/base.service';
-import { MatchBetService } from '../shared/services/match-bet.service';
 import { Observable } from 'rxjs';
 import { MatchBet } from '../shared/models/match-bet.model';
 import { BetTypeService } from '../shared/services/bet-type.service';
