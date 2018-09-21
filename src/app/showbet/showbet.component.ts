@@ -9,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 import { BaseService } from '../shared/services/base.service';
 import { MatchBetService } from '../shared/services/match-bet.service';
+import { Observable } from 'rxjs';
+import { MatchBet } from '../shared/models/match-bet.model';
+import { BetTypeService } from '../shared/services/bet-type.service';
 
 @Injectable()
 @Component({
@@ -18,34 +21,34 @@ import { MatchBetService } from '../shared/services/match-bet.service';
 })
 export class ShowbetComponent {
 
-  daySelected:String;
-  newVal: number = 0; 
-  calendar:Calendar[];
+  daySelected: String;
+  newVal: number = 0;
+  calendar: Calendar[];
   labelCalendar: any;
   team: Team[];
 
   competitionName: String;
   competition_id: number;
-  competition:Competition;
-  matchs:any;
-  matchBets: BetType[] ;
+  competition: Competition;
+  matchs: Observable<Match>;
+  matchBets: BetType[];
 
   databaseData;
   databaseList;
   databaseQuery;
 
-  constructor(private baseService: BaseService, 
+  constructor(private baseService: BaseService,
     private route: ActivatedRoute,
     public db: AngularFireLiteDatabase,
     public auth: AngularFireLiteAuth,
-private matchBetService: MatchBetService
+    private betTypeService: BetTypeService
   ) {
     route.params.subscribe(data => this.getCompetition());
   }
 
   ngOnInit() {
-    this.newVal = 1 ;
-    this.daySelected="1";
+    this.newVal = 1;
+    this.daySelected = "1";
 
     this.getCompetition();
     this.getCalendar();
@@ -58,14 +61,13 @@ private matchBetService: MatchBetService
       this.databaseData = data;
     });
 
-
     // Realtime Database list retrieval
     this.matchs = this.db.read('matchs');
   }
 
   public onChange(event): void {  // event will give you full brief of action
     this.newVal = event.target.value;
-    this.labelCalendar = this.calendar[this.newVal - 1].label ;
+    this.labelCalendar = this.calendar[this.newVal - 1].label;
     this.getMatchBets();
   }
 
@@ -76,9 +78,9 @@ private matchBetService: MatchBetService
       this.competitionName = this.competition.label;
       this.getCalendar();
       this.getMatchBets();
-    }else{
+    } else {
       this.competition = await this.baseService.get("/competition");
-      this.competitionName = "" ;
+      this.competitionName = "";
     }
   }
 
@@ -93,41 +95,42 @@ private matchBetService: MatchBetService
     }
   }
 
-  async getMatchBets(){
-    this.matchBets = [] ;
-    this.matchBets = await this.baseService.get("/matchday/" + this.newVal + "/" + this.competition_id  + "/matchs");
+  async getMatchBets() {
+    this.matchBets = [];
+    this.matchBets = await this.baseService.get("/matchday/" + this.newVal + "/matchs");
   }
+
 
   /*getFormattedTeams(match: Match){
-    if (match != null) {
-      let result: string = "";
-      result += match.matchteams.find(x => x.ishometeam).team.label;
-      result += " - " + match.matchteams.find(x => !x.ishometeam).team.label;
-      return result;
-    }
-  }
+      if (match != null) {
+        let result: string = "";
+        result += this.matchs. .matchteams.find(x => x.ishometeam).team.label;
+        result += " - " + match.matchteams.find(x => !x.ishometeam).team.label;
+        return result;
+      }
+    }*/
 
   // Sélectionne ou déselectionne un pari
-  switchBet(id: number) {
+  switchBet(id: number, betType: MatchBet) {
     if (this.isSelectedBet(id)) {
-      this.unselectBet(id);
+      this.unselectBet(id, betType);
     } else {
-      this.selectBet(id);
+      this.selectBet(id, betType);
     }
   }
 
   // Ajoute un pari dans le side panel
-  selectBet(id: number) {
-    this.matchBetService.addSelectedMatchBet(this.match.matchbets.find(x => x.id == id));
+  selectBet(id: number, betType: MatchBet) {
+    this.betTypeService.addSelectedBet(betType);
   }
 
   // Retire un pari du side panel
-  unselectBet(id: number) {
-    this.matchBetService.removeSelectedBet(this.match.matchbets.find(x => x.id == id));
+  unselectBet(id: number, betType: MatchBet) {
+    this.betTypeService.removeSelectedBet(betType);
   }
 
   // Contrôle si un pari est dans le side panel
   isSelectedBet(id: number) {
-    return this.matchBetService.isSelectedBet(id);
-  }*/
+    return this.betTypeService.isSelectedBet(id);
+  }
 }

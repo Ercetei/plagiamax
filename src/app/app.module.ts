@@ -62,7 +62,7 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
     CompetitionComponent,
     HistoryComponent,
     ShowbetComponent,
-    SidePanelComponent
+    SidePanelComponent,
     BackofficeComponent,
     UpdateProfileComponent
   ],

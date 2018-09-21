@@ -1,10 +1,10 @@
-import {AppComponent} from '../app.component';
-import {User} from '../shared/models/user.model';
-import {HttpClient} from '@angular/common/http';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
+import { AppComponent } from '../app.component';
+import { User } from '../shared/models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../shared/services/user.service';
 import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 
@@ -16,16 +16,16 @@ import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 export class UserComponent implements OnInit {
   isAuthentified: Boolean;
   currentUser: User;
-  firebaseUser:any;
+  firebaseUser: any;
   databaseData;
   databaseList;
   databaseQuery;
 
   constructor(private cookie: CookieService, private http: HttpClient, private router: Router,
- private userService: UserService 
-public db: AngularFireLiteDatabase,
+    private userService: UserService,
+    public db: AngularFireLiteDatabase,
     public auth: AngularFireLiteAuth) {
-this.isAuthentified = this.userService.isAuthentified();
+    this.isAuthentified = this.userService.isAuthentified();
     if (this.isAuthentified) {
       this.currentUser = this.userService.getCurrentUser();
     }

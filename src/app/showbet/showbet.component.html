@@ -26,25 +26,25 @@
 						</div>
 					</div>
 					<div *ngFor="let row of matchs | async">
-						<div *ngFor="let mb of row">
-							<div class="row" *ngIf="mb.matchday[0].id == daySelected && mb.status == 3">
+						<div *ngFor="let match of row">
+							<div class="row" *ngIf="match.matchday[0].id == daySelected && match.status == 3">
 
 									<div class="col-md-6">
-										<h5> {{ mb.matchbets[0].label }} - {{ mb.matchbets[2].label }} </h5>
+										<h5><a [routerLink]="['/football/match', match.id]"> {{ match.matchbets[0].label }} - {{ match.matchbets[2].label }} </a></h5>
 									</div>
 									<div class="col-md-2 text-center">
 										<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">
-											{{ mb.matchbets[0].currentodds }}
+											{{ match.matchbets[0].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
 										<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">
-											{{ mb.matchbets[1].currentodds }}
+											{{ match.matchbets[1].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
 										<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">
-											{{ mb.matchbets[2].currentodds }}
+											{{ match.matchbets[2].currentodds }}
 										</button>
 									</div>
 								</div>
@@ -81,7 +81,7 @@
 			<div class="row" *ngIf="m.status == 3 || m.status == 4">
 				<div class="col-md-6">
 					<h5>
-						{{ m.matchbets[0].label }} - {{ m.matchbets[2].label }}
+							<a [routerLink]="['/football/match', m.id]">{{ m.matchbets[0].label }} - {{ m.matchbets[2].label }}</a>
 					</h5>
 				</div>
 				<div class="col-md-2 text-center">

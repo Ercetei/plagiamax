@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -8,7 +6,7 @@ import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreditCardService } from './services/creditCard-service';
 import { CreditCard } from './models/creditCard';
-import { GeneralService } from '../../shared/services/general.service';
+import { BaseService } from '../../shared/services/base.service';
 
 
 const now = new Date();
@@ -76,7 +74,7 @@ export class CcComponent implements OnInit {
   dateValidate = false;
 
   constructor(private creditCardService: CreditCardService,calendar: NgbCalendar, private userService:UserService, 
-    private cookie: CookieService, private request: GeneralService) {
+    private cookie: CookieService, private baseService: BaseService) {
     this.fromDate = calendar.getToday(); /// test pour voir le mois en cours
 
     if (this.isAuthentified) {
@@ -105,7 +103,7 @@ export class CcComponent implements OnInit {
   OnSubmit(form: NgForm) {
    let wt = form.value;
    let newAmount = +this.currentUser.wallet +wt.wallet;
-   this.request.patch("/user/" + this.cookie.get("user_id"), {"wallet":newAmount});
+   this.baseService.patch("/user/" + this.cookie.get("user_id"), {"wallet":newAmount});
    let storageUser:any = JSON.parse(localStorage.getItem('user'));   
    storageUser.wallet = newAmount;
    localStorage.setItem("user", JSON.stringify(storageUser));
