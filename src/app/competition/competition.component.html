@@ -4,10 +4,10 @@
 <ng-template #affichageBlock>
   <table>
     <tr *ngFor="let cy of tabCategories">
-      <td class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="id01" ngbDropdownToggle>{{ cy.label }}</a>
+      <td class="nav-item">
+        <h4 class="nav-link" id="id01" >{{ cy.label }}</h4>
   
-        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+        <div aria-labelledby="id01" >
   
           <button class="dropdown-item" *ngFor="let cn of cy.competitions" 
                   [routerLink]="['/football/competition', cn.id ]">

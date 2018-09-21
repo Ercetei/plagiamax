@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr'
@@ -25,7 +24,6 @@ export class SignUpComponent implements OnInit {
     if (form != null) {
       form.reset();
     }
-
       this.user = {
       username: '',
       password: '',
@@ -45,7 +43,7 @@ export class SignUpComponent implements OnInit {
       .subscribe(
       res => {
         this.toastr.success('User registration successful');
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/login');
       },
       err => {
         //this.toastr.error(data.Errors[0]);

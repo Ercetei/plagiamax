@@ -5,6 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
+import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 
 @Component({
   selector: 'app-user',
@@ -14,15 +15,23 @@ import {CookieService} from 'ngx-cookie-service';
 export class UserComponent implements OnInit {
   isAuthentified: Boolean = !!localStorage.getItem('userToken');
   currentUser: User;
+  firebaseUser:any;
+  databaseData;
+  databaseList;
+  databaseQuery;
 
-  constructor(private cookie: CookieService, private http: HttpClient, private router: Router) {
+  constructor(private cookie: CookieService, private http: HttpClient, private router: Router,
+    public db: AngularFireLiteDatabase,
+    public auth: AngularFireLiteAuth) {
     if (this.isAuthentified) {
       this.currentUser = JSON.parse(localStorage.getItem('user'));
     }
   }
 
   ngOnInit() {
-
+    if (this.isAuthentified) {
+      this.getWallet();
+    }
   }
 
   /**
@@ -47,6 +56,13 @@ export class UserComponent implements OnInit {
           console.log('Server-side error occured.');
         }
       });
+  }
+
+  getWallet() {
+    // Realtime Database
+    this.db.read('users/' + this.cookie.get('user_id')).subscribe((data) => {
+      this.firebaseUser = data;
+    });
   }
 
 }

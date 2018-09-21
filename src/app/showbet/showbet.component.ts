@@ -11,6 +11,7 @@ import { Calendar } from './models/calendar';
 import { GeneralService } from '../shared/services/general.service';
 import { Competition } from '../shared/models/competition.model';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
 
 @Injectable()
 @Component({
@@ -29,47 +30,18 @@ export class ShowbetComponent {
   competitionName:String;
   competition_id: number;
   competition:Competition;
-  match:any[];
+  matchs:any;
   matchBets: BetType[] ;
 
-  // TODO: A supprimer avec la BDD
-  match1: Match = new Match(0, "Ligue 1", 0, [ new Team(0, "Paris Saint-Germain"), new Team(1, "OM")]);
-  match2: Match = new Match(1, "Ligue 1", 0, [ new Team(2, "SRFC"), new Team(3, "Dijon")]);
-  match3: Match = new Match(2, "Ligue 1", 0, [ new Team(4, "OL"), new Team(5, "OGC Nice")]);
-  match4: Match = new Match(3, "Ligue 1", 0, [ new Team(6, "Caen"), new Team(7, "Angers")]);
-  match5: Match = new Match(4, "Ligue 1", 0, [ new Team(8, "Nimes"), new Team(9, "Strasbourg")]);
-  
-  betsT1: BetType[] = [
-      new BetType(1, 'Paris Saint-Germain', 2.22, 1, this.match1),
-      new BetType(2, 'Nul', 3.41, 1, this.match1),
-      new BetType(3, 'OM', 3.15, 1, this.match1)
-  ];
+  databaseData;
+  databaseList;
+  databaseQuery;
 
-  betsT2: BetType[] = [
-    new BetType(1, 'SRFC', 1.55, 1, this.match2),
-    new BetType(2, 'Nul', 3.25, 1, this.match2),
-    new BetType(3, 'Dijon', 3.65, 1, this.match2)
-  ];
-
-  betsT3: BetType[] = [
-    new BetType(1, 'OL', 1.25, 1, this.match3),
-    new BetType(2, 'Nul', 2.55, 1, this.match3),
-    new BetType(3, 'OGC Nice', 3.15, 1, this.match3)
-  ];
-
-  betsT4: BetType[] = [
-    new BetType(1, 'Caen', 1.75, 1, this.match4),
-    new BetType(2, 'Nul', 2.55, 1, this.match4),
-    new BetType(3, 'Angers', 1.95, 1, this.match4)
-  ];
-  
-  betsT5: BetType[] = [
-    new BetType(1, 'Nimes', 2.22, 1, this.match5),
-    new BetType(2, 'Nul', 3.45, 1, this.match5),
-    new BetType(3, 'Strasbourg', 3.15, 1, this.match5)
-  ];
-
-  constructor(private generalService: GeneralService, private route: ActivatedRoute) {
+  constructor(private generalService: GeneralService, 
+    private route: ActivatedRoute,
+    public db: AngularFireLiteDatabase,
+    public auth: AngularFireLiteAuth
+  ) {
     route.params.subscribe(data => this.getCompetition());
   }
 
@@ -79,11 +51,21 @@ export class ShowbetComponent {
 
     this.getCompetition();
     this.getCalendar();
-    this.getMatch();
     this.getMatchBets();
+
+    // FIREBASE INITIALIZATION
+
+    // Realtime Database
+    this.db.read('plagiamax/matchs').subscribe((data) => {
+      this.databaseData = data;
+    });
+
+
+    // Realtime Database list retrieval
+    this.matchs = this.db.read('matchs');
   }
 
-  public onChange(event): void {  // event will give you full breif of action
+  public onChange(event): void {  // event will give you full brief of action
     this.newVal = event.target.value;
     this.labelCalendar = this.calendar[this.newVal - 1].label ;
     this.getMatchBets();
@@ -95,7 +77,6 @@ export class ShowbetComponent {
       this.competition = await this.generalService.get("/competition/" + this.competition_id);  
       this.competitionName = this.competition.label ;
       this.getCalendar();
-      this.getMatch();
       this.getMatchBets();
     }else{
       this.competition = await this.generalService.get("/competition");
@@ -112,10 +93,6 @@ export class ShowbetComponent {
     }else{
       this.labelCalendar = this.calendar[0].label ;
     }
-  }
-
-  async getMatch() {
-    this.match = await this.generalService.get("/match/");
   }
 
   async getMatchBets(){

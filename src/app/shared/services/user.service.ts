@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
-import { Body } from '@angular/http/src/body';
 
 @Injectable()
 export class UserService {
@@ -60,20 +58,17 @@ export class UserService {
   }
 
   getUserBDD(): Observable<User[]> {
-
-    // console.log("user")
     return this.http.get<User[]>(this.rootUrl + '/user', {
       withCredentials: true
     });
   }
 
   getSingleUserBDD(id: number): Observable<User> {
-
-    // console.log("user")
     return this.http.get<User>(this.rootUrl + '/user/' + id, {
       withCredentials: true
     });
   }
+
   uWallet(id, wallet){
     let body = {wallet}
     this.http.patch(this.rootUrl + '/user/' + id, body, {
@@ -81,6 +76,7 @@ export class UserService {
       withCredentials: true
     }).subscribe();
   }
+
   uDateExp(id, expirationdate){
     let body = {expirationdate}
     this.http.patch(this.rootUrl + '/user/' + id, body, {
@@ -88,6 +84,7 @@ export class UserService {
       withCredentials: true
     }).subscribe();
   }
+
   uCreditCard(id, creditcard){
     let body = {creditcard}
     this.http.patch(this.rootUrl + '/user/' + id, body, {

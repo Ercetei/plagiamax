@@ -1,0 +1,54 @@
+.card {
+  .card-subtitle{
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    padding-bottom:8px;
+  }
+
+  .card-text{
+    margin-bottom:2px;
+    margin-top:2px;
+    font-size:11px;
+    line-height: 13px;
+
+      span{
+        font-weight: bold;
+      }
+  }
+
+  .card-link {
+    padding-top:10px;
+  }
+}
+
+input
+{
+  height: 35px;
+}
+
+.form-control{
+  width: 20%;
+}
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}
+
+#creditCardNumber{
+  width: 145%;
+  margin: 5%;
+}
+
+#wallet{
+  width: 100%;
+}
+
+#cvc{
+  width: 50%;
+}
+
+#drop{
+  width: 50%;
+  margin: 5%;
+}

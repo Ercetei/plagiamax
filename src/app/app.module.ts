@@ -21,9 +21,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
-import { CcComponent } from './cc/cc.component';
+import { CcComponent } from './backoffice/cc/cc.component';
 import { CompetitionComponent } from './competition/competition.component';
-import { HistoryComponent } from './history/history.component';
+import { HistoryComponent } from './backoffice/history/history.component';
 import { HistoryService } from './shared/services/history.service';
 import { GeneralService } from './shared/services/general.service';
 import { CompetitionService } from './shared/services/competition.service';
@@ -32,11 +32,13 @@ import { ShowbetComponent } from './showbet/showbet.component';
 import { NgModule } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
-import { CreditCardService } from './cc/services/creditCard-service';
+import { CreditCardService } from './backoffice/cc/services/creditCard-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IgxDatePickerModule, IgxMaskModule } from 'igniteui-angular';
 import { AngularFireLite } from 'angularfire-lite';
 import { environment } from '../environments/environment';
+import { BackofficeComponent } from './backoffice/backoffice.component';
+import { UpdateProfileComponent } from './backoffice/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { environment } from '../environments/environment';
     BetListComponent,
     CompetitionComponent,
     HistoryComponent,
-    ShowbetComponent
+    ShowbetComponent,
+    BackofficeComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

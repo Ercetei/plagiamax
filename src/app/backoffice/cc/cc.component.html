@@ -1,0 +1,83 @@
+<div class="formSign">
+    <div class="container">
+
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Carte 1</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Carte VISA</h6>
+                <p class="card-text"><span>TITULAIRE:</span> SMITH</p>
+                <p class="card-text"> <span>NUMERO:</span> **** **** **** **22</p>
+                <p class="card-text"><span>CRYPTOGRAMME:</span> ***</p>
+                <p class="card-text"><span>EXPIRATION:</span> 05/****</p>
+
+                <a href="#" class="card-link">Supprimer la carte</a>
+                <a href="#" class="card-link">Modifier</a>
+            </div>
+        </div>
+
+        <form #creditCardForm="ngForm" class="form-signup" (ngSubmit)="OnSubmit(creditCardForm)">
+            <h2>Cagnotte</h2>
+
+            
+
+        
+            <!--<div class="form-group" >
+                <label for="creditCardNumber" data-error="Champ requis!">Numéro de carte</label>
+                <input igxInput [igxMask]="'#### - #### - #### - ####'" 
+                        class="form-control" type="text" 
+                        formControlName="creditCardNumber" 
+                        placeholder="Numéro Carte"
+                        required 
+                        autofocus
+                        name="number"
+                        [(ngModel)]="number"
+                        id="creditCardNumber">
+                <div *ngIf="creditCardNumber.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                    <div *ngIf="creditCardNumber.errors.minlength">
+                        Doit comporter 16 chiffres.
+                    </div> 
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <label for="month" data-error="Champ requis!">Expiration (MM/YYYY)</label>
+                <div class="form-row">
+                    <select class="form-control" name="month" id="month" [(ngModel)]="cardDate.month">
+                        <option *ngFor="let month of calendarMonth" [value]="month.id">{{month.label}}</option>    
+                    </select>
+                    <select placeholder="Année" name="year" id="year" class="form-control" [(ngModel)]="cardDate.year">
+                        <option placeholder="Année" *ngFor="let year of calendarYear" [value]="year.label">{{year.label}}</option>    
+                    </select>
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="cvc">Cryptogram</label>
+                <input igxInput [igxMask]="'###'" 
+                    formControlName="cvcNumber"
+                    type="text"  
+                    class="form-control" 
+                    placeholder="cvc"
+                    required autofocus
+                    name="crypto"
+                    [(ngModel)]="cvc"
+                    id="cvc">
+                <div *ngIf="cvcNumber.errors && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                    <div *ngIf="cvcNumber.errors.minlength">
+                        Doit comporter 3 chiffres.
+                    </div> 
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                <label for="cvc">Montant à ajouter à la cagnotte</label>
+                <input type="number" class="form-control" name="wallet" id="" [(ngModel)]="wallet">
+            </div>
+        
+            <button [disabled]="!creditCardForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Ajouter à la cagnotte</button>
+            
+        </form>
+    </div>
+</div>
