@@ -51,7 +51,7 @@ export class SignInComponent implements OnInit {
           this.cookieService.set("user_id", data.id);
           localStorage.setItem('userToken', this.csrf);
           localStorage.setItem('user', JSON.stringify(data));
-          this.router.navigate(['/home']);
+          window.location.href = 'home';
         } else {
           this.isLoginError = true;
         }

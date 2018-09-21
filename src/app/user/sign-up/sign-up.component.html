@@ -1,42 +1,44 @@
-<div class="container">
-  <form #userRegistrationForm="ngForm" class="form-signup" (ngSubmit)="OnSubmit(userRegistrationForm)">
-    <h2>Inscription</h2>
-
-    <div class="form-group">
-      <label for="userNameSignUp" data-error="Champ requis!">Nom d'utilisateur</label>
-      <input id="userNameSignUp" class="form-control" type="text" name="username" #username="ngModel" [(ngModel)]="user.username" required>
-    </div>
-
-    <div class="form-group">
-      <label for="passwordSignUp" >Mot de passe</label>
-      <input id="passwordSignUp" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required minlength="3">
-    </div>
-
-    <div class="form-group">
-      <label for="emailSignUp" data-error="Email invalide!">Email</label>
-      <input id="emailSignUp" class="form-control" type="text" name="mail" #mail="ngModel" [(ngModel)]="user.mail" [pattern]="emailPattern">
-    </div>
-
-    <div class="form-group">
-      <label for="birthSignUp" data-error="Date invalide!">Date de naissance</label>
-      <input id="birthSignUp" class="form-control" type="date" name="birthdate" #birthdate="ngModel" [(ngModel)]="user.birthdate">
-    </div>
-
-    <div class="form-group">
-      <label for="firstNameSignUp">Prénom</label>
-      <input type="text" class="form-control" id="firstNameSignUp" name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname">
-    </div>
-
-    <div class="form-group">
-      <label for="lastNameSignUp">Nom de famille</label>
-      <input type="text" class="form-control" id="lastNameSignUp" name="lastname" #lastname="ngModel" [(ngModel)]="user.lastname">
-    </div>
-
-    <button [disabled]="!userRegistrationForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
-
-    <a routerLink="/login">Déjà un compte?</a> | <a routerLink="/home">Annuler</a>
-
-  </form>
-
-
+<div class="formSign">
+  <div class="container">
+    <form #userRegistrationForm="ngForm" class="form-signup" (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <h2>Inscription</h2>
+  
+      <div class="form-group">
+        <label for="userNameSignUp" data-error="Champ requis!">Nom d'utilisateur</label>
+        <input id="userNameSignUp" class="form-control" type="text" name="username" #username="ngModel" [(ngModel)]="user.username" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="passwordSignUp" >Mot de passe</label>
+        <input id="passwordSignUp" class="form-control" type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required minlength="3">
+      </div>
+  
+      <div class="form-group">
+        <label for="emailSignUp" data-error="Email invalide!">Email</label>
+        <input id="emailSignUp" class="form-control" type="text" name="mail" #mail="ngModel" [(ngModel)]="user.mail" [pattern]="emailPattern">
+      </div>
+  
+      <div class="form-group">
+        <label for="birthSignUp" data-error="Date invalide!">Date de naissance</label>
+        <input id="birthSignUp" class="form-control" type="date" name="birthdate" #birthdate="ngModel" [(ngModel)]="user.birthdate">
+      </div>
+  
+      <div class="form-group">
+        <label for="firstNameSignUp">Prénom</label>
+        <input type="text" class="form-control" id="firstNameSignUp" name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname">
+      </div>
+  
+      <div class="form-group">
+        <label for="lastNameSignUp">Nom de famille</label>
+        <input type="text" class="form-control" id="lastNameSignUp" name="lastname" #lastname="ngModel" [(ngModel)]="user.lastname">
+      </div>
+  
+      <button [disabled]="!userRegistrationForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
+  
+      <a routerLink="/login">Déjà un compte?</a> | <a routerLink="/home">Annuler</a>
+  
+    </form>
+  
+  
+  </div>
 </div>

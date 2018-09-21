@@ -1,22 +1,24 @@
-<div class="container">
-    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="OnSubmit(userName.value,password.value)">
-	    <ngb-alert *ngIf="isLoginError" class="red-text center error-message">
-		    L'identifiant ou le mot de passe est incorrect
-		</ngb-alert>
-        <h2 class="form-signin-heading">Me connecter</h2>
-        <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
-        <input type="text" id="inputUsername" name="username" class="form-control" ngModel #userName placeholder="Pseudo" required autofocus>
-        <label for="inputPassword" class="sr-only">Mot de passe</label>
-        <input type="password" id="inputPassword" name="password" class="form-control mt-1" #password ngModel placeholder="**********" required>
-<!--         <label for="inputBirth" class="sr-only">Date de naissance</label> -->
-<!--         <input type="date" id="inputBirth" class="form-control" name="birthDate" #birthDate ngModel placeholder="01/01/1990" required> -->
-<!--         <div class="checkbox"> -->
-<!--             <label> -->
-<!--                 <input type="checkbox" value="remember-me"> Se souvenir de moi -->
-<!--             </label> -->
-<!--         </div> -->
-        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Connexion</button>
-        <a routerLink="/signup">Je n'ai pas de compte</a> | <a routerLink="/home">Annuler</a>
-    </form>
+<div class="formSign">
+    <div class="container">
+        <form class="form-signin" #loginForm="ngForm" (ngSubmit)="OnSubmit(userName.value,password.value)">
+            <ngb-alert *ngIf="isLoginError" class="red-text center error-message">
+                L'identifiant ou le mot de passe est incorrect
+            </ngb-alert>
+            <h2 class="form-signin-heading">Me connecter</h2>
+            <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
+            <input type="text" id="inputUsername" name="username" class="form-control" ngModel #userName placeholder="Pseudo" required autofocus>
+            <label for="inputPassword" class="sr-only">Mot de passe</label>
+            <input type="password" id="inputPassword" name="password" class="form-control mt-1" #password ngModel placeholder="**********" required>
+    <!--         <label for="inputBirth" class="sr-only">Date de naissance</label> -->
+    <!--         <input type="date" id="inputBirth" class="form-control" name="birthDate" #birthDate ngModel placeholder="01/01/1990" required> -->
+    <!--         <div class="checkbox"> -->
+    <!--             <label> -->
+    <!--                 <input type="checkbox" value="remember-me"> Se souvenir de moi -->
+    <!--             </label> -->
+    <!--         </div> -->
+            <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Connexion</button>
+            <a routerLink="/signup">Je n'ai pas de compte</a> | <a routerLink="/home">Annuler</a>
+        </form>
 
+    </div>
 </div>

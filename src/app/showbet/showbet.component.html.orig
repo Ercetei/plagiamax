@@ -74,6 +74,25 @@
 			<span class="badge badge-default">2</span>
 		</div>
 	</div>
+<<<<<<< HEAD
+	<div *ngFor="let match of matchs">
+		<div class="row" *ngIf="match.status == 3 || match.status == 4">
+
+			<div class="col-md-6">
+				<h5>
+					<a [routerLink]="['/football/match/', match.id]">{{match.matchbets[0].label}} - {{match.matchbets[2].label}}</a>
+				</h5>
+			</div>
+
+			<div class="col-md-2 text-center">
+				<button class="btn" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'">{{match.matchbets[0].currentodds}}</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="btn btn-bet" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'">{{match.matchbets[1].currentodds}}</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{match.matchbets[2].currentodds}}</button>
+=======
 
 
 	<div *ngFor="let match of matchs | async">
@@ -93,6 +112,7 @@
 				<div class="col-md-2 text-center">
 					<button class="btn btn-bet" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'">{{ m.matchbets[2].currentodds }}</button>
 				</div>
+>>>>>>> 60bd87f08ca7e288f887867c89fd9526add815c8
 			</div>
 		</div>
 	</div>
