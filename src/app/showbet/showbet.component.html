@@ -27,23 +27,23 @@
 					</div>
 					<div *ngFor="let row of matchs | async">
 						<div *ngFor="let match of row">
-							<div class="row" *ngIf="match.matchday[0]?.id == daySelected && match.status == 3">
+							<div class="row" *ngIf="match?.matchday[0]?.id == daySelected && match.status == 3">
 
 									<div class="col-md-6">
-										<h5><a [routerLink]="['/football/match', match.id]"> {{ match.matchteams[0].team.label }} - {{ match.matchteams[1].team.label }} </a></h5>
+										<h5><a [routerLink]="['/football/match', match.id]"> {{ match?.matchteams[0]?.team.label }} - {{ match?.matchteams[1]?.team.label }} </a></h5>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn" [ngClass]="isSelectedBet(match.matchbets[0]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[0]?.id, match?.matchbets[0])">
+										<button class="btn" [ngClass]="isSelectedBet(match?.matchbets[0]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn1Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[0]?.id, match?.matchbets[0])">
 											{{ match.matchbets[0].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[1]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[1]?.id, match?.matchbets[1])">
+										<button class="btn btn-bet" [ngClass]="isSelectedBet(match?.matchbets[1]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn2Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[1]?.id, match?.matchbets[1])">
 											{{ match.matchbets[1].currentodds }}
 										</button>
 									</div>
 									<div class="col-md-2 text-center">
-										<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[2]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match.matchbets[2]?.id, match?.matchbets[2])">
+										<button class="btn btn-bet" [ngClass]="isSelectedBet(match?.matchbets[2]?.id)==true ? 'btn-active' : 'btn-bet'" [ngClass]="btn3Active==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[2]?.id, match?.matchbets[2])">
 											{{ match.matchbets[2].currentodds }}
 										</button>
 									</div>

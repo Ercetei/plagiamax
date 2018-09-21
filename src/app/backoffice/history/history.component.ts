@@ -104,7 +104,7 @@ export class HistoryComponent implements OnInit {
           this.baseService.get("/bettype/" + element.betlines[0].bettype.id + "/teams").then(dataTeams => {
             let teams: string;
 
-            dataTeams.array.forEach(labelTeam => {
+            dataTeams.forEach(labelTeam => {
               teams += labelTeam.label;
             });
 
