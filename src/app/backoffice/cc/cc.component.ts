@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 import {CookieService} from 'ngx-cookie-service';
@@ -82,7 +80,6 @@ export class CcComponent implements OnInit {
     if (this.isAuthentified) {
       this.currentUser = JSON.parse(localStorage.getItem('user'));
     }
-
   }
 
 
