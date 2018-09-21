@@ -1,0 +1,25 @@
+<div class="bet-block">
+    <div class="text-right"><i id="btn-remove" class="fa fa-remove" (click)="removeBet()"></i></div>
+    <div class="container">
+        <div class="row">
+            <div class="col" *ngIf="betType.match?.matchteams">{{getFormattedTeams()}}</div>
+        </div>
+        <div class="row">
+            <div class="col text-left">{{getType()}}</div>
+        </div>
+        <div class="row">
+            <div class="col text-left">{{getBetLabel()}}</div>
+            <div class="col">
+                <div class="badge badge-warning">{{betType.currentodds}}</div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!combined">
+            <div class="col text-left">Mise</div>
+            <div class="col"><input [(ngModel)]="amount" /></div>
+        </div>
+        <div class="row" *ngIf="!combined">
+            <div class="col text-left">Gains potentiels</div>
+            <div class="col">{{getPotentialGains()}}</div>
+        </div>
+    </div>
+</div>

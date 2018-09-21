@@ -18,14 +18,13 @@
 
 <div class="d-flex flex-row justify-content-around">
   <div class="p-2 col-3 text-center">
-    <!-- MENU GAUCHE -->
-      <br>
-      <div class="divListCategory">
-        <app-competition></app-competition>
-      </div>
-      <br>
+    <br>
+    <div class="divListCategory">
+      <app-competition></app-competition>
+    </div>
+    <br>
   </div>
-  
+
   <div class="p-2 col-6">
     <router-outlet></router-outlet>
 
@@ -42,3 +41,7 @@
 </div>
 <!-- <app-cc></app-cc> -->
 <!-- <app-showbet></app-showbet> -->
+<<<<<<< HEAD
+<app-footer></app-footer>
+=======
+>>>>>>> 60bd87f08ca7e288f887867c89fd9526add815c8

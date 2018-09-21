@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+export class User {
+    id: number;
+=======
 export class User{
     id?:number;
+>>>>>>> 60bd87f08ca7e288f887867c89fd9526add815c8
     username: string;
     password: string;
     mail: string;

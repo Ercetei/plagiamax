@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {User} from '../../shared/models/user.model';
 import { NgForm } from '@angular/forms';
-import { GeneralService } from '../../shared/services/general.service';
+import { BaseService } from '../../shared/services/base.service';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class UpdateProfileComponent implements OnInit {
 
   user:User;
 
-  constructor(private global: GeneralService, private userService:UserService) { }
+  constructor(private baseService: BaseService, private userService:UserService) { }
 
   ngOnInit() {
     //this.request.patch("/user/" + this.cookie.get("user_id"), {"wallet":newAmount});
@@ -22,7 +22,7 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   OnSubmit(form:NgForm) {
-    this.global.patch("/user/" + this.user.id, form.value).then((data) => {
+    this.baseService.patch("/user/" + this.user.id, form.value).then((data) => {
       localStorage.setItem("user", JSON.stringify(data));
       window.location.reload();
     });

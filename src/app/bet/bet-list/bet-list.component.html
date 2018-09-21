@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 text-center">
+			<h3 *ngIf="match?.matchteams">{{getFormattedTeams()}}</h3>
+		</div>
+		<div class="col">
 			<h3 class="text-center">
-				{{match.teams[0].label}} - {{match.teams[1].label}}
-			</h3>
-			<h3 class="text-center">
-				France - Ligue 1 - 3ème journée
+				{{match?.place?.country}} - {{match?.matchday?.season?.competition?.label}} - {{match?.matchday?.label}}
 			</h3>
 		</div>
 	</div>
@@ -17,11 +17,11 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4 text-center" *ngFor="let bet of getWinnerBets()">
-			<h4>
-				{{bet.label}}
-			</h4>
-			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		<div class="col-md-4 text-center" *ngFor="let matchbet of getWinnerBets()">
+			<h5>
+				{{getBetLabel(matchbet)}}
+			</h5>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 	<div class="row bet-group" *ngIf="getScoreBets()">
@@ -32,11 +32,11 @@
 		</div>
 	</div>
 	<div class="row bet-group">
-		<div class="col-md-4 text-center" *ngFor="let bet of getScoreBets()">
-			<h4>
-				{{bet.label}}
-			</h4>
-			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		<div class="col-md-4 text-center" *ngFor="let matchbet of getScoreBets()">
+			<h5>
+				{{getBetLabel(matchbet)}}
+			</h5>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 	<div class="row bet-group" *ngIf="getGoalsBets()">
@@ -47,11 +47,11 @@
 		</div>
 	</div>
 	<div class="row">
-		<div ngClass="" class="col-md-6 text-center" *ngFor="let bet of getGoalsBets()">
-			<h4>
-				{{bet.label}}
-			</h4>
-			<button class="btn" [ngClass]="isSelectedBet(bet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(bet.id)">{{bet.odds}}</button>
+		<div ngClass="" class="col-md-6 text-center" *ngFor="let matchbet of getGoalsBets()">
+			<h5>
+				{{getBetLabel(matchbet)}}
+			</h5>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 

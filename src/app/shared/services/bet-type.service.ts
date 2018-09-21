@@ -1,57 +1,75 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Observable, of } from 'rxjs';
-import { Season } from '../models/season.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from "node_modules/rxjs";
+import { BaseService } from "./base.service";
+import { MatchBet } from "../models/match-bet.model";
+import { Injectable } from "@angular/core";
+
 
 @Injectable()
-export class SeasonService {
+export class BetTypeService {
 
-    seasons: Season[] = []
-    
-    readonly rootUrl = 'http://localhost:8080';
+    protected selectedBets: MatchBet[] = [];
+    public betTypeSubject = new Subject();
 
-    constructor(private http: HttpClient) { 
+    constructor(public baseService: BaseService) {
+
     }
 
-    getSeasons(id: number) : Observable<Season[]> {
-       return of(this.seasons);
-       //return this.http.get<Match[]>(this.rootUrl+'/match');
+    emitSelectedBetsSubject() {
+        this.betTypeSubject.next(this.selectedBets);
     }
 
-    getSeason(id: number) : Observable<Season> {
-        return of(this.seasons.find(x => x.id == id));
-        //return this.http.get<Match>(this.rootUrl+'/match/'+id);
+    addSelectedBet(betType: MatchBet) {
+        this.selectedBets.push(betType);
+        this.emitSelectedBetsSubject();
     }
-    getStartDateSeason(start_date: Date) : Observable<Season[]> {
-        return of(this.seasons);
-        //return this.http.get<Match[]>(this.rootUrl+'/match');
-     }
- 
-     getStartDatesSeason(start_date: Date) : Observable<Season> {
-         return of(this.seasons.find(x => x.start_date == start_date));
-         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
-     }
 
-     getEndDateSeason(end_date: Date) : Observable<Season[]> {
-        return of(this.seasons);
-        //return this.http.get<Match[]>(this.rootUrl+'/match');
-     }
- 
-     getEndDatessSeason(end_date: Date) : Observable<Season> {
-         return of(this.seasons.find(x => x.end_date == end_date));
-         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
-     }
-     getStatusSeason(status: number) : Observable<Season[]> {
-        return of(this.seasons);
-        //return this.http.get<Match[]>(this.rootUrl+'/match');
-     }
- 
-     getStatuSeason(status: number) : Observable<Season> {
-         return of(this.seasons.find(x => x.status == status));
-         //return this.http.get<Match>(this.rootUrl+'/match/'+id);
-     }
+    // Retire un pari des paris sélectionnés
+    removeSelectedBet(betType: MatchBet) {
+        this.selectedBets.splice(this.selectedBets.findIndex(x => x.id == betType.id), 1);
+        this.emitSelectedBetsSubject();
+    }
 
-    
+    // Récupère tous les paris sélectionnés
+    getSelectedBets(): MatchBet[] {
+        return this.selectedBets;
+    }
 
+    // Récupère l'un des paris sélectionnés
+    getSelectedBet(id: number): MatchBet {
+        return this.selectedBets.find(x => x.id == id);
+    }
+
+    // Teste si un pari est sélectionné
+    isSelectedBet(id: number) {
+        return this.selectedBets.findIndex(x => x.id == id) > -1;
+    }
+
+    getBetLabel(type: number, value: string) {
+        let labelToDisplay: string;
+        switch (type) {
+            case 1:
+                labelToDisplay = value;
+                break;
+            case 2:
+                labelToDisplay = value;
+                break;
+            case 3:
+                if (value.substring(0, 1) == "+") {
+                    labelToDisplay = "Plus de ";
+                } else if (value.substring(0, 1) == "-") {
+                    labelToDisplay = "Moins de ";
+                } else {
+                    labelToDisplay = "ERROR ";
+                }
+                labelToDisplay += value.substring(1) + " buts";
+                break;
+            default:
+                break;
+        }
+        return labelToDisplay;
+    }
+
+    removeSelectedBets(){
+        this.selectedBets.splice(0, this.selectedBets.length);
+    }
 }

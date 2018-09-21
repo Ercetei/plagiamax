@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { Place } from '../models/place.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Match } from '../models/match.model';
 import { Team } from '../models/team.model';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class PlaceService {
 
     places: Place[] = []
-    
-    readonly rootUrl = 'http://localhost:1234';
 
-    constructor(private http: HttpClient) { 
+    constructor(private baseService: BaseService) { 
     }
 
     getPlaces(id: number) : Observable<Place[]> {

@@ -10,18 +10,18 @@ import {CookieService} from 'ngx-cookie-service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private cookieService: CookieService) {}
+  constructor(private router: Router, private cookieService: CookieService, private userService: UserService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.headers.get('No-Auth') === 'True') {
       return next.handle(req.clone());
     }
 
-    if (localStorage.getItem('userToken') != null) {
+    if (this.userService.isAuthentified() != null) {
     //if (this.cookieService.check('JSESSIONID')) {
       const clonedreq = req.clone({
         // headers: req.headers.set('userToken', this.cookieService.ge('JSESSIONID'))
-        headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
+        headers: req.headers.set("Authorization", "Bearer " + this.userService.isAuthentified())
         // headers: req.headers.set("JSESSIONID", this.cookieService.get('JSESSIONID'))
       });
 

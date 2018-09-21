@@ -3,11 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Injectable()
-export class GeneralService {
+export class BaseService {
 
-    readonly rootUrl = 'http://localhost:8080';
+    public readonly rootUrl = 'http://localhost:8080';
+    public noAuthHeaders = new HttpHeaders().set('No-Auth', 'True');
+    public allowAccessHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+    public textHeaders = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    constructor(private http: HttpClient, private route: ActivatedRoute){
+    constructor(public http: HttpClient) {
+
     }
 
     async get(requestMapping: string): Promise<any> {

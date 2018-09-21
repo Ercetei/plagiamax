@@ -45,7 +45,7 @@ export const appRoutes: Routes = [
         children: [
             { path: 'competition/:id', component: ShowbetComponent }
              ,
-             { path: 'bets/match/:id', component: BetListComponent }
+             { path: 'match/:id', component: BetListComponent }
         ]
     },
     { path: 'basketball', component: HomeComponent }

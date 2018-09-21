@@ -1,24 +1,29 @@
-import { Team } from './team.model';
-import { BetType } from './bet-type.model';
 import { Place } from './place.model';
-import { Season } from './season.model';
+import { MatchTeam } from './match-team.model';
+import { MatchBet } from './match-bet.model';
+import { MatchDay } from './match-day.model';
+import { MatchPlayer } from './match-player.model';
 
 export class Match {
     id: number;
     label: String;
     status: number;
     place: Place;
-    season: Season;
-    teams: Team[];
-    bets: BetType[];
+    matchplayers: MatchPlayer[];
+    matchday: MatchDay;
+    matchteams: MatchTeam[];
+    matchbets: MatchBet[];
+    events: Event[];
 
-    constructor(id: number = 0, label: string = "", status: number = 0, teams: Team[] = [], bets: BetType[] = [], place: Place = null, season: Season = null) {
+    constructor(id: number = 0, label: string = "", status: number = 0, matchteams: MatchTeam[] = [], matchBets: MatchBet[] = [], 
+    place: Place = null, matchday: MatchDay = null, events: Event[] = []) {
         this.id = id;
         this.label = label;
-        this.teams = teams;
+        this.matchteams = matchteams;
         this.status = status;
-        this.bets = bets;
+        this.matchbets = matchBets;
         this.place = place;
-        this.season = season;
+        this.matchday = matchday;
+        this.events = events;
     }
 }

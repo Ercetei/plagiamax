@@ -4,8 +4,6 @@ import { UserService } from '../shared/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { GeneralService } from '../shared/services/general.service';
-
 
 @Component({
   selector: 'app-home',
@@ -13,6 +11,7 @@ import { GeneralService } from '../shared/services/general.service';
   styleUrls: ['home.component.scss'],
   providers: [NgbCarouselConfig]
 })
+
 export class HomeComponent implements OnInit {
   csrf: any;
   userClaims: any;
@@ -23,13 +22,12 @@ export class HomeComponent implements OnInit {
   afficher: String;
 
   constructor(private router: Router, private userService: UserService, config: NgbCarouselConfig, 
-            private http: HttpClient, private generalService : GeneralService, private route: ActivatedRoute) {
+            private http: HttpClient, private route: ActivatedRoute) {
     // customize default values of carousels used by this component tree
     config.interval = 10000;
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
-
   }
 
   ngOnInit() {

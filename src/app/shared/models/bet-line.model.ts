@@ -1,31 +1,18 @@
-// import { Bet } from "./bet.model";
+import { BetType } from "./bet-type.model";
+import { Bet } from "../../showbet/models/bet";
 
-// // Ajouter objet equipe
-// export class BetType{
-
-//     id: number;
-//     momentodds: number;
-//     bet: Bet;
-
-// 	constructor(id: number = 0, momentodds: number = 0, bet: Bet = null){
-//         this.id = id;
-//         this.momentodds = momentodds;
-//         this.bet = bet;
-//     }
-// }
-
-
-export class BetLine{
+// Ajouter objet equipe
+export class BetLine {
 
     id: number;
-    idBet:number;
-    idBetType:number;
-    momentodds: number;
+    bet: Bet;
+    betType: BetType;
+    status: number;
 
-	constructor(id: number = 0, idBet:number = 0, idBetType:number = 0, momentodds: number = 0){
+    constructor(id: number = 0, bet: Bet = null, betType: BetType = null, status: number = 1) {
         this.id = id;
-        this.idBet = idBet;
-        this.idBetType = idBetType;
-        this.momentodds = momentodds;
+        this.bet = bet;
+        this.betType = betType;
+        this.status = status;
     }
 }
