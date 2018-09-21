@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoryService } from '../../shared/services/history.service';
-
 import { Bet } from '../../shared/models/bet.model';
-import { UserService } from '../../shared/services/user.service';
 import { BaseService } from '../../shared/services/base.service';
 
 @Component({

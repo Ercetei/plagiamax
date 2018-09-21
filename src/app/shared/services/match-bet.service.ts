@@ -33,15 +33,25 @@ export class MatchBetService {
         });
     }
 
-    getBetTypeInfos(bettype: MatchBet = null) {
+    getBetTypeInfos() {
         for (let betType of this.betTypeService.getSelectedBets()) {
-            this.betTypeService.baseService.http.get<Match>(this.betTypeService.baseService.rootUrl + '/match/' + betType.match.id, {
-                headers: this.betTypeService.baseService.allowAccessHeaders,
-                responseType: 'json',
-                withCredentials: true
-            }).subscribe(async data => {
-                await (betType.match = data);
-            });
+            if (betType.match == null) {
+                this.betTypeService.baseService.http.get<Match>(this.betTypeService.baseService.rootUrl + '/match/bettype/' + betType.id, {
+                    headers: this.betTypeService.baseService.allowAccessHeaders,
+                    responseType: 'json',
+                    withCredentials: true
+                }).subscribe(async data => {
+                    await (betType.match = data);
+                });
+            } else {
+                this.betTypeService.baseService.http.get<Match>(this.betTypeService.baseService.rootUrl + '/match/' + betType.match.id, {
+                    headers: this.betTypeService.baseService.allowAccessHeaders,
+                    responseType: 'json',
+                    withCredentials: true
+                }).subscribe(async data => {
+                    await (betType.match = data);
+                });
+            }
         }
     }
 }
