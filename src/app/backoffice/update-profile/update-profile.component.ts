@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {User} from '../../shared/models/user.model';
 import { NgForm } from '@angular/forms';
 import { BaseService } from '../../shared/services/base.service';

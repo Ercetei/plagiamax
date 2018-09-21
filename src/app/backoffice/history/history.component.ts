@@ -92,7 +92,7 @@ export class HistoryComponent implements OnInit {
                   teams += labelTeam.label + " - ";
                 } else {
                   teams += labelTeam.label;
-                }
+                }   
               });
 
               bl.label = teams;
@@ -102,7 +102,7 @@ export class HistoryComponent implements OnInit {
           // if simple bet
         } else {
           this.baseService.get("/bettype/" + element.betlines[0].bettype.id + "/teams").then(dataTeams => {
-            let teams: string;
+            let teams: string = "";
 
             dataTeams.forEach(labelTeam => {
               teams += labelTeam.label;

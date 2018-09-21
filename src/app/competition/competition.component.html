@@ -1,22 +1,35 @@
-<div *ngIf="onAfficher() == 'HistoryComponent' || onAfficher() == 'CcComponent'; else affichageBlock">
+<!--<div *ngIf="onAfficher() == 'HistoryComponent' || onAfficher() == 'CcComponent'; else affichageBlock">
 </div>
 
-<ng-template #affichageBlock>
-  <table>
-    <tr *ngFor="let cy of tabCategories">
-      <td class="nav-item">
-        <h4 class="nav-link" id="id01" >{{ cy.label }}</h4>
-  
-        <div aria-labelledby="id01" >
-  
-          <button class="dropdown-item" *ngFor="let cn of cy.competitions" 
-                  [routerLink]="['/football/competition', cn.id ]">
-              {{ cn.label }}
-          </button>
+  <ng-template #affichageBlock>
+    <table>
+      <tr *ngFor="let cy of tabCategories">
+        <td class="nav-item">
+          <h4 class="nav-link" id="id01" >{{ cy.label }}</h4>
+    
+          <div aria-labelledby="id01" >
+    
+            <button class="dropdown-item" *ngFor="let cn of cy.competitions" 
+                    [routerLink]="['/football/competition', cn.id ]">
+                {{ cn.label }}
+            </button>
 
-        </div>
-  
-      </td>
-    </tr> 
-  </table>
-</ng-template>
+          </div>
+    
+        </td>
+      </tr> 
+    </table>
+  </ng-template>-->
+
+<div  class="side-panel-category border-bottom">
+  <ngb-accordion [closeOthers]="true" activeIds="static-1">
+      <ngb-panel *ngFor="let cy of tabCategories" id="static-1" title="{{cy.label}}">
+          <ng-template ngbPanelContent>
+              <button class="dropdown-item" *ngFor="let cn of cy.competitions" 
+              [routerLink]="['/football/competition', cn.id ]">
+          {{ cn.label }}
+            </button>
+          </ng-template>
+        </ngb-panel>
+  </ngb-accordion>
+</div>

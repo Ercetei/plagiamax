@@ -80,7 +80,6 @@ export class CcComponent implements OnInit {
     if (this.isAuthentified) {
       this.currentUser = JSON.parse(localStorage.getItem('user'));
     }
-
   }
 
 

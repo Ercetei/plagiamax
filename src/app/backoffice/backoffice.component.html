@@ -1,8 +1,14 @@
 <div class="container">
-  <p>
-    <button routerLink="/profile/cagnotte">Ma cagnotte</button>
-    <button routerLink="/profile/history">Historique des paris</button>
-    <button routerLink="/profile/update-profile">Modification du profil</button>
-  </p>
+  <div class="btn-group btn-group-toggle">
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" routerLink="/profile/cagnotte" ngbButton [(ngModel)]="model.wallet"> Ma cagnotte
+      </label>
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" routerLink="/profile/history" ngbButton [(ngModel)]="model.history"> Historique des paris
+      </label>
+      <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" routerLink="/profile/update-profile" ngbButton [(ngModel)]="model.profile"> Modification du profil
+      </label>
+    </div>
   <router-outlet></router-outlet>
 </div>
