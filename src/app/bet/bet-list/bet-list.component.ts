@@ -6,6 +6,8 @@ import { MatchService } from '../../shared/services/match.service';
 import { BetTypeService } from '../../shared/services/bet-type.service';
 import { MatchBetService } from '../../shared/services/match-bet.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Team } from '../../showbet/models/team';
+import { MatchTeam } from '../../shared/models/match-team.model';
 
 @Component({
   selector: 'app-bet-list',
@@ -97,7 +99,22 @@ export class BetListComponent implements OnInit {
     return this.betTypeService.isSelectedBet(id);
   }
 
-  getBetLabel(matchbet: BetType){
+  getBetLabel(matchbet: BetType) {
     return this.betTypeService.getBetLabel(matchbet.type, matchbet.label);
+  }
+
+  getFormattedTeams() {
+    if (this.match.matchteams.length > 0) {
+      let result: string = "";
+      /*for(let matchteam of this.match.matchteams){
+        if(matchteam.isHomeTeam)result += matchteam.team.label;
+      }*/
+
+      //console.log(this.match.matchteams.find((element) => element.isHomeTeam));
+      //result += .team.label;
+      //result += " - " + (this.match.matchteams.find(x => !x.isHomeTeam)).team.label;
+      return result;
+    }
+    return "machin";
   }
 }

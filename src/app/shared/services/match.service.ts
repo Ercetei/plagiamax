@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Match } from '../models/match.model';
 import { HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
+import { Team } from '../models/team.model';
 
 @Injectable()
 export class MatchService {

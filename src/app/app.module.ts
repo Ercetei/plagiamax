@@ -32,11 +32,8 @@ import { CompetitionComponent } from './competition/competition.component';
 
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from './shared/services/history.service';
-import { GeneralService } from './shared/services/general.service';
 import { CompetitionService } from './shared/services/competition.service';
 import { CookieService } from 'ngx-cookie-service';
-import { ShowbetComponent } from './showbet/showbet.component';
-import { NgModule } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CreditCardService } from './cc/services/creditCard-service';

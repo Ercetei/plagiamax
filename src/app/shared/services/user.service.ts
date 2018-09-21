@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response, URLSearchParams } from "@angular/http";
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../models/user.model';
 import { BaseService } from './base.service';
-import { Body } from '@angular/http/src/body';
 
 @Injectable()
 export class UserService {
@@ -14,7 +12,7 @@ export class UserService {
     }
 
   registerUser(user: User) {
-    const body: User = {
+    const body: any = {
       username: user.username,
       password: user.password,
       mail: user.mail,
@@ -66,7 +64,7 @@ export class UserService {
   getUserBDD(): Observable<User[]> {
 
     // console.log("user")
-    return this.http.get<User[]>(this.rootUrl + '/user', {
+    return this.baseService.http.get<User[]>(this.baseService.rootUrl + '/user', {
       withCredentials: true
     });
   }
@@ -74,27 +72,27 @@ export class UserService {
   getSingleUserBDD(id: number): Observable<User> {
 
     // console.log("user")
-    return this.http.get<User>(this.rootUrl + '/user/' + id, {
+    return this.baseService.http.get<User>(this.baseService.rootUrl + '/user/' + id, {
       withCredentials: true
     });
   }
   uWallet(id, wallet){
     let body = {wallet}
-    this.http.patch(this.rootUrl + '/user/' + id, body, {
+    this.baseService.http.patch(this.baseService.rootUrl + '/user/' + id, body, {
       responseType: 'json',
       withCredentials: true
     }).subscribe();
   }
   uDateExp(id, expirationdate){
     let body = {expirationdate}
-    this.http.patch(this.rootUrl + '/user/' + id, body, {
+    this.baseService.http.patch(this.baseService.rootUrl + '/user/' + id, body, {
       responseType: 'json',
       withCredentials: true
     }).subscribe();
   }
   uCreditCard(id, creditcard){
     let body = {creditcard}
-    this.http.patch(this.rootUrl + '/user/' + id, body, {
+    this.baseService.http.patch(this.baseService.rootUrl + '/user/' + id, body, {
       responseType: 'json',
       withCredentials: true
     }).subscribe();
