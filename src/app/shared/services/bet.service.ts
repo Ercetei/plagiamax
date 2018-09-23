@@ -4,7 +4,6 @@ import { BetType } from '../models/bet-type.model';
 import { BaseService } from './base.service';
 import { UserService } from './user.service';
 import { BetLineService } from './bet-line.service';
-import { when } from 'q';
 
 @Injectable()
 export class BetService {
@@ -35,6 +34,5 @@ export class BetService {
                 this.betLineService.createBetLine(betType, bet);
             }
         });
-        this.userService.removeFromWallet(amount);
     }
 }

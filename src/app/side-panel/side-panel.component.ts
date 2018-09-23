@@ -112,23 +112,29 @@ export class SidePanelComponent implements OnInit {
   onValidate() {
     // Vérification authentification
     if (this.auth = this.userService.isAuthentified()) {
+      let totalAmount: number = 0;
       // Si pari combiné
       if (this.combined) {
         // L'utilisateur a-t-il assez d'argent ?
         if (this.userService.getCurrentUser().wallet >= this.amount) {
+          totalAmount = this.amount;
           let betTypes: BetType[] = [];
+          // Récupération des bettypes dans les components enfants
           this.betSelectedComponents.forEach(BetSelectedComponent => {
             betTypes.push(BetSelectedComponent.getBetType());
           });
+          // création des paris
           this.betService.createBet(betTypes, this.amount, this.getTotalOdds());
         } else {
           this.errNotEnoughMoney = true;
           return;
         }
       } else {
-        let totalAmount: number = 0;
+        // Récupération du montant dans les components enfants
         this.betSelectedComponents.forEach(BetSelectedComponent => totalAmount += +BetSelectedComponent.getAmount());
+        // L'utilisateur a-t-il assez d'argent ?
         if (this.userService.getCurrentUser().wallet >= totalAmount) {
+          // création des paris en fonction des bettypes et du montant des components enfants
           this.betSelectedComponents.forEach(BetSelectedComponent => {
             this.betService.createBet([BetSelectedComponent.betType], BetSelectedComponent.getAmount(), BetSelectedComponent.betType.currentodds);
           });
@@ -137,6 +143,8 @@ export class SidePanelComponent implements OnInit {
           return;
         }
       }
+      // MAJ du portefeuille
+      this.userService.removeFromWallet(totalAmount);
       this.betTypeService.removeSelectedBets();
     }
   }

@@ -1,6 +1,5 @@
 import { User } from "./user.model";
 import { BetLine } from "./bet-line.model";
-import { getLocaleDateFormat } from "@angular/common";
 
 export class Bet {
     id: number;

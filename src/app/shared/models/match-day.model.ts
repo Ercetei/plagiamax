@@ -7,7 +7,6 @@ export class MatchDay {
     season: Season;
     matchs: Match[];
 
-
     constructor(id: number = 0, label: string = "", season: Season = null, matchs: Match[] = []) {
         this.id = id;
         this.label = label;

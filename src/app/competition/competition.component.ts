@@ -4,7 +4,6 @@ import { Category } from '../shared/models/category.model';
 
 import { ActivatedRoute } from '@angular/router';
 import { BaseService } from '../shared/services/base.service';
-import { CompetitionService } from '../shared/services/competition.service';
 import { Competition } from '../shared/models/competition.model';
 
 @Component({
@@ -18,7 +17,7 @@ export class CompetitionComponent implements OnInit {
   afficher: String;
   competitions: Competition[]=[];
 
-  constructor(private baseService: BaseService, private route: ActivatedRoute, private competitionService:CompetitionService) { }
+  constructor(private baseService: BaseService, private route: ActivatedRoute) { }
 
   ngOnInit(){
     this.getCategory();

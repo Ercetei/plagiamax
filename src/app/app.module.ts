@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { BetTypeService } from './shared/services/bet-type.service';
 import { UserService } from './shared/services/user.service';
-import { MatchService } from './shared/services/match.service';
 import { BetService } from './shared/services/bet.service';
 import { BetLineService } from './shared/services/bet-line.service';
 import { MatchBetService } from './shared/services/match-bet.service';
@@ -30,7 +29,6 @@ import { CcComponent } from './backoffice/cc/cc.component';
 import { CompetitionComponent } from './competition/competition.component';
 import { HistoryComponent } from './backoffice/history/history.component';
 import { HistoryService } from './shared/services/history.service';
-import { CompetitionService } from './shared/services/competition.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -79,7 +77,7 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
     ReactiveFormsModule,
     IgxDatePickerModule, IgxMaskModule
   ],
-  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, CompetitionService, MatchService, BaseService, AuthGuard,  CreditCardService,
+  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, BaseService, AuthGuard,  CreditCardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

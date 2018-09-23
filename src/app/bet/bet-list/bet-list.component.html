@@ -21,7 +21,7 @@
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>
-			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet) ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 	<div class="row bet-group" *ngIf="getScoreBets()">
@@ -36,7 +36,7 @@
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>
-			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet) ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 	<div class="row bet-group" *ngIf="getGoalsBets()">
@@ -51,7 +51,7 @@
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>
-			<button class="btn" [ngClass]="isSelectedBet(matchbet.id)==true ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet.id)">{{matchbet.currentodds}}</button>
+			<button class="btn" [ngClass]="isSelectedBet(matchbet) ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
 
