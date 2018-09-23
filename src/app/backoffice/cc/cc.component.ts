@@ -26,8 +26,7 @@ export class CcComponent implements OnInit {
 
   isValidFormSubmitted = null;
   creditCard = new CreditCard();
-  
-  isAuthentified: Boolean = !!localStorage.getItem('userToken');
+
   currentUser: User;
 
   fromDate: NgbDateStruct; /// test pour voir le mois en cours
@@ -76,10 +75,7 @@ export class CcComponent implements OnInit {
   constructor(private creditCardService: CreditCardService,calendar: NgbCalendar, private userService:UserService, 
     private cookie: CookieService, private baseService: BaseService) {
     this.fromDate = calendar.getToday(); /// test pour voir le mois en cours
-
-    if (this.isAuthentified) {
-      this.currentUser = JSON.parse(localStorage.getItem('user'));
-    }
+    this.currentUser = this.userService.getCurrentUser();
   }
 
 

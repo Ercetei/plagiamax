@@ -16,29 +16,29 @@
   
   </ngb-carousel>
 
-<div class="d-flex flex-row justify-content-around">
-  <div class="p-2 col-3 text-center">
-    <!-- MENU GAUCHE -->
+<div id="mainContainer">
+  <div class="d-flex flex-row justify-content-around">
+    <div class="p-2 col-3 text-center">
+      <!-- MENU GAUCHE -->
       <br>
       <div class="divListCategory">
         <app-competition></app-competition>
       </div>
       <br>
-  </div>
-  
-  <div class="p-2 col-6">
-    <router-outlet></router-outlet>
+    </div>
 
-    <!-- TODO : Regarder ce que c'est -->
-    <div *ngIf="onAfficher() != '' ; else affichageBlock"></div>
+    <div class="p-2 col-6">
+      <router-outlet></router-outlet>
+
+      <!-- TODO : Regarder ce que c'est -->
+      <div *ngIf="onAfficher() != '' ; else affichageBlock"></div>
       <ng-template #affichageBlock>
         <app-showbet></app-showbet>
       </ng-template>
-    
-  </div>
-  <div class="p-2 col-3 text-center">
-    <app-side-panel></app-side-panel>
+
+    </div>
+    <div class="p-2 col-3 text-center">
+      <app-side-panel></app-side-panel>
+    </div>
   </div>
 </div>
-<!-- <app-cc></app-cc> -->
-<!-- <app-showbet></app-showbet> -->

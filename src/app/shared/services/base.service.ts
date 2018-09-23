@@ -54,4 +54,24 @@ export class BaseService {
         return requestResponse;
     }
 
+    async post(requestMapping: string, object: any): Promise<any> {
+        // // define headers to allow access
+        // let httpHeaders = new HttpHeaders()
+        //     .set("Access-Control-Allow-Origin", "*");
+        // declare request response in await function (for asynchronous)
+        let requestResponse = await this.http
+        // GET request HTTP with complete URL
+            .post<any>(this.rootUrl + requestMapping, object, {
+                // use headers defined above
+                // headers: httpHeaders,
+                // define response format in JSON
+                responseType: 'json',
+                // enable to use credentials/certificates
+                withCredentials: true
+                // transform to promise to be able asynchronous
+            }).toPromise()
+        // return request response
+        return requestResponse;
+    }
+
 }

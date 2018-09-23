@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HistoryService } from '../../shared/services/history.service';
 import { Bet } from '../../shared/models/bet.model';
 import { BaseService } from '../../shared/services/base.service';
+import {User} from "../../shared/models/user.model";
+import {UserService} from "../../shared/services/user.service";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-history',
@@ -21,7 +25,7 @@ export class HistoryComponent implements OnInit {
     { label: "Vainqueur" },
     { label: "Score exact" },
     { label: "But" }
-  ]
+  ];
 
   statusSelected;
 
@@ -59,14 +63,10 @@ export class HistoryComponent implements OnInit {
   newVal: number = 0;
 
   isAuthentified: Boolean = !!localStorage.getItem('userToken');
-  currentIdUser: number = 0;
+  currentUser:User;
 
-  constructor(private historyService: HistoryService, private baseService: BaseService) {
-    if (this.isAuthentified) {
-      this.currentIdUser = JSON.parse(localStorage.getItem('user')).id;
-    }
-
-
+  constructor(private userService: UserService, private baseService: BaseService, private modalService: NgbModal) {
+    this.currentUser = this.userService.getCurrentUser();
   }
 
   ngOnInit() {
@@ -74,7 +74,7 @@ export class HistoryComponent implements OnInit {
     let maskArrayProcessing = new Array;
     let maskArrayOld = new Array;
 
-    this.baseService.get("/user/" + this.currentIdUser + "/bets").then(data => {
+    this.baseService.get("/user/" + this.currentUser.id + "/bets").then(data => {
       parent.allBetUser = data;
 
       // Search for the teams name
@@ -104,8 +104,12 @@ export class HistoryComponent implements OnInit {
           this.baseService.get("/bettype/" + element.betlines[0].bettype.id + "/teams").then(dataTeams => {
             let teams: string = "";
 
-            dataTeams.forEach(labelTeam => {
-              teams += labelTeam.label;
+            dataTeams.forEach((labelTeam, index) => {
+              if (index == 0) {
+                teams += labelTeam.label + " - ";
+              } else {
+                teams += labelTeam.label;
+              }
             });
 
             element.label = teams;
@@ -150,6 +154,14 @@ export class HistoryComponent implements OnInit {
     gainPotentiel = bet.betamount * oddsTotal;
 
     return gainPotentiel;
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size:"lg"}).result.then((result) => {
+      //this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
 }

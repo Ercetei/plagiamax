@@ -1,6 +1,10 @@
-<div *ngIf="matchdays.length; else emptyBlock">
+<h2 class="text-center"> {{ competitions[0]?.label }} </h2>
+
+<h3 *ngIf="display == 1" class="text-center subtitle">{{ matchdayName }} de {{ competitions[0]?.label }}</h3>
+<h3 *ngIf="display == 2" class="text-center subtitle">Liste des matchs à venir</h3>
+
+<div class="border containerBets" *ngIf="matchdays.length; else emptyBlock">
 	<div *ngIf="display == 1">
-		<h2> {{ competitions[0]?.label }} </h2>
 		<select class="form-control" [(ngModel)]="selectedDay" (change)="onSelectDay()">
 			<option *ngFor="let day of matchdays" [value]="day.id">{{day.label}}</option>
 		</select>
@@ -8,24 +12,22 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h3 *ngIf="display == 1" class="text-center subtitle">{{ matchdayName }} de {{ competitions[0]?.label }}</h3>
-				<h3 *ngIf="display == 2" class="text-center subtitle">Liste des matchs à venir</h3>
 				<div class="row">
 					<div class="col-md-6">
 					</div>
 					<div class="col-md-2 text-center">
-						<span class="badge badge-default">1</span>
+						<span class="badge badge-info">1</span>
 					</div>
 					<div class="col-md-2 text-center">
 						<span class="badge badge-default">N</span>
 					</div>
 					<div class="col-md-2 text-center">
-						<span class="badge badge-default">2</span>
+						<span class="badge badge-success">2</span>
 					</div>
 				</div>
 				<div *ngFor="let obsmatch of matchs | async">
 					<div *ngFor="let match of obsmatch">
-						<div class="row" *ngIf="display == 1 && match.matchday[0]?.id == selectedDay && match.status == 3 || 
+						<div class="row row-bets border" *ngIf="display == 1 && match.matchday[0]?.id == selectedDay && match.status == 3 ||
 						display == 1 && match.matchday[0]?.id == selectedDay && match.status == 4 || 
 						display == 2 && match.status == 3 || display == 2 && match.status == 4">
 							<div class="col-md-6">
@@ -54,5 +56,5 @@
 	</div>
 </div>
 <ng-template #emptyBlock>
-	<p>Aucun match de programmé pour le moment.</p>
+	<p class="text-center">Aucun match de programmé pour le moment.</p>
 </ng-template>

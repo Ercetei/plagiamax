@@ -17,9 +17,7 @@ export class UserComponent implements OnInit {
   isAuthentified: Boolean;
   currentUser: User;
   firebaseUser: any;
-  databaseData;
-  databaseList;
-  databaseQuery;
+  userRole = 0;
 
   constructor(private cookie: CookieService, private http: HttpClient, private router: Router,
     private userService: UserService,
@@ -28,12 +26,22 @@ export class UserComponent implements OnInit {
     this.isAuthentified = this.userService.isAuthentified();
     if (this.isAuthentified) {
       this.currentUser = this.userService.getCurrentUser();
+      if(this.currentUser.roles[0].role == "ADMIN") {
+        this.userRole = 2;
+      }
     }
+
   }
 
   ngOnInit() {
     if (this.isAuthentified) {
-      this.getWallet();
+      this.db.read('users/' + this.cookie.get('user_id')).subscribe((data) => {
+        this.firebaseUser = data;
+        if(data[1]) {
+          this.currentUser.wallet = data[1][0];
+          localStorage.setItem("user", JSON.stringify(this.currentUser));
+        }
+      });
     }
   }
 
@@ -50,7 +58,7 @@ export class UserComponent implements OnInit {
         localStorage.removeItem('userToken');
         localStorage.removeItem('user');
         window.location.reload();
-
+        this.router.navigateByUrl("/home");
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -59,13 +67,6 @@ export class UserComponent implements OnInit {
           console.log('Server-side error occured.');
         }
       });
-  }
-
-  getWallet() {
-    // Realtime Database
-    this.db.read('users/' + this.cookie.get('user_id')).subscribe((data) => {
-      this.firebaseUser = data;
-    });
   }
 
 }

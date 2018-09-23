@@ -1,0 +1,14 @@
+<div *ngIf="(matchs | async)?.length > 0; else emptyBlock">
+  <div *ngFor="let obsmatch of matchs | async">
+    <div *ngFor="let match of obsmatch">
+      <div class="row border-bottom" *ngIf="match.status == 3 ||
+                          match.status == 4 ">
+        <app-scoreform [match]="match"></app-scoreform>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyBlock>
+  <p>Aucun match en cours.</p>
+</ng-template>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../shared/models/user.model";
+import {UserService} from "../shared/services/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed=true;
+  isAuthentified: Boolean;
+  currentUser: User;
 
-  constructor() { }
+  constructor(private userService: UserService) {
+    this.isAuthentified = this.userService.isAuthentified();
+    if (this.isAuthentified) {
+      this.currentUser = this.userService.getCurrentUser();
+    }
+  }
 
   ngOnInit() {
   }

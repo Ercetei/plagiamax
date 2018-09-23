@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Event } from '@angular/router';
+import {User} from "../shared/models/user.model";
+import {UserService} from "../shared/services/user.service";
 
 @Component({
   selector: 'app-backoffice',
@@ -7,32 +9,17 @@ import { ActivatedRoute, Router, Event } from '@angular/router';
   styleUrls: ['./backoffice.component.scss']
 })
 export class BackofficeComponent implements OnInit {
+  currentUser: User;
+  userRole = 1;
 
-  model = {
-    wallet: false,
-    history: false,
-    profile: false
-  };
-
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
    }
 
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      console.log(event); // This will give you the required url
-  });  }
-
-  currentPage(val: String) {
-    this.model.wallet = false;
-    this.model.history = false;
-    this.model.profile = false;
-
-    if (val == "history") {
-      this.model.history = true;
-    } else if (val == "wallet") {
-      this.model.wallet = true;
-    } else {
-      this.model.profile = true;
+    this.currentUser = this.userService.getCurrentUser();
+    if(this.currentUser.roles[0].role == "ADMIN") {
+      this.userRole = 2;
     }
   }
+
 }

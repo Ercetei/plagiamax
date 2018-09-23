@@ -1,14 +1,19 @@
 <div class="container">
   <div class="btn-group btn-group-toggle">
       <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" routerLink="/profile/cagnotte" ngbButton [(ngModel)]="model.wallet"> Ma cagnotte
+        <input type="checkbox" routerLink="/profile/cagnotte" ngbButton> Ma cagnotte
       </label>
       <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" routerLink="/profile/history" ngbButton [(ngModel)]="model.history"> Historique des paris
+        <input type="checkbox" routerLink="/profile/history" ngbButton> Historique des paris
       </label>
       <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" routerLink="/profile/update-profile" ngbButton [(ngModel)]="model.profile"> Modification du profil
+        <input type="checkbox" routerLink="/profile/update-profile" ngbButton> Modification du profil
+      </label>
+      <label class="btn-primary" ngbButtonLabel *ngIf="userRole > 1">
+          <input type="checkbox" routerLink="/profile/admin" ngbButton> Administration
       </label>
     </div>
-  <router-outlet></router-outlet>
+  <div id="backContainer">
+      <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,16 +1,35 @@
-.historical-block {
-    background-color: white;
-    margin: 0px 1% 0px 1%;
-    width: 100%;
-    text-align:center;
-}
-.historical-block-head{
-    background-color: lightgray;
-}
-tr{
-    border: 1px solid black;
-}
-.form-control-format{
-    margin-left: 15px ;
-    width: 30%;
+ #history {
+    .headingsHistory {
+        padding: 15px;
+        font-size: 11px;
+        font-weight: bold;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+     .headingsBets {
+         margin-left: 25px;
+         padding: 8px;
+        background:rgba(0,0,0,0.05);
+     }
+
+    .rowDepth1 {
+        transition:all 0.2s;
+        clear: both;
+        box-sizing: border-box;
+        padding: 15px;
+        margin-left: 0;
+    }
+
+    .rowDepth1:hover{
+        background:rgba(0,0,0,0.1);
+        transition:all 0.2s;
+    }
+
+    .rowDepth2 {
+        clear: both;
+        box-sizing: border-box;
+        padding: 8px;
+        margin-left: 25px;
+        background:#fff;
+    }
 }
