@@ -20,6 +20,13 @@ export class HistoryComponent implements OnInit {
     { id: 2, status: 'Terminé' }
   ];
 
+  betStatus = [
+    { status: '0' },
+    { status: 'En cours' },
+    { status: 'Gagné' },
+    { status: 'Perdu' }
+  ];
+
   typeBet = [
     { label: "0" },
     { label: "Vainqueur" },

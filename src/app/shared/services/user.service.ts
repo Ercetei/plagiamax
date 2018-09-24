@@ -102,8 +102,10 @@ export class UserService {
 
 
     removeFromWallet(amount: number) {
+      console.log("Amount : " + amount);
         let currentUser = this.getCurrentUser();
-        let wallet = currentUser.wallet - amount;
+        let wallet = Math.round((+currentUser.wallet - +amount) * 100) / 100;
+        console.log("WALLET : " + wallet);
         let body = {
             wallet
         };

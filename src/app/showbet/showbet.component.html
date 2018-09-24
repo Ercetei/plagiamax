@@ -1,4 +1,4 @@
-<h2 class="text-center"> {{ competitions[0]?.label }} </h2>
+<h2 *ngIf="display == 1" class="text-center"> {{ competitions[0]?.label }} </h2>
 
 <h3 *ngIf="display == 1" class="text-center subtitle">{{ matchdayName }} de {{ competitions[0]?.label }}</h3>
 <h3 *ngIf="display == 2" class="text-center subtitle">Liste des matchs à venir</h3>

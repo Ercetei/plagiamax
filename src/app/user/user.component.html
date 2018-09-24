@@ -27,7 +27,7 @@
                 </ul>
             </li>
         </ul>
-        <div class="nav-wallet"><i class="fa fa-money"> {{firebaseUser ? firebaseUser[1] : "0"}}</i></div>
+        <div class="nav-wallet"><i class="fa fa-money"> {{currentUser?.wallet ? currentUser.wallet : "0"}}</i></div>
 
     </ng-template>
 

@@ -143,6 +143,7 @@ export class SidePanelComponent implements OnInit {
           return;
         }
       }
+      console.log(totalAmount);
       // MAJ du portefeuille
       this.userService.removeFromWallet(totalAmount);
       this.betTypeService.removeSelectedBets();
