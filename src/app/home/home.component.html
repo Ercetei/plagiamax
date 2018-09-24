@@ -29,13 +29,6 @@
 
     <div class="p-2 col-6">
       <router-outlet></router-outlet>
-
-      <!-- TODO : Regarder ce que c'est -->
-      <div *ngIf="onAfficher() != '' ; else affichageBlock"></div>
-      <ng-template #affichageBlock>
-        <app-showbet></app-showbet>
-      </ng-template>
-
     </div>
     <div class="p-2 col-3 text-center">
       <app-side-panel></app-side-panel>

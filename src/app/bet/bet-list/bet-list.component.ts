@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BetType } from '../../shared/models/bet-type.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Match } from '../../shared/models/match.model';
 import { BetTypeService } from '../../shared/services/bet-type.service';
 import { MatchBetService } from '../../shared/services/match-bet.service';
@@ -17,6 +17,7 @@ export class BetListComponent implements OnInit {
 
   constructor
     (
+    private router: Router,
     private route: ActivatedRoute,
     private baseService: BaseService,
     private matchBetService: MatchBetService,
@@ -26,24 +27,37 @@ export class BetListComponent implements OnInit {
 
   // A l'initialisation, fait en sorte de charger le match au changement d'URL et on s'abonne à la liste de paris du side panel.
   ngOnInit() {
-    this.route.params.subscribe(data => this.reload());
+
+    this.route.params.subscribe(async data => {
+      await this.reload();
+      if (this.match == null) {
+        this.router.navigateByUrl('/home');
+      } else {
+        if (this.match.status == 5) {
+          this.router.navigateByUrl('/home');
+        }
+      }
+    });
     this.betTypeService.betTypeSubject.subscribe(
       (bts: BetType[]) => {
         this.selectedBets = bts;
       }
     );
+
   }
 
   // On charge les infos du match
-  reload() {
-    this.getMatch();
+  async reload() {
+    await this.getMatch();
   }
 
   // Récupère le match en cours
   async getMatch() {
-    console.log('Récupération du match');
     const match_id = +this.route.snapshot.paramMap.get('id');
-    this.match = await this.baseService.get("/match/"+ match_id);
+    if (match_id > Number.MAX_SAFE_INTEGER || !Number.isSafeInteger(match_id)) {
+      this.router.navigateByUrl('/home');
+    }
+    this.match = await this.baseService.get("/match/" + match_id);
   }
 
   // Récupère les paris sur l'équipe gagnante

@@ -20,17 +20,25 @@ export class BetTypeService {
 
     addSelectedBet(betType: MatchBet) {
         this.selectedBets.push(betType);
+        localStorage.setItem("bets", JSON.stringify(this.selectedBets));
         this.emitSelectedBetsSubject();
     }
 
     // Retire un pari des paris sélectionnés
     removeSelectedBet(betType: MatchBet) {
         this.selectedBets.splice(this.selectedBets.findIndex(x => x.id == betType.id), 1);
+        localStorage.setItem("bets", JSON.stringify(this.selectedBets));
         this.emitSelectedBetsSubject();
     }
 
     // Récupère tous les paris sélectionnés
     getSelectedBets(): MatchBet[] {
+        let matchbets: MatchBet[] =  JSON.parse(localStorage.getItem('bets'));
+        if(this.selectedBets == null || this.selectedBets.length == 0){
+            if(matchbets != null){
+                this.selectedBets = matchbets;
+            }
+        }
         return this.selectedBets;
     }
 
@@ -70,6 +78,7 @@ export class BetTypeService {
     }
 
     removeSelectedBets(){
+        localStorage.removeItem("bets");
         this.selectedBets.splice(0, this.selectedBets.length);
     }
 }

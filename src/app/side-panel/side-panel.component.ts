@@ -7,7 +7,7 @@ import { BetType } from '../shared/models/bet-type.model';
 import { BetSelectedComponent } from './bet-selected/bet-selected.component';
 import { BetService } from '../shared/services/bet.service';
 import { UserService } from '../shared/services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Event } from '@angular/router';
 
 @Component({
   selector: 'app-side-panel',
@@ -24,12 +24,17 @@ export class SidePanelComponent implements OnInit {
 
   constructor
     (
+    private router: Router,
     private route: ActivatedRoute,
     private betTypeService: BetTypeService,
     private matchBetService: MatchBetService,
     private betService: BetService,
     private userService: UserService
     ) {
+      // A chaque modification de l'URL, on charge le side panel
+      this.router.events.subscribe((event: Event) => {
+        this.selectedBets  = this.betTypeService.getSelectedBets();
+    });
 
   }
 
@@ -44,6 +49,8 @@ export class SidePanelComponent implements OnInit {
         if (bts.length < 2) this.combined = false;
       }
     );
+
+    
   }
 
   reset() {
