@@ -1,110 +1,82 @@
 <div class="form-control-format">
-Status
-<select class="form-control" value="Status" [(ngModel)]="statusSelected" (change)="onChange($event)">
-    <option *ngFor="let status of tabStatus" [value]="status.id">{{ status.status }}</option>
-</select>
+    Status
+    <select class="form-control" value="Status" [(ngModel)]="statusSelected" (change)="onChange($event)">
+        <option *ngFor="let status of tabStatus" [value]="status.id">{{ status.status }}</option>
+    </select>
 </div>
 <br>
 
-<table class="table" *ngIf="(betDisplayer)?.length > 0; else emptyBlock">
+<div id="history" *ngIf="(betDisplayer)?.length > 0; else emptyBlock">
 
-  <!--<thead class="thead-dark">
-    <tr>
-      <th> PARI </th>
-      <th> DATE </th>
-      <th> HEURE </th>
-      <th> MISE </th>
-      <th> GAIN TOTAL </th>
-      <th> STATUS </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let hb of betDisplayer">
-        <td> {{ hb.label }} </td>
-        <td> {{ hb.betdate | date: 'dd/MM/yyyy' }} </td>
-        <td> {{ hb.betdate | date: 'HH:mm' }}  </td>
-        <td> {{ hb.betamount.toFixed(2) }}€ </td>
-        <td> {{ (hb.betamount * hb.momentodds).toFixed(2) }}€ </td>
-        <td> {{ tabStatus[hb.status].status }} </td>    
-    </tr>
-  </tbody>
-</table>
-
-<ng-template #emptyBlock>
-    <p>Vous n'avez aucun pari.</p>
-  </ng-template>
-
-
-  <!--<td colspan="12" *ngFor = "let bl of hb.betlines" >
-      <span>{{bl.bettype.label}}</span> - 
-      <span>{{typeBet[bl.bettype.type].label}}</span>
-  </td> -->
-
-  <div class="row border" *ngIf="(betDisplayer)?.length > 0">
-    <div class="col-sm-12">
-      <div class="row">
-        <div class="row col-sm-12">
-          <div class="col-sm-3">
-              Pari
-          </div>
-          <div class="col-sm-3">
-              Date du pari
-          </div>
-          <div class="col-sm-2">
-              Montant parié (€)
-          </div>
-          <div class="col-sm-2">
-              Gains (€)
-          </div>
-          <div class="col-sm-2">
-              Status
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row border" *ngIf="(betDisplayer)?.length > 0; else emptyBlock">
-  <div class="col-sm-12">
-    <div class="row" *ngFor="let bd of betDisplayer">
-      <div class="row col-sm-12">
-          <div class="col-sm-3">
-              {{ bd.label }}
-          </div>
-          <div class="col-sm-3">
-              {{ bd.betdate | date: 'dd/MM/yyyy' }} - {{ bd.betdate | date: 'HH:mm' }}
-          </div>
-          <div class="col-sm-2">
-              {{ bd.betamount.toFixed(2) }}€
-          </div>
-          <div class="col-sm-2">
-              {{ (bd.betamount * bd.momentodds).toFixed(2) }}€
-          </div>
-          <div class="col-sm-2">
-              {{ tabStatus[bd.status].status }}
-          </div>
-      </div>
-      
-      <div class="row col-sm-12" *ngIf="bd.betlines.length > 1">
-
-        
-
-        <div class="row col-sm-12" *ngFor="let bl of bd.betlines">
-            <div class="col-sm-3">
-                ► {{ bl.label }}
-            </div>
-            <div class="col-sm-3">
-                {{typeBet[bl.bettype.type].label}}
-            </div>
-            <div class="col-sm-3">
-                {{ bl.bettype.label }}
-            </div>
-            <div class="col-sm-3">
-                {{ tabStatus[bl.status].status }}
+    <div class="row border headingsHistory" *ngIf="(betDisplayer)?.length > 0" >
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="row col-sm-12">
+                    <div class="col-sm-3">
+                        Pari
+                    </div>
+                    <div class="col-sm-3">
+                        Date du pari
+                    </div>
+                    <div class="col-sm-2">
+                        Montant parié (€)
+                    </div>
+                    <div class="col-sm-2">
+                        Gains potentiels(€)
+                    </div>
+                    <div class="col-sm-2">
+                        Status
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+
+
+    <div class="row border" *ngIf="(betDisplayer)?.length > 0; else emptyBlock">
+        <div class="col-sm-12">
+            <div class="row" *ngFor="let bd of betDisplayer">
+                <div class="row col-sm-12 rowDepth1" (click)="open(content)">
+                    <div class="col-sm-3">
+                        {{ bd.label }}
+                    </div>
+                    <div class="col-sm-3">
+                        {{ bd.betdate | date: 'dd/MM/yyyy' }} - {{ bd.betdate | date: 'HH:mm' }}
+                    </div>
+                    <div class="col-sm-2">
+                        {{ bd.betamount.toFixed(2) }}€
+                    </div>
+                    <div class="col-sm-2">
+                        {{ (bd.betamount * bd.momentodds).toFixed(2) }}€
+                    </div>
+                    <div class="col-sm-2">
+                        {{ tabStatus[bd.status].status }}
+                    </div>
+                </div>
+
+
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Détail du pari</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <app-betdetails [bd]="bd"></app-betdetails>
+                    </div>
+                </ng-template>
+
+
+
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+<ng-template #emptyBlock>
+    <p>Aucun pari enregistré.</p>
+</ng-template>

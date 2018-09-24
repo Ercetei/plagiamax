@@ -1,7 +1,7 @@
 import { Subject } from "node_modules/rxjs";
-import { BaseService } from "./base.service";
 import { MatchBet } from "../models/match-bet.model";
 import { Injectable } from "@angular/core";
+import { BetType } from "../models/bet-type.model";
 
 
 @Injectable()
@@ -10,7 +10,7 @@ export class BetTypeService {
     protected selectedBets: MatchBet[] = [];
     public betTypeSubject = new Subject();
 
-    constructor(public baseService: BaseService) {
+    constructor() {
 
     }
 
@@ -40,8 +40,8 @@ export class BetTypeService {
     }
 
     // Teste si un pari est sélectionné
-    isSelectedBet(id: number) {
-        return this.selectedBets.findIndex(x => x.id == id) > -1;
+    isSelectedBet(bettype: BetType) {
+        return this.selectedBets.findIndex(x => x.id == bettype.id) > -1;
     }
 
     getBetLabel(type: number, value: string) {

@@ -14,6 +14,7 @@ export class UserService {
 
   registerUser(user: User) {
     const body: User = {
+      id:null,
       username: user.username,
       password: user.password,
       mail: user.mail,
@@ -23,7 +24,8 @@ export class UserService {
       creditcard: user.creditcard,
       cryptogram: user.cryptogram,
       expirationdate: user.expirationdate,
-      wallet: user.wallet
+      wallet: user.wallet,
+      roles:null
     };
 
        return this.baseService.http.post(this.baseService.rootUrl + '/user/register', body, {
@@ -32,7 +34,7 @@ export class UserService {
     }
 
     isAuthentified(): Boolean {
-        return !!localStorage.getItem('userToken');
+        return !!localStorage.getItem('user');
     }
 
     getCurrentUser(): User {
@@ -100,14 +102,17 @@ export class UserService {
 
 
     removeFromWallet(amount: number) {
-        let wallet = this.getCurrentUser().wallet - amount;
+        let currentUser = this.getCurrentUser();
+        let wallet = currentUser.wallet - amount;
         let body = {
             wallet
-        }
+        };
 
-        this.baseService.http.patch(this.baseService.rootUrl + '/user/' + this.getCurrentUser().id, body, {
+        this.baseService.http.patch(this.baseService.rootUrl + '/user/' + currentUser.id, body, {
             responseType: 'json',
             withCredentials: true
         }).subscribe();
+
+        localStorage.setItem("user", JSON.stringify(currentUser));
     }
 }

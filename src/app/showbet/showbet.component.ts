@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Match } from './models/match';
-import { Team } from './models/team';
-import { BetType } from './models/bet-type';
-import { Calendar } from './models/calendar';
+import { Match } from '../shared/models/match.model';
+import { BetType } from '../shared/models/bet-type.model';
+import { MatchDay } from '../shared/models/match-day.model';
 import { Competition } from '../shared/models/competition.model';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireLiteDatabase, AngularFireLiteAuth } from 'angularfire-lite';
@@ -20,17 +19,17 @@ import { BetTypeService } from '../shared/services/bet-type.service';
 })
 export class ShowbetComponent {
 
-  daySelected: String;
-  newVal: number = 0;
-  calendar: Calendar[];
-  labelCalendar: any;
-  team: Team[];
+  selectedDay: string = "3";
+  matchdays: MatchDay[] = [];
 
-  competitionName: String;
+  matchdayName: string;
+
+  // 1 : All, 2 : Competition
+  display: number;
+
   competition_id: number;
-  competition: Competition;
+  competitions: Competition[];
   matchs: Observable<Match>;
-  matchBets: BetType[];
 
   databaseData;
   databaseList;
@@ -46,15 +45,10 @@ export class ShowbetComponent {
   }
 
   ngOnInit() {
-    this.newVal = 1;
-    this.daySelected = "1";
-
     this.getCompetition();
-    this.getCalendar();
-    this.getMatchBets();
+    this.getMatchDays();
 
     // FIREBASE INITIALIZATION
-
     // Realtime Database
     this.db.read('plagiamax/matchs').subscribe((data) => {
       this.databaseData = data;
@@ -64,72 +58,65 @@ export class ShowbetComponent {
     this.matchs = this.db.read('matchs');
   }
 
-  public onChange(event): void {  // event will give you full brief of action
-    this.newVal = event.target.value;
-    this.labelCalendar = this.calendar[this.newVal - 1].label;
-    this.getMatchBets();
+  public onSelectDay(): void {
+    this.matchdayName = this.matchdays.find(x => x.id == parseInt(this.selectedDay)).label;
   }
 
   async getCompetition() {
+    this.competitions = [];
     this.competition_id = +this.route.snapshot.paramMap.get('id');
     if (this.competition_id > 0) {
-      this.competition = await this.baseService.get("/competition/" + this.competition_id);
-      this.competitionName = this.competition.label;
-      this.getCalendar();
-      this.getMatchBets();
+      this.display = 1;
+      this.competitions.push(await this.baseService.get("/competition/" + this.competition_id));
+      this.getMatchDays();
     } else {
-      this.competition = await this.baseService.get("/competition");
-      this.competitionName = "";
+      this.competitions = await this.baseService.get("/competition");
+      this.display = 2;
     }
   }
 
-  async getCalendar() {
-    this.labelCalendar = "";
-    this.calendar = [];
-    this.calendar = await this.baseService.get("/competition/" + this.competition_id + "/matchdays");
-    if (this.calendar.length == 0) {
-      this.labelCalendar = "";
-    } else {
-      this.labelCalendar = this.calendar[0].label;
-    }
-  }
-
-  async getMatchBets() {
-    this.matchBets = [];
-    this.matchBets = await this.baseService.get("/matchday/" + this.newVal + "/matchs");
-  }
-
-
-  /*getFormattedTeams(match: Match){
-      if (match != null) {
-        let result: string = "";
-        result += this.matchs. .matchteams.find(x => x.ishometeam).team.label;
-        result += " - " + match.matchteams.find(x => !x.ishometeam).team.label;
-        return result;
+  async getMatchDays() {
+    if (this.display == 1) {
+      this.matchdays = await this.baseService.get("/competition/" + this.competition_id + "/matchdays/active");
+      if (this.matchdays.length > 0) {
+        this.selectedDay = this.matchdays[0].id.toString();
+        this.matchdayName = this.matchdays.find(x => x.id == parseInt(this.selectedDay)).label;
       }
-    }*/
+    } else {
+      this.matchdays = await this.baseService.get("/matchday");
+    }
+  }
+
+  getFormattedTeams(match: Match) {
+    if (match != null) {
+      let result: string;
+      result = match.matchteams.find(x => x.ishometeam).team.label;
+      result += " - " + match.matchteams.find(x => !x.ishometeam).team.label;
+      return result;
+    }
+  }
 
   // Sélectionne ou déselectionne un pari
-  switchBet(id: number, betType: MatchBet) {
-    if (this.isSelectedBet(id)) {
-      this.unselectBet(id, betType);
+  switchBet(betType: MatchBet) {
+    if (this.isSelectedBet(betType)) {
+      this.unselectBet(betType);
     } else {
-      this.selectBet(id, betType);
+      this.selectBet(betType);
     }
   }
 
   // Ajoute un pari dans le side panel
-  selectBet(id: number, betType: MatchBet) {
+  selectBet(betType: MatchBet) {
     this.betTypeService.addSelectedBet(betType);
   }
 
   // Retire un pari du side panel
-  unselectBet(id: number, betType: MatchBet) {
+  unselectBet(betType: MatchBet) {
     this.betTypeService.removeSelectedBet(betType);
   }
 
   // Contrôle si un pari est dans le side panel
-  isSelectedBet(id: number) {
-    return this.betTypeService.isSelectedBet(id);
+  isSelectedBet(betType: MatchBet) {
+    return this.betTypeService.isSelectedBet(betType);
   }
 }

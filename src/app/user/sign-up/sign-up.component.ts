@@ -24,18 +24,18 @@ export class SignUpComponent implements OnInit {
     if (form != null) {
       form.reset();
     }
-      this.user = {
-      username: '',
-      password: '',
-      mail: '',
-      birthdate: new Date(),
-      firstname: '',
-      lastname: '',
-      creditcard: '',
-      cryptogram: '',
-      expirationdate: '',
-      wallet: 0
-    }
+      this.user = <User>{
+        username: '',
+        password: '',
+        mail: '',
+        birthdate: new Date(),
+        firstname: '',
+        lastname: '',
+        creditcard: '',
+        cryptogram: '',
+        expirationdate: '',
+        wallet: 0
+      }
   }
 
   OnSubmit(form: NgForm) {

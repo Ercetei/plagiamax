@@ -1,5 +1,5 @@
 import { BetType } from "./bet-type.model";
-import { Bet } from "../../showbet/models/bet";
+import { Bet } from "./bet.model";
 
 // Ajouter objet equipe
 export class BetLine {

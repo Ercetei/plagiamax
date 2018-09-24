@@ -1,25 +1,34 @@
-<div *ngIf="isAuthentified == false; else connectedBlock">
-	<button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
-	<button type="button" class="btn btn-success" routerLink='/signup'>Inscription</button>
-</div>
+<div class="userBlock">
+    <div *ngIf="isAuthentified == false; else connectedBlock">
+        <button type="button" class="btn btn-outline-dark" routerLink="/login">Connexion</button>
+        <button type="button" class="btn btn-success" routerLink='/signup'>Inscription</button>
+    </div>
 
-<ng-template #connectedBlock>
-	<ul class="nav navbar-nav navbar-right">
-		<div class="nav-wallet"><i class="fa fa-money"> {{firebaseUser ? firebaseUser[1] : "0"}}</i></div>
-		<li class="dropdown">
-		<div class="dropdown-toggle"
-			data-toggle="dropdown" role="button" aria-haspopup="true"
-			aria-expanded="false">
-			<i class="fa fa-user"></i> {{currentUser.username}} 
-		</div>
-			<ul class="dropdown-menu user-menu">
-				<li><em>{{currentUser.mail}}</em></li>
-				<li role="separator" class="divider"></li>
-				<li><a routerLink="/profile/update-profile">Modifier le profil</a></li>
-				<li><a routerLink="/profile/cagnotte">Cagnotte</a></li>
-				<li><a routerLink="/profile/history">Historique</a></li>
-				<li role="separator" class="divider"></li>
-				<li><button (click)="Logout()">Deconnexion</button></li>
-			</ul></li>
-	</ul>
-</ng-template>
+    <ng-template #connectedBlock>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <div class="dropdown-toggle"
+                     data-toggle="dropdown" role="button" aria-haspopup="true"
+                     aria-expanded="false">
+                    <span class="userName">{{currentUser.username}}</span>
+                </div>
+                <ul class="dropdown-menu user-menu">
+                    <li><em>{{currentUser.mail}}</em></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a routerLink="/profile/update-profile">Modifier le profil</a></li>
+                    <li><a routerLink="/profile/cagnotte">Cagnotte</a></li>
+                    <li><a routerLink="/profile/history">Historique</a></li>
+                    <li *ngIf="userRole > 1">
+                        <a routerLink="/profile/admin"> Administration</a>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <button (click)="Logout()">Deconnexion</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav-wallet"><i class="fa fa-money"> {{firebaseUser ? firebaseUser[1] : "0"}}</i></div>
+
+    </ng-template>
+
+</div>

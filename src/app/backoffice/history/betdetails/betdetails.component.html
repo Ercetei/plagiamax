@@ -1,0 +1,29 @@
+<div class="row headingsBets">
+  <div class="col-sm-3">
+    Pari
+  </div>
+  <div class="col-sm-3">
+    Critère du pari
+  </div>
+  <div class="col-sm-2">
+    Choix
+  </div>
+  <div class="col-sm-2">
+    Status
+  </div>
+</div>
+
+<div class="row rowDepth2 border-bottom" *ngFor="let bl of bd.betlines">
+  <div class="col-sm-3">
+    {{ bl.label }}
+  </div>
+  <div class="col-sm-3">
+    {{typeBet[bl.bettype.type].label}}
+  </div>
+  <div class="col-sm-3">
+    {{ bl.bettype.label }}
+  </div>
+  <div class="col-sm-3">
+    {{ tabStatus[bl.status]?.status }}
+  </div>
+</div>

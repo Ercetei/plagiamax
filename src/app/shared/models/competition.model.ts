@@ -4,7 +4,7 @@ import { Category } from './category.model';
 export class Competition{
 
     id: number;
-    label: String;
+    label: string;
     status: number;
     type:number;
     // category:Category;

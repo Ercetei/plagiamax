@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BetType } from '../../shared/models/bet-type.model';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Match } from '../../shared/models/match.model';
-import { MatchService } from '../../shared/services/match.service';
 import { BetTypeService } from '../../shared/services/bet-type.service';
 import { MatchBetService } from '../../shared/services/match-bet.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Team } from '../../showbet/models/team';
-import { MatchTeam } from '../../shared/models/match-team.model';
+import { BaseService } from '../../shared/services/base.service';
 
 @Component({
   selector: 'app-bet-list',
@@ -21,7 +18,7 @@ export class BetListComponent implements OnInit {
   constructor
     (
     private route: ActivatedRoute,
-    private matchService: MatchService,
+    private baseService: BaseService,
     private matchBetService: MatchBetService,
     private betTypeService: BetTypeService
     ) {
@@ -43,21 +40,10 @@ export class BetListComponent implements OnInit {
   }
 
   // Récupère le match en cours
-  getMatch() {
+  async getMatch() {
     console.log('Récupération du match');
     const match_id = +this.route.snapshot.paramMap.get('id');
-    this.matchService.getMatch(match_id).subscribe(
-      (match: Match) => {
-        this.match = match;
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log('Server-side error occured.');
-        }
-      }
-    );
+    this.match = await this.baseService.get("/match/"+ match_id);
   }
 
   // Récupère les paris sur l'équipe gagnante
@@ -76,11 +62,11 @@ export class BetListComponent implements OnInit {
   }
 
   // Sélectionne ou déselectionne un pari
-  switchBet(id: number) {
-    if (this.isSelectedBet(id)) {
-      this.unselectBet(id);
+  switchBet(bettype: BetType) {
+    if (this.isSelectedBet(bettype)) {
+      this.unselectBet(bettype.id);
     } else {
-      this.selectBet(id);
+      this.selectBet(bettype.id);
     }
   }
 
@@ -95,8 +81,8 @@ export class BetListComponent implements OnInit {
   }
 
   // Contrôle si un pari est dans le side panel
-  isSelectedBet(id: number) {
-    return this.betTypeService.isSelectedBet(id);
+  isSelectedBet(bettype: BetType) {
+    return this.betTypeService.isSelectedBet(bettype);
   }
 
   getBetLabel(matchbet: BetType) {

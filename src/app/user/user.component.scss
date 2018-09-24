@@ -1,22 +1,44 @@
-button:first-child{
-	margin-right:5px;
+.userBlock {
+	button:first-child {
+		margin-right: 5px;
 	}
 	.dropdown-toggle {
-		cursor:pointer;
+		cursor: pointer;
 	}
 
-	.user-menu{
-		right:0;
-		left:inherit;
-		padding:5px;
-		box-sizing:border-box;
+	.userName{
+		font-weight:bold;
+		padding-right:5px;
 	}
 
-	.divider{
-		border-bottom:1px solid rgba(0,0,0,0.05);
-		margin:10px 0;
+	.user-menu {
+		right: 0;
+		left: inherit;
+		padding: 15px;
+		box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.1);
+		box-sizing: border-box;
+
+		a {
+			color: #263238;
+			padding: 2px;
+		}
+
+		button {
+			background: #fefefe;
+			width: 100%;
+			border: 1px solid #a02234;
+			border-radius: 5px;
+			color: #a02234;
+		}
 	}
 
-	.nav-wallet{
-		margin-right:10px;
+	.divider {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		margin: 10px 0;
 	}
+
+	.nav-wallet {
+		margin-right: 10px;
+		color: #79a32d;
+	}
+}

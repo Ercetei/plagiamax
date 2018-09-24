@@ -1,20 +1,39 @@
 .subtitle {
-    border: 1px solid black;
-    color: white;
-    background-color: gray;
+    margin:30px 0;
+    color:#ffb405;
+    font-size:22px;
+    font-weight: normal;
 }
 
-.btn-bet {
-    background-color: white;
-    border: 1px solid black;
-}
+.containerBets {
+    padding-bottom:20px;
+    box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.1);
 
-.btn-active {
-    background-color: rgb(141, 86, 86);
-    color: white;
-    border: 1px solid black;
-}
+    h4 {
+        width: 100%;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.05);
+    }
 
-.bet-group {
-    margin-top:15px;
+    h5 {
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    .btn-bet {
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+    .btn-active {
+        background-color: #ffb405;
+        color: white;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .bet-group {
+        margin-top: 15px;
+    }
+
 }

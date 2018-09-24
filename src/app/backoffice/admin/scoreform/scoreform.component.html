@@ -1,0 +1,16 @@
+<form #scoreForm="ngForm" class="formScore" (ngSubmit)="OnSubmit(scoreForm)">
+  <div class="form-row">
+    <div class="col-md-6">
+      <h5>{{getFormattedTeams(match)}}</h5>
+    </div>
+    <div class="col-md-2">
+      <input type="number" min="0" class="form-control" placeholder="score équipe 1" name="score1" #score1="ngModel" [(ngModel)]="scoreTeamOne" required>
+    </div>
+    <div class="col-md-2">
+      <input type="number" min="0" class="form-control" placeholder="score équipe 2" name="score2" #score2="ngModel" [(ngModel)]="scoreTeamTwo" required>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" [disabled]="!scoreForm.valid">valider</button>
+    </div>
+  </div>
+</form>

@@ -10,4 +10,7 @@ export class User{
     cryptogram: string;
     expirationdate: string;
     wallet: number;
+    roles?:{
+        role:string
+    };
 }

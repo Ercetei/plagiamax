@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { BetTypeService } from './shared/services/bet-type.service';
 import { UserService } from './shared/services/user.service';
-import { MatchService } from './shared/services/match.service';
 import { BetService } from './shared/services/bet.service';
 import { BetLineService } from './shared/services/bet-line.service';
 import { MatchBetService } from './shared/services/match-bet.service';
@@ -24,13 +23,11 @@ import { appRoutes } from './routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './footer/footer.component';
 import { CcComponent } from './backoffice/cc/cc.component';
 import { CompetitionComponent } from './competition/competition.component';
 import { HistoryComponent } from './backoffice/history/history.component';
 import { HistoryService } from './shared/services/history.service';
-import { CompetitionService } from './shared/services/competition.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ShowbetComponent } from './showbet/showbet.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -43,6 +40,9 @@ import { environment } from '../environments/environment';
 import { BaseService } from './shared/services/base.service';
 import { BackofficeComponent } from './backoffice/backoffice.component';
 import { UpdateProfileComponent } from './backoffice/update-profile/update-profile.component';
+import { AdminComponent } from './backoffice/admin/admin.component';
+import { ScoreFormComponent } from './backoffice/admin/scoreform/scoreform.component';
+import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,10 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
     ShowbetComponent,
     SidePanelComponent,
     BackofficeComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    AdminComponent,
+    ScoreFormComponent,
+    BetdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -77,9 +80,9 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
     NgbModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    IgxDatePickerModule, IgxMaskModule
+    IgxDatePickerModule, IgxMaskModule,
   ],
-  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, CompetitionService, MatchService, BaseService, AuthGuard,  CreditCardService,
+  providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, BaseService, AuthGuard,  CreditCardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
