@@ -28,6 +28,7 @@ export class CcComponent implements OnInit {
   creditCard = new CreditCard();
 
   currentUser: User;
+  min:number = 1;
 
   fromDate: NgbDateStruct; /// test pour voir le mois en cours
   toDate: NgbDateStruct; /// test pour voir le mois en cours
@@ -97,6 +98,7 @@ export class CcComponent implements OnInit {
 
   OnSubmit(form: NgForm) {
    let wt = form.value;
+   this.currentUser = this.userService.getCurrentUser();
    let newAmount = +this.currentUser.wallet +wt.wallet;
    this.baseService.patch("/user/" + this.cookie.get("user_id"), {"wallet":newAmount});
    let storageUser:any = JSON.parse(localStorage.getItem('user'));   
@@ -124,11 +126,10 @@ export class CcComponent implements OnInit {
   }
 
   onUpdateWallet() {
-    this.checkDate();
+    //this.checkDate();
+    this.currentUser = this.userService.getCurrentUser();
     this.currentUser.wallet = (+this.wallet) + (+this.currentUser.wallet);
     this.userService.uWallet(this.userID, this.currentUser.wallet);
-    console.log('Wallet Enter : ' + this.wallet);
-    console.log('Wallet User : ' + this.currentUser.wallet);
   }
 
 

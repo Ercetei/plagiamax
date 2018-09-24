@@ -44,6 +44,7 @@ import { AdminComponent } from './backoffice/admin/admin.component';
 import { ScoreFormComponent } from './backoffice/admin/scoreform/scoreform.component';
 import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.component';
 import { TwoDigitDecimaNumberDirective } from './shared/directives/two-digit-decimal-number-directive';
+import { CustomMinDirective } from './shared/validators/custom-min.validator';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { TwoDigitDecimaNumberDirective } from './shared/directives/two-digit-dec
     AdminComponent,
     ScoreFormComponent,
     BetdetailsComponent,
-    TwoDigitDecimaNumberDirective
+    TwoDigitDecimaNumberDirective,
+    CustomMinDirective
   ],
   imports: [
     BrowserModule,

@@ -171,4 +171,8 @@ export class HistoryComponent implements OnInit {
     });
   }
 
+  dismiss() {
+    this.modalService.dismissAll();
+  }
+
 }
