@@ -73,7 +73,7 @@
 
             <div class="form-group">
                 <label for="cvc">Montant à ajouter à la cagnotte</label>
-                <input type="number" class="form-control" name="wallet" id="" [(ngModel)]="wallet">
+                <input type="number" [customMin]="min" class="form-control" name="wallet" id="" [(ngModel)]="wallet">
             </div>
         
             <button [disabled]="!creditCardForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Ajouter à la cagnotte</button>

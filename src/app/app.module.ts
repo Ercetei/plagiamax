@@ -43,6 +43,7 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
 import { AdminComponent } from './backoffice/admin/admin.component';
 import { ScoreFormComponent } from './backoffice/admin/scoreform/scoreform.component';
 import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.component';
+import { CustomMinDirective } from './shared/validators/custom-min.validator';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.
     UpdateProfileComponent,
     AdminComponent,
     ScoreFormComponent,
-    BetdetailsComponent
+    BetdetailsComponent,
+    CustomMinDirective
   ],
   imports: [
     BrowserModule,
