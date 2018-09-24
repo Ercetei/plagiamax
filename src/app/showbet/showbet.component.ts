@@ -32,8 +32,30 @@ export class ShowbetComponent {
   matchs: Observable<Match>;
 
   databaseData;
-  databaseList;
-  databaseQuery;
+  days = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi"
+  ];
+
+  months = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
+  ];
 
   constructor(private baseService: BaseService,
     private route: ActivatedRoute,
@@ -87,12 +109,18 @@ export class ShowbetComponent {
     }
   }
 
-  getFormattedTeams(match: Match) {
+
+
+  getHomeTeam(match: Match) {
     if (match != null) {
-      let result: string;
-      result = match.matchteams.find(x => x.ishometeam).team.label;
-      result += " - " + match.matchteams.find(x => !x.ishometeam).team.label;
-      return result;
+      return match.matchteams.find(x => x.ishometeam).team.label;
+    }
+  }
+
+  getOutsider(match: Match) {
+    if (match != null) {
+      return match.matchteams.find(x => !x.ishometeam).team.label;
+
     }
   }
 

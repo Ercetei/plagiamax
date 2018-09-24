@@ -5,21 +5,36 @@
   font-weight: normal;
 }
 
+h5{
+  font-size:13px;
+  color: #787878;
+  text-transform: uppercase;
+}
+
+.flagTeam {
+  width:25px;
+  position: relative;
+  top:5px;
+}
+
 .containerBets {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding:10px;
-  box-shadow:-2px 2px 0 rgba(0,0,0,0.1);
+  box-shadow:-2px 2px 0 rgba(0,0,0,0.2);
 
   .badge {
-    margin-bottom:5px;
+    margin:5px;
+    width:50px;
+    left: -11px;
+    position: relative;
   }
 
   .btn {
     width:55px;
     text-align:center;
-    margin:3px auto;
+    margin:3px;
   }
 
   .btn-bet {
@@ -39,11 +54,15 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding:5px;
+    padding:15px 5px;
   }
 
   a {
     color: gray;
     font-size:13px;
+  }
+  
+  .linkMatch {
+    cursor: pointer;
   }
 }

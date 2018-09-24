@@ -13,15 +13,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-7">
 					</div>
-					<div class="col-md-2 text-center">
+					<div class="col-md-5 text-center">
 						<span class="badge badge-info">1</span>
-					</div>
-					<div class="col-md-2 text-center">
 						<span class="badge badge-default">N</span>
-					</div>
-					<div class="col-md-2 text-center">
 						<span class="badge badge-success">2</span>
 					</div>
 				</div>
@@ -30,20 +26,20 @@
 						<div class="row row-bets border" *ngIf="display == 1 && match.matchday[0]?.id == selectedDay && match.status == 3 ||
 						display == 1 && match.matchday[0]?.id == selectedDay && match.status == 4 || 
 						display == 2 && match.status == 3 || display == 2 && match.status == 4">
-							<div class="col-md-6">
-								<h5><a [routerLink]="['/football/match', match.id]"> {{getFormattedTeams(match)}} </a></h5>
+							<div class="col-md-7 linkMatch" [routerLink]="['/football/match', match.id]">
+								<h5>{{ days[match.date.day] }} {{ match.date.date }} {{ months[match.date.month] }} 2018</h5>
+								<span><img class="flagTeam" src="../../assets/img/team/{{getHomeTeam(match)}}.png" alt="{{getHomeTeam(match)}}">{{getHomeTeam(match)}}</span> - <span>{{getOutsider(match)}} <img class="flagTeam" src="../../assets/img/team/{{getOutsider(match)}}.png" alt="{{getHomeTeam(match)}}"></span>
+
 							</div>
-							<div class="col-md-2 text-center">
+							<div class="col-md-5 text-center">
 								<button class="btn" [ngClass]="isSelectedBet(match.matchbets[0]) ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[0])">
 									{{ match.matchbets[0].currentodds }}
 								</button>
-							</div>
-							<div class="col-md-2 text-center">
+
 								<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[1]) ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[1])">
 									{{ match.matchbets[1].currentodds }}
 								</button>
-							</div>
-							<div class="col-md-2 text-center">
+
 								<button class="btn btn-bet" [ngClass]="isSelectedBet(match.matchbets[2]) ? 'btn-active' : 'btn-bet'" (click)="switchBet(match?.matchbets[2])">
 									{{ match.matchbets[2].currentodds }}
 								</button>
