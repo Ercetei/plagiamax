@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-left">Mise</div>
-                    <div class="col"><input [(ngModel)]="amount" /></div>
+                    <div class="col"><input type="number" [(ngModel)]="amount" appTwoDigitDecimaNumber/></div>
                 </div>
                 <div class="row">
                     <div class="col text-left">Gains potentiels</div>
@@ -31,5 +31,6 @@
         </div>
     </div>
     <ngb-alert *ngIf="!auth" class="red-text center error-message">Veuillez vous connecter</ngb-alert>
-    <ngb-alert *ngIf="errNotEnoughMoney" class="red-text center error-message">Vous n'avez pas assez d'argent</ngb-alert>
+    <ngb-alert *ngIf="error=='money'" class="red-text center error-message">Vous n'avez pas assez d'argent</ngb-alert>
+    <ngb-alert *ngIf="error=='minVal'" class="red-text center error-message">Veuillez saisir au moins 1€</ngb-alert>
 </div>

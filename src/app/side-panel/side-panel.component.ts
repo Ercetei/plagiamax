@@ -19,7 +19,7 @@ export class SidePanelComponent implements OnInit {
   selectedBets: BetType[] = [];
   combined: Boolean = false;
   auth: Boolean = true;
-  errNotEnoughMoney: boolean = false;
+  error: String = "";
   @Input() amount: number;
 
   constructor
@@ -48,7 +48,7 @@ export class SidePanelComponent implements OnInit {
 
   reset() {
     this.auth = true;
-    this.errNotEnoughMoney = false;
+    this.error = "";
   }
 
   // Retire un pari du side panel
@@ -110,11 +110,17 @@ export class SidePanelComponent implements OnInit {
   // Au clic sur valider, on vérifie que l'utilisateur est connecté, que la somme sur la cagnotte est suffisante, 
   // on enregistre les paris en fonction de la nature (Simple / Combiné), on redirige et on vide les paris sélectionnés
   onValidate() {
+    this.error="";
     // Vérification authentification
     if (this.auth = this.userService.isAuthentified()) {
       let totalAmount: number = 0;
       // Si pari combiné
       if (this.combined) {
+        // Si l'utilisateur a saisi une valeur incorrecte
+        if(this.amount < 1 || this.amount == 0){
+          this.error = "minVal";
+          return;
+        }
         // L'utilisateur a-t-il assez d'argent ?
         if (this.userService.getCurrentUser().wallet >= this.amount) {
           totalAmount = this.amount;
@@ -126,12 +132,21 @@ export class SidePanelComponent implements OnInit {
           // création des paris
           this.betService.createBet(betTypes, this.amount, this.getTotalOdds());
         } else {
-          this.errNotEnoughMoney = true;
+          this.error = "money";
           return;
         }
+        // Pari simple
       } else {
         // Récupération du montant dans les components enfants
-        this.betSelectedComponents.forEach(BetSelectedComponent => totalAmount += +BetSelectedComponent.getAmount());
+        this.betSelectedComponents.forEach(BetSelectedComponent => {
+          // Si la valeur est incorrecte
+          if(BetSelectedComponent.getAmount() < 1 || BetSelectedComponent.getAmount() == 0){
+            this.error = "minVal";
+          }
+          totalAmount += +BetSelectedComponent.getAmount();
+        });
+        if(this.error == "minVal") return;
+        
         // L'utilisateur a-t-il assez d'argent ?
         if (this.userService.getCurrentUser().wallet >= totalAmount) {
           // création des paris en fonction des bettypes et du montant des components enfants
@@ -139,11 +154,10 @@ export class SidePanelComponent implements OnInit {
             this.betService.createBet([BetSelectedComponent.betType], BetSelectedComponent.getAmount(), BetSelectedComponent.betType.currentodds);
           });
         } else {
-          this.errNotEnoughMoney = true;
+          this.error = "money";
           return;
         }
       }
-      console.log(totalAmount);
       // MAJ du portefeuille
       this.userService.removeFromWallet(totalAmount);
       this.betTypeService.removeSelectedBets();

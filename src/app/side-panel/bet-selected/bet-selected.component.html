@@ -15,7 +15,7 @@
         </div>
         <div class="row" *ngIf="!combined">
             <div class="col text-left">Mise</div>
-            <div class="col"><input [(ngModel)]="amount" /></div>
+            <div class="col"><input type="number" [(ngModel)]="amount" appTwoDigitDecimaNumber/></div>
         </div>
         <div class="row" *ngIf="!combined">
             <div class="col text-left">Gains potentiels</div>

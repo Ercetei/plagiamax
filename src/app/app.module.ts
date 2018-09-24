@@ -43,6 +43,7 @@ import { UpdateProfileComponent } from './backoffice/update-profile/update-profi
 import { AdminComponent } from './backoffice/admin/admin.component';
 import { ScoreFormComponent } from './backoffice/admin/scoreform/scoreform.component';
 import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.component';
+import { TwoDigitDecimaNumberDirective } from './shared/directives/two-digit-decimal-number-directive';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.
     UpdateProfileComponent,
     AdminComponent,
     ScoreFormComponent,
-    BetdetailsComponent
+    BetdetailsComponent,
+    TwoDigitDecimaNumberDirective
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { BetdetailsComponent } from './backoffice/history/betdetails/betdetails.
     NgbModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    IgxDatePickerModule, IgxMaskModule,
+    IgxDatePickerModule, 
+    IgxMaskModule
   ],
   providers: [UserService, HistoryService, BetTypeService, BetService, BetLineService, MatchBetService, BaseService, AuthGuard,  CreditCardService,
     {
