@@ -6,22 +6,22 @@
 
 
 <div class="border containerBets">
-	<div class="row" *ngIf="getWinnerBets()">
+	<div class="row" *ngIf="getBets(1)">
 		<div class="col-md-12">
 			<h4>
-				Resultats
+				Gagnant
 			</h4>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4 text-center" *ngFor="let matchbet of getWinnerBets()">
+		<div class="col-md-4 text-center" *ngFor="let matchbet of getBets(1)">
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>
 			<button class="btn" [ngClass]="isSelectedBet(matchbet) ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
-	<div class="row bet-group" *ngIf="getScoreBets()">
+	<div class="row bet-group" *ngIf="getBets(2)">
 		<div class="col-md-12">
 			<h4>
 				Score exact
@@ -29,14 +29,14 @@
 		</div>
 	</div>
 	<div class="row bet-group">
-		<div class="col-md-4 text-center" *ngFor="let matchbet of getScoreBets()">
+		<div class="col-md-4 text-center" *ngFor="let matchbet of getBets(2)">
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>
 			<button class="btn" [ngClass]="isSelectedBet(matchbet) ? 'btn-active' : 'btn-bet'" (click)="switchBet(matchbet)">{{matchbet.currentodds}}</button>
 		</div>
 	</div>
-	<div class="row bet-group" *ngIf="getGoalsBets()">
+	<div class="row bet-group" *ngIf="getBets(3)">
 		<div class="col-md-12">
 			<h4>
 				Nombre de buts
@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div ngClass="" class="col-md-6 text-center" *ngFor="let matchbet of getGoalsBets()">
+		<div ngClass="" class="col-md-6 text-center" *ngFor="let matchbet of getBets(3)">
 			<h5>
 				{{getBetLabel(matchbet)}}
 			</h5>

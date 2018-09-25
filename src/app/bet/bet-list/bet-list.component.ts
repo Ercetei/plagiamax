@@ -27,7 +27,6 @@ export class BetListComponent implements OnInit {
 
   // A l'initialisation, fait en sorte de charger le match au changement d'URL et on s'abonne à la liste de paris du side panel.
   ngOnInit() {
-
     this.route.params.subscribe(async data => {
       await this.reload();
       if (this.match == null) {
@@ -43,7 +42,6 @@ export class BetListComponent implements OnInit {
         this.selectedBets = bts;
       }
     );
-
   }
 
   // On charge les infos du match
@@ -60,19 +58,9 @@ export class BetListComponent implements OnInit {
     this.match = await this.baseService.get("/match/" + match_id);
   }
 
-  // Récupère les paris sur l'équipe gagnante
-  getWinnerBets() {
-    if (this.match != null) return this.match.matchbets.filter(x => x.type == 1);
-  }
-
-  // Récupère les paris sur le score exact
-  getScoreBets() {
-    if (this.match != null) return this.match.matchbets.filter(x => x.type == 2);
-  }
-
-  // Récupère les paris sur le nombre de buts
-  getGoalsBets() {
-    if (this.match != null) return this.match.matchbets.filter(x => x.type == 3);
+  // Récupère les paris sur le type défini
+  getBets(type: number) {
+    if (this.match != null) return this.match.matchbets.filter(x => x.type == type);
   }
 
   // Sélectionne ou déselectionne un pari
@@ -99,10 +87,12 @@ export class BetListComponent implements OnInit {
     return this.betTypeService.isSelectedBet(bettype);
   }
 
+  // Retourne le libellé correspondant au pari
   getBetLabel(matchbet: BetType) {
     return this.betTypeService.getBetLabel(matchbet.type, matchbet.label);
   }
 
+  // Retourne les équipes dans le bon ordre
   getFormattedTeams() {
     if (this.match.matchteams.length > 0) {
       let result: string = "";

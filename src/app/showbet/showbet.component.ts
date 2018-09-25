@@ -29,7 +29,7 @@ export class ShowbetComponent {
 
   competition_id: number;
   competitions: Competition[];
-  matchs: Observable<Match>;
+  matchs: Observable<Match[]>;
 
   databaseData;
   days = [
@@ -109,8 +109,6 @@ export class ShowbetComponent {
     }
   }
 
-
-
   getHomeTeam(match: Match) {
     if (match != null) {
       return match.matchteams.find(x => x.ishometeam).team.label;
@@ -120,7 +118,6 @@ export class ShowbetComponent {
   getOutsider(match: Match) {
     if (match != null) {
       return match.matchteams.find(x => !x.ishometeam).team.label;
-
     }
   }
 

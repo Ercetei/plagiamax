@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,7 +11,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbCarouselConfig]
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   csrf: any;
   userClaims: any;
   images = [
@@ -28,10 +27,6 @@ export class HomeComponent implements OnInit {
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
-  }
-
-  ngOnInit() {
-
   }
 
   // Logout() {

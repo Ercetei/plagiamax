@@ -31,9 +31,10 @@ export class SidePanelComponent implements OnInit {
     private betService: BetService,
     private userService: UserService
     ) {
-      // A chaque modification de l'URL, on charge le side panel
+      // A chaque modification de l'URL, on charge le side panel et on rafraîchit la liste des erreurs
       this.router.events.subscribe((event: Event) => {
         this.selectedBets  = this.betTypeService.getSelectedBets();
+        this.reset();
     });
 
   }
@@ -41,7 +42,6 @@ export class SidePanelComponent implements OnInit {
   // A l'initialisation, on s'abonne à la liste de paris dans le side panel
   // et on récupère l'ensemble des informations utiles pour les paris en question
   ngOnInit() {
-    this.route.params.subscribe(data => this.reset());
     this.betTypeService.betTypeSubject.subscribe(
       (bts: BetType[]) => {
         this.selectedBets = bts;

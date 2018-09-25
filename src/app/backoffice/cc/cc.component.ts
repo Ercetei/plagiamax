@@ -5,7 +5,6 @@ import {CookieService} from 'ngx-cookie-service';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap'; 
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreditCardService } from './services/creditCard-service';
-import { CreditCard } from './models/creditCard';
 import { BaseService } from '../../shared/services/base.service';
 
 
@@ -25,7 +24,6 @@ export class CcComponent implements OnInit {
  });
 
   isValidFormSubmitted = null;
-  creditCard = new CreditCard();
 
   currentUser: User;
   min:number = 1;

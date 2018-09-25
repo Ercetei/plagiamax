@@ -9,21 +9,15 @@ import { BetTypeService } from '../../shared/services/bet-type.service';
   templateUrl: './bet-selected.component.html',
   styleUrls: ['../side-panel.component.scss']
 })
-export class BetSelectedComponent implements OnInit {
+export class BetSelectedComponent {
   @Input() betType: MatchBet;
   @Input() combined: Boolean;
   @Input() amount: number;
 
   constructor
     (
-    private betTypeService: BetTypeService,
-    private matchBetService: MatchBetService
+    private betTypeService: BetTypeService
     ) {
-
-  }
-
-  // A l'initialisation, on récupère les ifos du bet en question
-  ngOnInit() {
 
   }
 
@@ -73,7 +67,7 @@ export class BetSelectedComponent implements OnInit {
     }
   }
 
-  getBetLabel(){
+  getBetLabel() {
     return this.betTypeService.getBetLabel(this.betType.type, this.betType.label);
   }
 
